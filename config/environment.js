@@ -23,6 +23,13 @@ module.exports = function(environment) {
     }
   };
 
+  ENV.contentSecurityPolicy = {
+    'connect-src': "'self' *",
+    'default-src': "'none'",
+    'script-src': "'self' 'unsafe-inline' 'unsafe-eval' *",
+    'img-src': "'self' *"
+  }
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

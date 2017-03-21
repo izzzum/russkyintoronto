@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    ajax: Ember.inject.service(),
+    //ajax: Ember.inject.service(),
     store: Ember.inject.service(),
     model() {
         let store = this.get('store');
-        //let user = Ember.Object.create({isNotLoaded:true});
+        return store.queryRecord('user', {user_id: 1, v: '5.0'});
+        /*let user = Ember.Object.create({isNotLoaded:true});
         let params = {user_id:'1', v:'5.0'};
         let url = 'https://api.vk.com/method/users.get';
         let method = 'GET';
@@ -20,7 +21,7 @@ export default Ember.Route.extend({
             //let storeData = '{"data": {"type": "user","id":"'+json.response[0].id+'","attributes": {"firstName":"'+json.response[0].first_name+'","id":"'+json.response[0].id+'","lastName":"'+json.response[0].last_name+'"}}}';
             //store.pushPayload(JSON.parse(storeData));
             //return JSON.parse(storeData)
-        })
+        })*/
         //return user;
     }
 });
