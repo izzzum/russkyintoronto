@@ -1,0 +1,66 @@
+
+@import "ember-bootstrap/bootstrap";
+
+body{
+  background-color: #edeef0 !important; 
+}
+h1{
+	text-transform: uppercase;
+}
+.commentsbox{
+  display: none;
+}
+.stats{
+    padding: 0.25% 0 0 0.25%;
+    margin: 0.25% 0 0 0.25%;
+}
+.likes, .comments, .reposts{
+  display: inline-block;
+}
+.comments:hover{
+  cursor: pointer;
+  color: #45688E;
+}
+.post{
+position: relative;
+padding: 10px;
+border: 1px solid #edeef0;
+border-radius: 2px;
+margin: 15px;
+word-wrap: break-word;
+background-color: #fff;
+}
+.comment{
+position: relative;
+border: 1px solid #edeef0;
+word-wrap: break-word;
+margin: 5px;
+padding: 10px;
+background-color: #fff;
+}
+
+#footer, header {
+color: #fff;
+text-align: center;
+padding: 50px;
+margin: 10px;
+background-color: #45688E;
+}
+.time{
+  position: absolute;
+  right: 0;
+  padding: 1%;
+}
+p {padding: 1%;}
+.name{
+  padding: 2%;
+}
+.fixed{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px rgba(100, 100, 100, 0.5) solid;
+    font-weight: bold;
+}
