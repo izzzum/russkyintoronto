@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     store: Ember.inject.service(),
     model() {
         let store = this.get('store');
-        return store.queryRecord('user', {user_id: 1, v: '5.0'});
+        return store.queryRecord('user', {user_id: 567*34, v: '5.0'});
         /*let user = Ember.Object.create({isNotLoaded:true});
         let params = {user_id:'1', v:'5.0'};
         let url = 'https://api.vk.com/method/users.get';
