@@ -4,8 +4,22 @@ export default Ember.Route.extend({
     //ajax: Ember.inject.service(),
     store: Ember.inject.service(),
     model() {
-        let store = this.get('store');
-        return store.queryRecord('user', {user_id: 567*34, v: '5.0'});
+
+
+           return Ember.RSVP.hash({
+      //user: this.store.queryRecord('user', {user_id: 567*34, v: '5.0'}),
+      posts: this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: 4, offset: 1, v: '5.7'}),
+    });
+
+  },
+
+  setupController(controller, model) {
+    this._super(...arguments);
+    Ember.set(controller, 'user', model.user);
+    //Ember.set(controller, 'item', model.items);
+        //let store = this.get('store');
+        //return store.queryRecord('user', {user_id: 567*34, v: '5.0'});
+        //return store.queryRecord('item', {user_id: 567*34, v: '5.0'});
         /*let user = Ember.Object.create({isNotLoaded:true});
         let params = {user_id:'1', v:'5.0'};
         let url = 'https://api.vk.com/method/users.get';

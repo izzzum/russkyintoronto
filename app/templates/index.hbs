@@ -1,2 +1,10 @@
-{{#if model}}{{model.firstName}} {{model.lastName}}{{else}}no content{{/if}}
+{{#if model}}{{model.user.firstName}} {{model.user.lastName}}{{else}}no content{{/if}}
+{{#each model.posts as |i|}}
+        <p>{{i.user.firstName}}</p>
+        <p>{{i.text}}</p>
+        {{#each i.attachments as |a|}}
+            <img src="{{a.photo.photo604}}">
+        {{/each}}
+{{/each}}
+{{showme}}
 {{loader-img show=showLoader}}
