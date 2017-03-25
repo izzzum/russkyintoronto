@@ -4,8 +4,6 @@
         {{#each post.attachments as |attachment|}}
             <img src="{{attachment.photo.photo604}}">
         {{/each}}
-        {{!-- {{read-comments post=i.id}} --}}
-
         {{read-comments postId=post.id comments=post.comments}}
 {{/each}}
 {{loader-img show=showLoader}}
