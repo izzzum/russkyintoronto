@@ -1,10 +1,11 @@
-{{#if model}}{{model.user.firstName}} {{model.user.lastName}}{{else}}no content{{/if}}
-{{#each model.posts as |i|}}
-        <p>{{i.user.firstName}}</p>
-        <p>{{i.text}}</p>
-        {{#each i.attachments as |a|}}
-            <img src="{{a.photo.photo604}}">
+{{#each model.posts as |post|}}
+        <p>{{post.user.firstName}}</p>
+        <p>{{post.text}}</p>
+        {{#each post.attachments as |attachment|}}
+            <img src="{{attachment.photo.photo604}}">
         {{/each}}
+        {{!-- {{read-comments post=i.id}} --}}
+
+        {{read-comments postId=post.id comments=post.comments}}
 {{/each}}
-{{showme}}
 {{loader-img show=showLoader}}

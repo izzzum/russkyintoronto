@@ -7,8 +7,9 @@ export default DS.Model.extend({
   postType: DS.attr('string'),
   text: DS.attr('string'),
   attachments: DS.hasMany('attachment', {async: true}),
-  comments: DS.attr('number'),
+  commentsNum: DS.attr('number'),
   likes: DS.attr('string'),
   reposts: DS.attr('string'),
-  user: DS.belongsTo('user', {async: true})
+  user: DS.belongsTo('user', {async: true}),
+  comments: DS.hasMany('comment', {async: true}),
 });
