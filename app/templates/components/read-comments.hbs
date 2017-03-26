@@ -1,3 +1,10 @@
 {{#each comments as |comment|}}
    {{single-comment comment=comment id=comment.id}}
 {{/each}}
+{{#if isThereMore}}
+<div class="loadMoreComments">
+    <a {{action "loadMore"}}>
+        <i class="fa fa-cube"></i>Load more...
+    </a>
+</div>
+{{/if}}
