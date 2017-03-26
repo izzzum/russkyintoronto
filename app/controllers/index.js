@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
    showLoader: Ember.computed(function() {
         return this.get('model.posts') ? false: true;
     }),
-    didInsertElement: function() {
+    afterModel: function() {
         console.log('test');
         let view = this;
         Ember.$(window).bind("scroll", function(){
