@@ -21,7 +21,7 @@ background-color: #fff;
   .likes, .comments, .reposts{
     display: inline-block;
   }
-  .comments:hover{
+  .comments a:hover{
     cursor: pointer;
     color: #45688E;
   }

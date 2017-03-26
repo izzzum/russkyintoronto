@@ -13,10 +13,15 @@
         {{post.reposts}}
     </div>
     <div class="comments">
-        <a {{action "toggleComments"}}>
+        {{#if post.commentsNum}}
+        <a class="link" {{action "toggleComments"}}>
             <i class="fa fa-comment-o"></i>
             {{post.commentsNum}}
         </a>
+        {{else}}
+            <i class="fa fa-comment-o"></i>
+            {{post.commentsNum}}
+        {{/if}}
     </div>
 </div>
 {{#if isShowingComments}}

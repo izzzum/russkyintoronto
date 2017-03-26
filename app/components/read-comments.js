@@ -9,9 +9,12 @@ export default Ember.Component.extend({
     isThereMore: Ember.computed('loadedComments', function(){
        let loadedComments = this.get('loadedComments');
        let commentsNum = this.get('commentsNum');
-       console.log(commentsNum);
+                                //BUG, it shows load more after comments been loaded. loadedComments being
+                                //reser to 10 every time we put back this element on the screen.
+       /*console.log(commentsNum);
+       console.log(loadedComments);
        console.log(commentsNum > loadedComments);
-       console.log(this.get('comments'));
+       console.log(this.get('comments'));*/
        return commentsNum > loadedComments;
        //let post = this.get('store').peekRecord('post', this.get('postId'));
        //let loadedCommentsNum = post.comments.get('length');
