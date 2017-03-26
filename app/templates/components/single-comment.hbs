@@ -1,1 +1,13 @@
-<p style="border: 1px solid black">{{comment.text}}</p>
+<p class="time">{{get-date comment.date}}</p>
+<a href="http://vk.com/id{{comment.user.id}}"><img class="img-circle" src="{{comment.user.photo100}}"></a>
+<a class="name" href="http://vk.com/id{{comment.user.id}}">{{get-fullname comment.user.firstName comment.user.lastName}}</a>
+<p>
+    {{#if comment.replyToComment}}
+    <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
+    {{/if}}
+    {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=(get-fullname comment.replied.firstName comment.replied.lastName)}}}
+</p>
+{{#if comment.attachments}}{{put-attachments attachments=comment.attachments}}{{/if}}
+{{#if isLikes}}
+<div class="stats"><div class="likes"><i class="fa fa-heart-o"></i>{{comment.likes}}</div></div>
+{{/if}}

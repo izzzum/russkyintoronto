@@ -1,0 +1,24 @@
+<p class="time">{{get-date post.date}}</p>
+<a href="http://vk.com/id{{post.user.id}}"><img class="img-circle" src="{{post.user.photo100}}"></a>
+<a class="name" href="http://vk.com/id{{post.user.id}}">{{get-fullname post.user.firstName post.user.lastName}}</a>
+<p>{{{text-to-link post.text}}}</p>
+{{#if post.attachments}}{{put-attachments attachments=post.attachments}}{{/if}}
+<div class="stats">
+    <div class="likes">
+        <i class="fa fa-heart-o"></i>
+        {{post.likes}}
+    </div>
+    <div class="reposts">
+        <i class="fa fa-bullhorn"></i>
+        {{post.reposts}}
+    </div>
+    <div class="comments">
+        <a {{action "toggleComments"}}>
+            <i class="fa fa-comment-o"></i>
+            {{post.commentsNum}}
+        </a>
+    </div>
+</div>
+{{#if isShowingComments}}
+{{read-comments postId=post.id comments=post.comments}}
+{{/if}}

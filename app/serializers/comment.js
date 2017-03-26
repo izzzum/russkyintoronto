@@ -19,6 +19,11 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
            let attachments = [];
            comment.likes = comment.likes.count;
            comment.user = comment.from_id;
+          if(!Ember.isEmpty(comment.reply_to_user)){
+           comment.replied = comment.reply_to_user;
+          }else {
+              comment.replied = null;
+          }
            delete comment.from_id;
            delete comment.likes.count;
             if(!Ember.isEmpty(comment.attachments)){

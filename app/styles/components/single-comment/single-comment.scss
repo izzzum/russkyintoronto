@@ -1,0 +1,29 @@
+.comment{
+position: relative;
+border: 1px solid #edeef0;
+word-wrap: break-word;
+margin: 5px;
+padding: 10px;
+background-color: #fff;
+  a i {
+    cursor: pointer;
+  }
+  .time{
+    position: absolute;
+    right: 0;
+    padding: 1%;
+  }
+  .name{
+    padding: 2%;
+  }
+  .stats{
+    padding: 0.25% 0 0 0.25%;
+    margin: 0.25% 0 0 0.25%;
+    .likes {
+        display: inline-block;
+        i {
+          color: red;
+        }
+    }
+}
+}

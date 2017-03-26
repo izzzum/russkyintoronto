@@ -1,9 +1,4 @@
 {{#each model.posts as |post|}}
-        <p>{{post.user.firstName}}</p>
-        <p>{{post.text}}</p>
-        {{#each post.attachments as |attachment|}}
-            <img src="{{attachment.photo.photo604}}">
-        {{/each}}
-        {{read-comments postId=post.id comments=post.comments}}
+    {{single-post post=post}}
 {{/each}}
 {{loader-img show=showLoader}}
