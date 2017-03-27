@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     classNames: ['commentsbox'],
     loadedComments: 10,
+    isLoading: false,
+    loadingStatus: Ember.computed('isLoading', function(){
+       return this.get('isLoading');
+    }),
     postId: null,
     comments: null,
     commentsNum: null,
@@ -22,6 +26,7 @@ export default Ember.Component.extend({
     }),
     store: Ember.inject.service(),
      showComments: Ember.on('didInsertElement', function() {
+      this.set('isLoading', true);
       Ember.RSVP.hash({
       comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, /*count: 4, offset: 1,*/ need_likes: 1, v: '5.7'}).then(resolved => {
             let post = this.get('store').peekRecord('post', this.get('postId'));
@@ -30,11 +35,13 @@ export default Ember.Component.extend({
                     comment.set('post', post);
                     }
             });
+            this.set('isLoading', false);
         })
     });
   }),
     actions: {
     loadMore() {
+        this.set('isLoading', true);
             Ember.RSVP.hash({
       comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, offset: this.get('loadedComments'), need_likes: 1, v: '5.7'}).then(resolved => {
             let post = this.get('store').peekRecord('post', this.get('postId'));
@@ -44,6 +51,7 @@ export default Ember.Component.extend({
                 if(post.get('commentsNum') !== 0){
                     comment.set('post', post);
                     }
+                    this.set('isLoading', false);
             });
         })
     });

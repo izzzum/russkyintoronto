@@ -5,21 +5,7 @@ export default Ember.Controller.extend({
    showLoader: Ember.computed(function() {
         return this.get('model.posts') ? false: true;
     }),
-    afterModel: function() {
-        console.log('test');
-        let view = this;
-        Ember.$(window).bind("scroll", function(){
-            view.didScroll();
-        });
-    },
-    didScroll: function() {
-        if(this.isScrolledToBottom()){
-            this.get('controller').send('more'); //need to edit
-        }
-    },
-    willDestroyElement: function() {
-        Ember.$(window).unbind("scroll");
-    }
+    
        /* getComments: Ember.computed('model', function() {
         var model = this.get('model');
         var store = this.get('store');

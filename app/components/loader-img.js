@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    classNames: ['animation_image'],
+    classNames: ['loader-img'],
     attributeBindings: ['align'],
     align: 'center',
     show: null

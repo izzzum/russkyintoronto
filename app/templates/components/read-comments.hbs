@@ -1,6 +1,9 @@
 {{#each comments as |comment|}}
-   {{single-comment comment=comment id=comment.id}}
+   {{single-comment comment=comment}}
 {{/each}}
+{{#if loadingStatus}}
+{{loader-img show=loadingStatus}}
+{{/if}}
 {{#if isThereMore}}
 <div class="loadMoreComments">
     <a {{action "loadMore"}}>

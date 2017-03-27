@@ -14,7 +14,7 @@
     </div>
     <div class="comments">
         {{#if post.commentsNum}}
-        <a class="link" {{action "toggleComments"}}>
+        <a {{action "toggleComments"}}>
             <i class="fa fa-comment-o"></i>
             {{post.commentsNum}}
         </a>

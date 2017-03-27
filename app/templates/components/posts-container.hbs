@@ -1,3 +1,6 @@
-{{#each model.posts as |post|}}
+{{#each posts as |post|}}
     {{single-post post=post}}
 {{/each}}
+{{#if isThereMore}}
+{{loader-img show=isThereMore}}
+{{/if}}
