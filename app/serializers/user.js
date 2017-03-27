@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.RESTSerializer.extend({
 normalizeSingleResponse(store, primaryModelClass, payload, id, requestType){
@@ -20,7 +21,7 @@ const regex = /\D\d/g;
 let m;
 
 if ((m = regex.exec(key)) !== null) {
-    m.forEach((match, groupIndex) => {
+    m.forEach((match) => {
         key = key.slice(0, key.indexOf(match)+1) + "_" + key.slice(key.indexOf(match)+1);
     });
     return key;

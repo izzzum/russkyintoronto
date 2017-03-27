@@ -23,11 +23,11 @@ export default Ember.Component.extend({
         }*/
         var st = window.pageYOffset || document.documentElement.scrollTop;
         //st += document.body.clientHeight;
-        st += $(window).height();
+        st += Ember.$(window).height();
             /*console.log("st: " + st + "increment " + document.body.clientHeight);
             console.log("body h: " + $('body').outerHeight(true));
             console.log("window: "+$(window).height());*/
-        if(st >= $('body').outerHeight(true))   //user scrolled to bottom of the page?
+        if(st >= Ember.$('body').outerHeight(true))   //user scrolled to bottom of the page?
         {
             if(this.get('isLoadingNow') === false) {
                 this.set('isLoadingNow', true);

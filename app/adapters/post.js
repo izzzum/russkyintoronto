@@ -2,7 +2,7 @@ import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
     host: 'https://api.vk.com/method',
-    pathForType: function(type) {
+    pathForType: function() {
         return 'wall.get';
     },
     ajaxOptions: function(url, type, options){

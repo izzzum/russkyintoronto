@@ -16,7 +16,7 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
        payload.response.comments = payload.response.items;
        delete payload.response.items;
        payload.response.comments.forEach(function(comment){
-           let attachments = [];
+           //let attachments = [];
            comment.likes = comment.likes.count;
            comment.user = comment.from_id;
           if(!Ember.isEmpty(comment.reply_to_user)){
