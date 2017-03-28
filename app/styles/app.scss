@@ -2,4 +2,18 @@
 @import "components/components";
 
 body{background-color: #edeef0 !important;}
-p {padding: 1%;}
+p {
+    padding: 10px;
+    padding-bottom: 0;
+    }
+.container {
+    padding: 0;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}

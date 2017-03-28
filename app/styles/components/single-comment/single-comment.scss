@@ -1,4 +1,4 @@
-.comment{
+.post .comment{
 position: relative;
 border: 1px solid #edeef0;
 word-wrap: break-word;
@@ -17,13 +17,12 @@ background-color: #fff;
     padding: 2%;
   }
   .stats{
-    padding: 0.25% 0 0 0.25%;
-    margin: 0.25% 0 0 0.25%;
+    padding: 10px;
+    margin: 0 10px;
     .likes {
+        position: initial;
+        margin-left: 48%;
         display: inline-block;
-        i {
-          color: red;
-        }
     }
 }
 }

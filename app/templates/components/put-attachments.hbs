@@ -1,3 +1,31 @@
 {{#each attachments as |attachment|}}
-    <img class="img-responsive" src="{{attachment.photo.photo604}}">
+    {{#if attachment.photo}}
+    {{put-photo photo=attachment.photo}}
+    {{/if}}
+    {{#if attachment.posted_photo}}
+    {{put-photo photo=attachment.posted_photo}}
+    {{/if}}
+    {{#if attachment.link}}
+    <div class="link-attachment">
+    <p>{{attachment.link.title}} <a href="{{attachment.link.url}}">{{attachment.link.url}}</a></p>
+    <p>{{attachment.link.description}}</p>
+    </div>
+    {{/if}}
+    {{#if attachment.video}}
+    <div class="video-attachment">
+       <p>Sorry, video attachments are not availiable yet</p>
+       <p>video: {{attachment.video.title}}</p>
+    </div>
+    {{/if}}
+    {{#if attachment.audio}}
+    <div class="audio-attachment">
+       <p>Sorry, audio attachments are not availiable yet</p>
+       <p>audio: {{attachment.audio.artist}}-{{attachment.audio.title}}</p>
+    </div>
+    {{/if}}
+    {{#if attachment.sticker}}
+    <div class="sticker-attachment">
+        <img class="img-responsive" src="{{attachment.sticker.photo256}}">
+    </div>
+    {{/if}}
 {{/each}}

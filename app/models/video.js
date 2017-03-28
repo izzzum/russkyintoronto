@@ -13,6 +13,7 @@ export default DS.Model.extend({
   addingDate: DS.attr('number'),
   comments: DS.attr('number'),
   player: DS.attr('string'),
+  platform: DS.attr('string'),
   accessKey: DS.attr('string'),
   processing: DS.attr('number'),
   live: DS.attr('number'),
