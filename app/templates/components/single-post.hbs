@@ -10,23 +10,20 @@
         {{post.likes}}
         {{/if}}
     </div>
-    <div class="reposts">
-        <i class="fa fa-bullhorn"></i>
-        {{#if isReposted}}
-        {{post.reposts}}
-        {{/if}}
-    </div>
-    <div class="comments">
-        {{#if post.commentsNum}}
-        <a {{action "toggleComments"}}>
+    {{#if post.commentsNum}}
+        <a class="comments" {{action "toggleComments"}}>
             <i class="fa fa-comment-o"></i>
             {{post.commentsNum}}
         </a>
-        {{else}}
+    {{else}}
+        <div class="comments">
             <i class="fa fa-comment-o"></i>
-            {{#if post.commentsNum}}
-            {{post.commentsNum}}
-            {{/if}}
+        </div>
+    {{/if}}
+    <div class="reposts">
+        <i class="fa fa-bullhorn"></i>
+        {{#if isReposted}}
+            {{post.reposts}}
         {{/if}}
     </div>
 </div>

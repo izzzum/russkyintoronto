@@ -18,29 +18,18 @@ background-color: #fff;
     border-top: 1px #edeef0 solid;
     padding: 10px;
     margin: 0 10px;
-    position: relative;
-    height: 30px;
+    text-align: center;
     .likes, .comments, .reposts{
-      position: absolute;
+      padding: 5px 10%;
       display: inline-block;
     }
-    .likes {
-      left: 10%;
-    }
-    .reposts {
-      right: 10%;
-    }
-    .comments {
-      position: initial;
-      margin-left: 48%;
-      a {
-        text-decoration: none;
+    a.comments {
+      text-decoration: none;
+      &:hover {
+        background-color: #edeef0;
+        cursor: pointer;
       }
     }
-  }
-  .comments a:hover{
-    cursor: pointer;
-    color: #45688E;
   }
   .loadMoreComments {
     text-align: center;

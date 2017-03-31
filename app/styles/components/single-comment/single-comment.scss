@@ -4,6 +4,7 @@ border: 1px solid #edeef0;
 word-wrap: break-word;
 margin: 5px;
 padding: 10px;
+padding-bottom: 0;
 background-color: #fff;
   a i {
     cursor: pointer;
@@ -19,10 +20,10 @@ background-color: #fff;
   .stats{
     padding: 10px;
     margin: 0 10px;
+    text-align: center;
     .likes {
-        position: initial;
-        margin-left: 48%;
-        display: inline-block;
-    }
-}
+      padding: 5px 10%;
+      padding-bottom: 0;
+      }
+  }
 }

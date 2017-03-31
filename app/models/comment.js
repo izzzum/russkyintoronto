@@ -9,5 +9,6 @@ export default DS.Model.extend({
   post: DS.belongsTo('post'),
   replyToUser: DS.attr('number'),
   replyToComment: DS.attr('number'),
-  attachments: DS.hasMany('attachment')
+  attachments: DS.hasMany('attachment'),
+  commentsNum: DS.attr('number')
 });
