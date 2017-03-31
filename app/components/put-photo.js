@@ -7,6 +7,7 @@ export default Ember.Component.extend({
         toggleImageSize() {
             this.toggleProperty('isLarge');
             Ember.$('.overlay').toggleClass("hide");
+            Ember.$('body').toggleClass("no-scroll");
         }
     }
 });
