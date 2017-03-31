@@ -7,6 +7,18 @@ export default Ember.Component.extend({
     loadingStatus: Ember.computed('isLoading', function(){
        return this.get('isLoading');
     }),
+    howManyLeft: Ember.computed('loadedComments', function(){
+        let left = this.get('commentsNum') - this.get('loadedComments');
+        if (left > 10) {
+            return `Load next 10 of ${left} comments`;
+        }
+        else if(left !== 1){
+            return `Load ${left} more comments`;
+        }
+        else{
+            return `Load ${left} more comment`;
+        }
+    }),
     postId: null,
     comments: null,
     commentsNum: null,

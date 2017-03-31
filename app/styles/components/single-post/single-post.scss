@@ -24,17 +24,23 @@ background-color: #fff;
       display: inline-block;
     }
     a.comments {
+      cursor: pointer;
       text-decoration: none;
       &:hover {
         background-color: #edeef0;
-        cursor: pointer;
       }
     }
   }
   .loadMoreComments {
+    margin: 25px;
     text-align: center;
     a{
-    cursor:pointer;
+      padding: 10px 10%;
+      cursor:pointer;
+      text-decoration: none;
+      &:hover{
+        background-color: #edeef0;
+      }
     }
   }
 }
