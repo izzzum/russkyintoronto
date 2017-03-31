@@ -1,7 +1,9 @@
 {{#each attachments as |attachment|}}
+    <div class="pics">
     {{#if attachment.photo}}
         {{put-photo photo=attachment.photo}}
     {{/if}}
+    </div>
     {{#if attachment.posted_photo}}
         {{put-photo photo=attachment.posted_photo}}
     {{/if}}
