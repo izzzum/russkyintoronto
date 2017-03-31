@@ -35,22 +35,24 @@ export default Ember.Component.extend({
     }),
     store: Ember.inject.service(),
      showComments: Ember.on('didInsertElement', function() {
-      this.set('isLoading', true);
-      Ember.RSVP.hash({
-      comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, /*count: 4, offset: 1,*/ need_likes: 1, v: '5.7'}).then(resolved => {
-            let post = this.get('store').peekRecord('post', this.get('postId'));
-            let counter = 0;
-            resolved.forEach(comment => {
-                if (counter++ === resolved.content.length - 1){
-                    post.set('commentsNum', comment.get('commentsNum'));
-                }
-                if(comment.get('commentsNum') !== 0){
-                    comment.set('post', post);
-                    }
+        let post = this.get('store').peekRecord('post', this.get('postId'));
+        if (Ember.isEmpty(post.get('comments'))){
+            this.set('isLoading', true);
+            Ember.RSVP.hash({
+            comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, /*count: 4, offset: 1,*/ need_likes: 1, v: '5.7'}).then(resolved => {
+                    let counter = 0;
+                    resolved.forEach(comment => {
+                        if (counter++ === resolved.content.length - 1){
+                            post.set('commentsNum', comment.get('commentsNum'));
+                        }
+                        if(comment.get('commentsNum') !== 0){
+                            comment.set('post', post);
+                            }
+                    });
+                    this.set('isLoading', false);
+                })
             });
-            this.set('isLoading', false);
-        })
-    });
+     }
   }),
     actions: {
     loadMore() {
