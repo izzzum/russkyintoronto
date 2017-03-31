@@ -29,7 +29,7 @@ export default Ember.Component.extend({
            return commentsNum > this.get('loadedComments');
        }
        else {
-           this.set('loadedComments', post.get('comments').content.length)
+           this.set('loadedComments', post.get('comments').content.length);
            return commentsNum > post.get('comments').content.length;  
        }
     }),
