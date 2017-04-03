@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import ApplicationAdapter from '../adapters/application';
 
 export default Ember.Route.extend({
-    model: function(params, transition) {
+    model: function(params) {
         let post = this.get('store').peekRecord('post', params.postId);
         if (Ember.isEmpty(post)){
             this.store.adapterFor('post').set('namespace', "method/wall.getById");
