@@ -5,12 +5,15 @@ export default Ember.Route.extend({
     store: Ember.inject.service(),
       afterModel: function() {
         this.controllerFor('index').set('count', this.get('count'));
-        //this.controllerFor('index').set('model', this.get('model'));
     },
     model: function() {
-      this.store.adapterFor('post').set('namespace', "method/wall.get");
-           return Ember.RSVP.hash({
-     posts: this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: 0, v: '5.7'}),
-    });
+        let posts = this.get('store').peekAll('post');
+        if (Ember.isEmpty(posts) || posts.content.length < this.get('count')){
+        this.store.adapterFor('post').set('namespace', "method/wall.get");
+            return Ember.RSVP.hash({
+        posts: this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: 0, v: '5.7'}),
+      });
+  }
   },
 });
+ 
