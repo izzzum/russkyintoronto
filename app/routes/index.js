@@ -8,6 +8,7 @@ export default Ember.Route.extend({
         //this.controllerFor('index').set('model', this.get('model'));
     },
     model: function() {
+      this.store.adapterFor('post').set('namespace', "method/wall.get");
            return Ember.RSVP.hash({
      posts: this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: 0, v: '5.7'}),
     });

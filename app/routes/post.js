@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+    params: null,
     model: function(params) {
+        this.set('params', params);
         let post = this.get('store').peekRecord('post', params.postId);
         if (Ember.isEmpty(post)){
             this.store.adapterFor('post').set('namespace', "method/wall.getById");
@@ -12,5 +14,9 @@ export default Ember.Route.extend({
         else {
             return post;
         }
+    },
+    afterModel: function() {
+        let params = this.get('params');
+        this.controllerFor('post').set('postId', params.postId);
     }
 });
