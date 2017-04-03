@@ -1,9 +1,10 @@
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
-    host: 'https://api.vk.com/method',
+    host: 'https://api.vk.com/',
+    namespace: 'method/wall.get',
     pathForType: function() {
-        return 'wall.get';
+        return '';
     },
     ajaxOptions: function(url, type, options){
         var hash = this._super(url, type, options);

@@ -1,0 +1,9 @@
+<div id="content" class="container">
+{{#if model.posts}}
+{{#each model.posts as |post|}}
+    {{single-post post=post}}
+{{/each}}
+{{else}}
+{{single-post post=model}}
+{{/if}}
+</div>

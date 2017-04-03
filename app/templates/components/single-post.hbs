@@ -1,4 +1,5 @@
 <p class="time">{{get-date post.date}}</p>
+<p class="linkToPost">{{#link-to 'post' post.id}}<i class="fa fa-link"> Permanent url</i>{{/link-to}}</p>
 <a href="http://vk.com/id{{post.user.id}}"><img class="img-circle" src="{{post.user.photo100}}"></a>
 <a class="name" href="http://vk.com/id{{post.user.id}}">{{get-fullname post.user.firstName post.user.lastName}}</a>
 <p>{{{text-to-link post.text}}}</p>
@@ -29,4 +30,4 @@
 </div>
 {{#if isShowingComments}}
 {{read-comments postId=post.id commentsNum=post.commentsNum comments=post.comments}}
-{{/if}}
+{{/if}} 
