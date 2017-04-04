@@ -1,8 +1,16 @@
-<a class="getStats" {{action 'getStats'}}>
-   <i class="fa fa-line-chart"></i> 
-   {{#unless displayStats}}Показать статистику{{/unless}}
-   {{#if displayStats}}Hide Stats{{/if}}
-</a>
+<nav class="menu">
+    <a class="getStats" {{action 'getStats'}}>
+        <i class="fa fa-line-chart"></i> 
+        {{#unless displayStats}}Показать статистику{{/unless}}
+        {{#if displayStats}}Hide Stats{{/if}}
+    </a>
+    <a class="scrollTop" {{action 'scrollTop'}}>
+        <i class="fa fa-arrow-up"></i> Scroll up
+    </a>
+    <a class="scrollBot" {{action 'scrollBot'}}>
+        <i class="fa fa-arrow-down"></i> Scroll down
+    </a>
+</nav>
 {{#if showLoader}}
 {{loader-img show=showLoader}}
 {{/if}}

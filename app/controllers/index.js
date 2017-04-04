@@ -10,13 +10,28 @@ export default Ember.Controller.extend({
         return this.get('model.posts') ? false: true;
     }),
     actions: {
+    scrollTop(){
+            Ember.$('body').stop().animate({
+                scrollTop: (Ember.$('.page-header').offset().top-100)
+            }, 1000);
+    },
+    scrollBot(){
+            Ember.$('body').stop().animate({
+                scrollTop: (Ember.$('.page-footer').offset().top-100)
+            }, 1000);
+    },
     getStats() {
+        let realThis = this;
         if(this.get('displayStats')) {
-            this.set('displayStats', false);
-            Ember.$('body').toggleClass("no-scroll");
+            Ember.$('.statistics').animate({
+                height: "0%"
+            }, 500, function(){
+                realThis.set('displayStats', false);
+                Ember.$('body').toggleClass("no-scroll");
+            });
         } else {
         Ember.$('body').stop().animate({
-            scrollTop: (Ember.$('.page-header').offset().top-100) //need to fix on mobile
+            scrollTop: (Ember.$('.page-header').offset().top-100)
             }, 500);
 
         let sortByNumber = function(a, b) {
@@ -41,7 +56,6 @@ export default Ember.Controller.extend({
                     }
                 });
         let promise;
-        let realThis = this;
         if(!Ember.isEmpty(posts) && posts.content.length < this.get('statsAmmount')) {
             this.store.adapterFor('post').set('namespace', "method/wall.get");
             posts = this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('statsAmmount')-posts.content.length, offset: posts.content.length, v: '5.7'});
@@ -106,17 +120,22 @@ promise.finally(function(){
             realThis.set('list.commentsNum', commentsNum);
             realThis.set('list.userNum', userNum);
             realThis.set('list.postsNum', postsNum);
-            /*console.log(listOfComments);
-            console.log(listOfPosts);
-            console.log(listOfTopCommented);
-            console.log(listOfMostLikedComments);*/
+
             realThis.set('showLoader', false);
             realThis.set('displayStats', true);
-            //Ember.$('.overlay').toggleClass("hide");
-             Ember.$('body').stop().animate({
-            scrollTop: (Ember.$('.page-header').offset().top-100) //need to fix on mobile
+            Ember.$('body').stop().animate({
+            scrollTop: (Ember.$('.page-header').offset().top-100)
             }, 500);
             Ember.$('body').toggleClass("no-scroll");
+            //animate
+            Ember.run.later(function(){
+            Ember.$('.statistics').stop().animate({
+                height: "98%"
+            }, 500, function(){
+                console.log('stats opened');
+            });
+            }, 600);
+
 
             });
 
@@ -171,91 +190,24 @@ promise.finally(function(){
 
             realThis.set('showLoader', false);
             realThis.set('displayStats', true);
-            //Ember.$('.overlay').toggleClass("hide");
-             Ember.$('body').stop().animate({
-            scrollTop: (Ember.$('.page-header').offset().top-100) //need to fix on mobile
+            Ember.$('body').stop().animate({
+            scrollTop: (Ember.$('.page-header').offset().top-100)
             }, 500);
             Ember.$('body').toggleClass("no-scroll");
+            //animate
+            Ember.run.later(function(){
+            Ember.$('.statistics').stop().animate({
+                height: "98%"
+            }, 500, function(){
+                console.log('stats opened');
+            });
+            }, 600);
 
 }, 10000);
             //**DUPLICATE */
-
-/*
-            this.set('showLoader', false);
-            this.set('displayStats', true);
-            //Ember.$('.overlay').toggleClass("hide");
-            Ember.$('body').toggleClass("no-scroll");*/
     }
 
         }
-    //setTimeout(function(){
-        /*this.set('list.posts', store.peekAll('post'));
-        this.set('list.users', store.peekAll('user'));
-        this.set('list.comments', store.peekAll('comment'));*/
-/*
-        let sortByNumber = function(a, b) {
-                return ((a.items > b.items) ? -1 : ((a.items == b.items) ? 0 : 1));
-            };
-
-        let listOfComments = [];
-        let listOfPosts = [];
-        let listOfTopCommented = [];
-        let listOfMostLikedComments = [];
-
-        let users = store.peekAll('user');
-            users.forEach(user =>{
-                listOfComments.push({user: user.get('id'), items: user.get('comments').content.currentState.length});
-                listOfPosts.push({user: user.get('id'), items: user.get('posts').content.currentState.length});
-            });
-
-        
-            posts.forEach(post =>{
-                listOfTopCommented.push({post: post.get('id'), items: post.get('commentsNum')});
-            });
-
-        let comments = store.peekAll('comment');
-            comments.forEach(comment =>{
-                listOfMostLikedComments.push({comment: comment.get('id'), items: comment.get('likes')});
-            });
-
-            listOfComments.sort(sortByNumber);
-            listOfPosts.sort(sortByNumber);
-            listOfTopCommented.sort(sortByNumber);
-            listOfMostLikedComments.sort(sortByNumber);
-
-            console.log(listOfComments);
-            console.log(listOfPosts);
-            console.log(listOfTopCommented);
-            console.log(listOfMostLikedComments);
-*/
-   // }), 50000; //lagged
     }
   }
-    
-       /* getComments: Ember.computed('model', function() {
-        var model = this.get('model');
-        var store = this.get('store');
-        model.posts.forEach(function(post){
-            return Ember.RSVP.hash({
-            comments: store.query('comment', {owner_id: '-164278', post_id: post.id, extended:1, oauth: 1, count: 4, offset: 1, need_likes: 1, v: '5.7'})
-        });
-        });
-    })*/
 });
-
-// comments: store.query('comment', {owner_id: '-164278', post_id: post.id, extended:1, oauth: 1, /*count: 4, offset: 1,*/ need_likes: 1, v: '5.7'})
-/*
-            Ember.RSVP.hash({
-            comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, /*count: 4, offset: 1,*//* need_likes: 1, v: '5.7'}).then(resolved => {
-                    let counter = 0;
-                    resolved.forEach(comment => {
-                        if (counter++ === resolved.content.length - 1){
-                            post.set('commentsNum', comment.get('commentsNum'));
-                        }
-                        if(comment.get('commentsNum') !== 0){
-                            comment.set('post', post);
-                            }
-                    });
-                    this.set('isLoading', false);
-                })
-            });*/
