@@ -18,5 +18,8 @@ export default Ember.Route.extend({
     afterModel: function() {
         let params = this.get('params');
         this.controllerFor('post').set('postId', params.postId);
+        if(Ember.$('body').hasClass('no-scroll')){
+            Ember.$('body').toggleClass("no-scroll");
+        }
     }
 });
