@@ -20,3 +20,18 @@ p {
 .no-scroll {
     overflow: hidden;
 }
+
+.getStats {
+    position: fixed;
+    width: 100%;
+    background: #337ab7;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10000;
+    top: 0;
+    color: #fff;
+    &:hover{
+        text-decoration: none;
+        color: #c1faff;
+    }
+}

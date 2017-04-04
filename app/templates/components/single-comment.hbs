@@ -2,9 +2,11 @@
 <a href="http://vk.com/id{{comment.user.id}}"><img class="img-circle" src="{{comment.user.photo100}}"></a>
 <a class="name" href="http://vk.com/id{{comment.user.id}}">{{get-fullname comment.user.firstName comment.user.lastName}}</a>
 <p>
+    {{#unless simple}}
     {{#if comment.replyToComment}}
         <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
     {{/if}}
+    {{/unless}}
     {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=(get-fullname comment.replied.firstName comment.replied.lastName)}}}
 </p>
 {{#if comment.attachments}}{{put-attachments attachments=comment.attachments}}{{/if}}

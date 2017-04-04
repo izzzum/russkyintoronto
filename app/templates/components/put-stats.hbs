@@ -1,0 +1,40 @@
+<div class="container">
+<h3>Статистика за последние 50 постов</h3>
+<ul>
+    <li>Написано комментариев: {{list.commentsNum}}</li>
+    <li>Количество активных пользователей: {{list.userNum}}</li>
+</ul>
+<h4>Топ-3 Комментатора:</h4>
+<ol>
+{{#each list.topCommentsUsers as |user|}}
+<li><a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+<a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+left {{user.items}} comments</li>
+{{/each}}
+</ol>
+<h4>Топ-3 по кол-ву постов:</h4>
+<ol>
+{{#each list.topPostsUsers as |user|}}
+<li><a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+<a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+posted {{user.items}} times</li>
+{{/each}}
+</ol>
+<h4>Топ-3 Поста:</h4>
+<ol>
+{{#each list.topCommentedPosts as |post|}}
+<li>
+{{single-post post=post.post simple=true}}
+</li>
+{{/each}}
+</ol>
+<h4>Топ-3 Комментария:</h4>
+<ol>
+{{#each list.mostLikedComments as |comment|}}
+<li>
+{{#link-to 'post' comment.comment.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
+{{single-comment comment=comment.comment simple=true}}
+</li>
+{{/each}}
+</ol>
+</div>

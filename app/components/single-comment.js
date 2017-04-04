@@ -4,7 +4,9 @@ export default Ember.Component.extend({
     classNames: ['comment'],
     attributeBindings: ['id'],
     id: Ember.computed(function(){
+        if(this.get('simple') === false){
         return `comment${this.get('comment').id}`;
+        }
     }),
     comment: null,
     isLikes: Ember.computed('comment', function(){

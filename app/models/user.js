@@ -8,8 +8,8 @@ export default DS.Model.extend({
   photo50: DS.attr('string'),
   photo100: DS.attr('string'),
   online: DS.attr('string'),
-  //post: DS.hasMany('post', {async: true}),
-  //comments: DS.hasMany('comment', {async: true}),
+  posts: DS.hasMany('post', {async: true}),
+  comments: DS.hasMany('comment', {async: true, inverse: 'user'}),
   onlineApp: DS.attr('string'),
   onlineMobile: DS.attr('string')
 });

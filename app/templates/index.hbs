@@ -1,2 +1,10 @@
-{{posts-container posts=model.posts count=count}}
+<a class="getStats" {{action 'getStats'}}>
+   <i class="fa fa-line-chart"></i> Показать статистику
+</a>
+{{#if showLoader}}
 {{loader-img show=showLoader}}
+{{/if}}
+{{#if displayStats}}
+{{put-stats list=list}}
+{{/if}}
+{{posts-container posts=model.posts count=count loadedPortion=loadedPortion}}
