@@ -1,5 +1,7 @@
 <a class="getStats" {{action 'getStats'}}>
-   <i class="fa fa-line-chart"></i> Показать статистику
+   <i class="fa fa-line-chart"></i> 
+   {{#unless displayStats}}Показать статистику{{/unless}}
+   {{#if displayStats}}Hide Stats{{/if}}
 </a>
 {{#if showLoader}}
 {{loader-img show=showLoader}}

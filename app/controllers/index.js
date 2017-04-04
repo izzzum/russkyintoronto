@@ -11,9 +11,18 @@ export default Ember.Controller.extend({
     }),
     actions: {
     getStats() {
+        if(this.get('displayStats')) {
+            this.set('displayStats', false);
+            Ember.$('body').toggleClass("no-scroll");
+        } else {
         Ember.$('body').stop().animate({
             scrollTop: (Ember.$('.page-header').offset().top-100) //need to fix on mobile
             }, 500);
+
+        let sortByNumber = function(a, b) {
+                return ((a.items > b.items) ? -1 : ((a.items === b.items) ? 0 : 1));
+            };
+
         this.set('showLoader', true);
       let store = this.get('store');
         let posts = store.peekAll('post');
@@ -58,9 +67,6 @@ export default Ember.Controller.extend({
                                 Ember.run.later(function(){
                            
 promise.finally(function(){
-            let sortByNumber = function(a, b) {
-                return ((a.items > b.items) ? -1 : ((a.items === b.items) ? 0 : 1));
-            };
 
         let listOfComments = [];
         let listOfPosts = [];
@@ -68,6 +74,7 @@ promise.finally(function(){
         let listOfMostLikedComments = [];
         let userNum = 0;
         let commentsNum = 0;
+        let postsNum = 0;
         let users = store.peekAll('user');
             users.forEach(user =>{
                 userNum++;
@@ -75,8 +82,9 @@ promise.finally(function(){
                 listOfPosts.push({user: store.peekRecord('user', user.get('id')), items: user.get('posts').content.currentState.length});
             });
 
-        
+        posts = store.peekAll('post');
             posts.forEach(post =>{
+                postsNum++;
                 listOfTopCommented.push({post: store.peekRecord('post', post.get('id')), items: post.get('commentsNum')});
             });
 
@@ -97,13 +105,17 @@ promise.finally(function(){
             realThis.set('list.mostLikedComments', listOfMostLikedComments);
             realThis.set('list.commentsNum', commentsNum);
             realThis.set('list.userNum', userNum);
+            realThis.set('list.postsNum', postsNum);
             /*console.log(listOfComments);
             console.log(listOfPosts);
             console.log(listOfTopCommented);
             console.log(listOfMostLikedComments);*/
             realThis.set('showLoader', false);
             realThis.set('displayStats', true);
-            Ember.$('.overlay').toggleClass("hide");
+            //Ember.$('.overlay').toggleClass("hide");
+             Ember.$('body').stop().animate({
+            scrollTop: (Ember.$('.page-header').offset().top-100) //need to fix on mobile
+            }, 500);
             Ember.$('body').toggleClass("no-scroll");
 
             });
@@ -114,16 +126,68 @@ promise.finally(function(){
         });
     }
     else {
-            this.set('showLoader', false);
-            if (this.get('displayStats') === true){
-                this.set('displayStats', false);
-            } else{
-                this.set('displayStats', true);
-            }
-            Ember.$('.overlay').toggleClass("hide");
+            //**DUPLICATE */
+
+     Ember.run.later(function(){
+
+        let listOfComments = [];
+        let listOfPosts = [];
+        let listOfTopCommented = [];
+        let listOfMostLikedComments = [];
+        let userNum = 0;
+        let commentsNum = 0;
+        let postsNum = 0;
+        let users = store.peekAll('user');
+            users.forEach(user =>{
+                userNum++;
+                listOfComments.push({user: store.peekRecord('user', user.get('id')), items: user.get('comments').content.currentState.length});
+                listOfPosts.push({user: store.peekRecord('user', user.get('id')), items: user.get('posts').content.currentState.length});
+            });
+
+        posts = store.peekAll('post');
+            posts.forEach(post =>{
+                postsNum++;
+                listOfTopCommented.push({post: store.peekRecord('post', post.get('id')), items: post.get('commentsNum')});
+            });
+
+        let comments = store.peekAll('comment');
+            comments.forEach(comment =>{
+                commentsNum++;
+                listOfMostLikedComments.push({comment: store.peekRecord('comment', comment.get('id')), items: comment.get('likes')});
+            });
+
+            listOfComments = listOfComments.sort(sortByNumber).slice(0,3);
+            listOfPosts = listOfPosts.sort(sortByNumber).slice(0,3);
+            listOfTopCommented = listOfTopCommented.sort(sortByNumber).slice(0,3);
+            listOfMostLikedComments = listOfMostLikedComments.sort(sortByNumber).slice(0,3);
+
+            realThis.set('list.topCommentsUsers', listOfComments);
+            realThis.set('list.topPostsUsers', listOfPosts);
+            realThis.set('list.topCommentedPosts', listOfTopCommented);
+            realThis.set('list.mostLikedComments', listOfMostLikedComments);
+            realThis.set('list.commentsNum', commentsNum);
+            realThis.set('list.userNum', userNum);
+            realThis.set('list.postsNum', postsNum);
+
+            realThis.set('showLoader', false);
+            realThis.set('displayStats', true);
+            //Ember.$('.overlay').toggleClass("hide");
+             Ember.$('body').stop().animate({
+            scrollTop: (Ember.$('.page-header').offset().top-100) //need to fix on mobile
+            }, 500);
             Ember.$('body').toggleClass("no-scroll");
-            
+
+}, 10000);
+            //**DUPLICATE */
+
+/*
+            this.set('showLoader', false);
+            this.set('displayStats', true);
+            //Ember.$('.overlay').toggleClass("hide");
+            Ember.$('body').toggleClass("no-scroll");*/
     }
+
+        }
     //setTimeout(function(){
         /*this.set('list.posts', store.peekAll('post'));
         this.set('list.users', store.peekAll('user'));
