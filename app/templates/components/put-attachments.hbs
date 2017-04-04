@@ -1,4 +1,7 @@
 {{#each attachments as |attachment|}}
+    {{#if attachment.poll}}
+        {{put-poll poll=attachment.poll}}
+    {{/if}}
     {{#if attachment.photo}}
         {{put-photo photo=attachment.photo}}
     {{/if}}

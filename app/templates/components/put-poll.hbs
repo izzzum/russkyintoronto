@@ -1,0 +1,8 @@
+<p class="poll-date">{{get-date poll.created}}</p>
+<h4>{{poll.question}}</h4>
+<ol>
+{{#each poll.answers as |answer|}}
+<li>{{answer.text}} - votes({{answer.votes}}), rate({{answer.rate}})</li>
+{{/each}}
+</ol>
+<p>Overall votes: {{poll.votes}}</p>
