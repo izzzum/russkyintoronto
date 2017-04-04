@@ -94,7 +94,7 @@ promise.finally(function(){
                 listOfMostLikedComments.push({comment: store.peekRecord('comment', comment.get('id')), items: comment.get('likes')});
             });
 
-            listOfComments = listOfComments.sort(sortByNumber).slice(0,3);
+            listOfComments = listOfComments.sort(sortByNumber).slice(0,5);
             listOfPosts = listOfPosts.sort(sortByNumber).slice(0,3);
             listOfTopCommented = listOfTopCommented.sort(sortByNumber).slice(0,3);
             listOfMostLikedComments = listOfMostLikedComments.sort(sortByNumber).slice(0,3);
@@ -156,7 +156,7 @@ promise.finally(function(){
                 listOfMostLikedComments.push({comment: store.peekRecord('comment', comment.get('id')), items: comment.get('likes')});
             });
 
-            listOfComments = listOfComments.sort(sortByNumber).slice(0,3);
+            listOfComments = listOfComments.sort(sortByNumber).slice(0,5);
             listOfPosts = listOfPosts.sort(sortByNumber).slice(0,3);
             listOfTopCommented = listOfTopCommented.sort(sortByNumber).slice(0,3);
             listOfMostLikedComments = listOfMostLikedComments.sort(sortByNumber).slice(0,3);

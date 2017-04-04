@@ -4,7 +4,7 @@
     <li>Написано комментариев: {{list.commentsNum}}</li>
     <li>Количество активных пользователей: {{list.userNum}}</li>
 </ul>
-<h4>Топ-3 Комментатора:</h4>
+<h4>Топ-{{array-length list.topCommentsUsers}} Комментатора:</h4>
 <ol>
 {{#each list.topCommentsUsers as |user|}}
 <li><a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
@@ -12,7 +12,7 @@
 left {{user.items}} comments</li>
 {{/each}}
 </ol>
-<h4>Топ-3 по кол-ву постов:</h4>
+<h4>Топ-{{array-length list.topCommentedPosts}} по кол-ву постов:</h4>
 <ol>
 {{#each list.topPostsUsers as |user|}}
 <li><a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
@@ -20,7 +20,7 @@ left {{user.items}} comments</li>
 posted {{user.items}} times</li>
 {{/each}}
 </ol>
-<h4>Топ-3 Поста:</h4>
+<h4>Топ-{{array-length list.topCommentedPosts}} Поста:</h4>
 <ol>
 {{#each list.topCommentedPosts as |post|}}
 <li>
@@ -28,7 +28,7 @@ posted {{user.items}} times</li>
 </li>
 {{/each}}
 </ol>
-<h4>Топ-3 Комментария:</h4>
+<h4>Топ-{{array-length list.mostLikedComments}} Комментария:</h4>
 <ol>
 {{#each list.mostLikedComments as |comment|}}
 <li>
