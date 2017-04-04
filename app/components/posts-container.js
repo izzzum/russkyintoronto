@@ -41,7 +41,7 @@ export default Ember.Component.extend({
     actions:{
         loadMore: function() {
             return Ember.RSVP.hash({
-                posts: this.get('store').query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: this.get('loadedPortion'), v: '5.7'}).then(/*resolved =>*/function() {
+                posts: this.get('store').query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: this.get('loadedPortion'), v: '5.7'}).then(resolved => {
                     let loadedPortion = this.get('loadedPortion') + this.get('count');
                     this.set('loadedPortion', loadedPortion);
                     /*resolved.forEach(post => {
