@@ -10,6 +10,5 @@ export default DS.Model.extend({
   online: DS.attr('string'),
   posts: DS.hasMany('post', {async: true}),
   comments: DS.hasMany('comment', {async: true, inverse: 'user'}),
-  onlineApp: DS.attr('string'),
-  onlineMobile: DS.attr('string')
+  totalLikes: DS.attr('number', {defaultValue: 0})
 });

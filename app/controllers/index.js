@@ -86,26 +86,39 @@ promise.finally(function(){
         let listOfPosts = [];
         let listOfTopCommented = [];
         let listOfMostLikedComments = [];
+        let listOfOverallLikes = [];
         let userNum = 0;
         let commentsNum = 0;
         let postsNum = 0;
-        let users = store.peekAll('user');
-            users.forEach(user =>{
-                userNum++;
-                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
-                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
-            });
+        let likesNum = 0;
 
         posts = store.peekAll('post');
             posts.forEach(post =>{
                 postsNum++;
                 listOfTopCommented.push({post: post, items: post.get('commentsNum')});
+                if(parseInt(post.get('likes')) !== 0){
+                    post.get('user').set('totalLikes', (parseInt(post.get('user').get('totalLikes'))+parseInt(post.get('likes'))));
+                }
             });
 
         let comments = store.peekAll('comment');
             comments.forEach(comment =>{
                 commentsNum++;
                 listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
+                if(parseInt(comment.get('likes')) !== 0){
+                    comment.get('user').set('totalLikes', (parseInt(comment.get('user').get('totalLikes'))+parseInt(comment.get('likes'))));
+                }
+            });
+
+            let users = store.peekAll('user');
+            users.forEach(user =>{
+                userNum++;
+                if(user.get('totalLikes')){
+                    likesNum += user.get('totalLikes');
+                }
+                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
+                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
+                listOfOverallLikes.push({user: user, items: user.get('totalLikes')});
             });
 
             listOfComments.sort(sortByNumber);
@@ -119,14 +132,18 @@ promise.finally(function(){
             listOfTopCommented = listOfTopCommented.slice(0,3);
             listOfMostLikedComments.sort(sortByNumber);
             listOfMostLikedComments = listOfMostLikedComments.slice(0,3);
+            listOfOverallLikes.sort(sortByNumber);
+            listOfOverallLikes = listOfOverallLikes.slice(0,5);
 
             realThis.set('list.topCommentsUsers', listOfComments);
             realThis.set('list.topPostsUsers', listOfPosts);
             realThis.set('list.topCommentedPosts', listOfTopCommented);
             realThis.set('list.mostLikedComments', listOfMostLikedComments);
+            realThis.set('list.listOfOverallLikes', listOfOverallLikes);
             realThis.set('list.commentsNum', commentsNum);
             realThis.set('list.userNum', userNum);
             realThis.set('list.postsNum', postsNum);
+            realThis.set('list.likesNum', likesNum);
 
             realThis.set('showLoader', false);
             realThis.set('displayStats', true);
@@ -160,26 +177,39 @@ promise.finally(function(){
         let listOfPosts = [];
         let listOfTopCommented = [];
         let listOfMostLikedComments = [];
+        let listOfOverallLikes = [];
         let userNum = 0;
         let commentsNum = 0;
         let postsNum = 0;
-        let users = store.peekAll('user');
-            users.forEach(user =>{
-                userNum++;
-                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
-                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
-            });
+        let likesNum = 0;
 
         posts = store.peekAll('post');
             posts.forEach(post =>{
                 postsNum++;
                 listOfTopCommented.push({post: post, items: post.get('commentsNum')});
+                if(parseInt(post.get('likes')) !== 0){
+                    post.get('user').set('totalLikes', (parseInt(post.get('user').get('totalLikes'))+parseInt(post.get('likes'))));
+                }
             });
 
         let comments = store.peekAll('comment');
             comments.forEach(comment =>{
                 commentsNum++;
                 listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
+                if(parseInt(comment.get('likes')) !== 0){
+                    comment.get('user').set('totalLikes', (parseInt(comment.get('user').get('totalLikes'))+parseInt(comment.get('likes'))));
+                }
+            });
+
+            let users = store.peekAll('user');
+            users.forEach(user =>{
+                userNum++;
+                if(user.get('totalLikes')){
+                    likesNum += user.get('totalLikes');
+                }
+                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
+                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
+                listOfOverallLikes.push({user: user, items: user.get('totalLikes')});
             });
 
             listOfComments.sort(sortByNumber);
@@ -193,14 +223,18 @@ promise.finally(function(){
             listOfTopCommented = listOfTopCommented.slice(0,3);
             listOfMostLikedComments.sort(sortByNumber);
             listOfMostLikedComments = listOfMostLikedComments.slice(0,3);
+            listOfOverallLikes.sort(sortByNumber);
+            listOfOverallLikes = listOfOverallLikes.slice(0,5);
 
             realThis.set('list.topCommentsUsers', listOfComments);
             realThis.set('list.topPostsUsers', listOfPosts);
             realThis.set('list.topCommentedPosts', listOfTopCommented);
             realThis.set('list.mostLikedComments', listOfMostLikedComments);
+            realThis.set('list.listOfOverallLikes', listOfOverallLikes);
             realThis.set('list.commentsNum', commentsNum);
             realThis.set('list.userNum', userNum);
             realThis.set('list.postsNum', postsNum);
+            realThis.set('list.likesNum', likesNum);
 
             realThis.set('showLoader', false);
             realThis.set('displayStats', true);

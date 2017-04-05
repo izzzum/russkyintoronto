@@ -41,6 +41,17 @@ export function formatEnding(params, args) {
       word = 'пользователей';
     }
   }
+  else if(checkWord==='like'){
+    if(num === 1){
+      word = 'лайк';
+    }
+    else if(num > 1 && num <5) {
+      word = 'лайка';
+    }
+    else{
+      word = 'лайков';
+    }
+  }
 
   return word;
 }

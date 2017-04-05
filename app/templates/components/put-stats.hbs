@@ -3,6 +3,7 @@
         <ul>
             <li>Написано комментариев: {{list.commentsNum}}</li>
             <li>Количество активных пользователей: {{list.userNum}}</li>
+            <li>Количество отданых лайков: {{list.likesNum}}</li>
         </ul>
     <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
     <div class="box">
@@ -18,11 +19,32 @@
             {{/if}}
             {{user.items}} {{format-ending num=user.items word='comment'}}</p>
             <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
-            
         </li>
         {{/each}}
         </ol>
     </div>
+
+
+    <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
+    <div class="box">
+        <ol>
+        {{#each list.listOfOverallLikes as |user|}}
+        <li>
+            <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+            {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items)}}
+            <p>{{#if (eq user.user.sex '1')}}
+                получила
+            {{else}}
+                получил
+            {{/if}}
+            {{user.items}} {{format-ending num=user.items word='like'}}</p>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+        </li>
+        {{/each}}
+        </ol>
+    </div>
+
+
     <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
     <div class="box">
         <ol>

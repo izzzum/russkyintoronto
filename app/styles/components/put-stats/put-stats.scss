@@ -10,7 +10,7 @@
     border-bottom: 10px solid #337ab7;
     .container{
         .box {
-            &:first-of-type{       
+            &:first-of-type, &:nth-of-type(2){       
                 a.name{
                     display: block;
                 }
