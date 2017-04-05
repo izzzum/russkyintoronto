@@ -10,7 +10,6 @@
         {{#each list.topCommentsUsers as |user|}}
         <li>
             <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
             {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
             <p>{{#if (eq user.user.sex '1')}}
                 оставила
@@ -18,6 +17,7 @@
                 оставил
             {{/if}}
             {{user.items}} {{format-ending num=user.items word='comment'}}</p>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
             
         </li>
         {{/each}}
