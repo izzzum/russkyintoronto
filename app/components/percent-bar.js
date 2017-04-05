@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     classNames: ['percent-bar'],
+    delay: 1200,
     didInsertElement: function(){
         let realThis = this;
         let el = "#"+realThis.elementId+" .overlay-rate";
@@ -9,6 +10,6 @@ export default Ember.Component.extend({
             Ember.$(el).animate({
                     left: realThis.get('rate')+"%"
                 }, 1000);
-        }, 1200);
+        }, realThis.get('delay'));
     }
 });

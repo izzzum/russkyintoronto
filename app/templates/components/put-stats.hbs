@@ -31,7 +31,7 @@
         {{#each list.listOfOverallLikes as |user|}}
         <li>
             <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
-            {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items)}}
+            {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items) delay=2000}}
             <p>{{#if (eq user.user.sex '1')}}
                 получила
             {{else}}
