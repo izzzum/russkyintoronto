@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
             }, 500);
 
         let sortByNumber = function(a, b) {
-                return ((a.items > b.items) ? -1 : ((a.items === b.items) ? 0 : 1));
+                return ((parseInt(a.items) > parseInt(b.items)) ? -1 : ((parseInt(a.items) === parseInt(b.items)) ? 0 : 1));
             };
 
         this.set('showLoader', true);
@@ -92,26 +92,33 @@ promise.finally(function(){
         let users = store.peekAll('user');
             users.forEach(user =>{
                 userNum++;
-                listOfComments.push({user: store.peekRecord('user', user.get('id')), items: user.get('comments').content.currentState.length});
-                listOfPosts.push({user: store.peekRecord('user', user.get('id')), items: user.get('posts').content.currentState.length});
+                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
+                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
             });
 
         posts = store.peekAll('post');
             posts.forEach(post =>{
                 postsNum++;
-                listOfTopCommented.push({post: store.peekRecord('post', post.get('id')), items: post.get('commentsNum')});
+                listOfTopCommented.push({post: post, items: post.get('commentsNum')});
             });
 
         let comments = store.peekAll('comment');
             comments.forEach(comment =>{
                 commentsNum++;
-                listOfMostLikedComments.push({comment: store.peekRecord('comment', comment.get('id')), items: comment.get('likes')});
+                listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
             });
 
-            listOfComments = listOfComments.sort(sortByNumber).slice(0,5);
-            listOfPosts = listOfPosts.sort(sortByNumber).slice(0,3);
-            listOfTopCommented = listOfTopCommented.sort(sortByNumber).slice(0,3);
-            listOfMostLikedComments = listOfMostLikedComments.sort(sortByNumber).slice(0,3);
+            listOfComments.sort(sortByNumber);
+            listOfComments = listOfComments.slice(0,5);
+            listOfPosts.sort(sortByNumber);
+            listOfPosts = listOfPosts.slice(0,3);
+            if(listOfPosts[2].items === 1){
+                listOfPosts = listOfPosts.slice(0,2);
+            }
+            listOfTopCommented.sort(sortByNumber);
+            listOfTopCommented = listOfTopCommented.slice(0,3);
+            listOfMostLikedComments.sort(sortByNumber);
+            listOfMostLikedComments = listOfMostLikedComments.slice(0,3);
 
             realThis.set('list.topCommentsUsers', listOfComments);
             realThis.set('list.topPostsUsers', listOfPosts);
@@ -159,26 +166,33 @@ promise.finally(function(){
         let users = store.peekAll('user');
             users.forEach(user =>{
                 userNum++;
-                listOfComments.push({user: store.peekRecord('user', user.get('id')), items: user.get('comments').content.currentState.length});
-                listOfPosts.push({user: store.peekRecord('user', user.get('id')), items: user.get('posts').content.currentState.length});
+                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
+                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
             });
 
         posts = store.peekAll('post');
             posts.forEach(post =>{
                 postsNum++;
-                listOfTopCommented.push({post: store.peekRecord('post', post.get('id')), items: post.get('commentsNum')});
+                listOfTopCommented.push({post: post, items: post.get('commentsNum')});
             });
 
         let comments = store.peekAll('comment');
             comments.forEach(comment =>{
                 commentsNum++;
-                listOfMostLikedComments.push({comment: store.peekRecord('comment', comment.get('id')), items: comment.get('likes')});
+                listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
             });
 
-            listOfComments = listOfComments.sort(sortByNumber).slice(0,5);
-            listOfPosts = listOfPosts.sort(sortByNumber).slice(0,3);
-            listOfTopCommented = listOfTopCommented.sort(sortByNumber).slice(0,3);
-            listOfMostLikedComments = listOfMostLikedComments.sort(sortByNumber).slice(0,3);
+            listOfComments.sort(sortByNumber);
+            listOfComments = listOfComments.slice(0,5);
+            listOfPosts.sort(sortByNumber);
+            listOfPosts = listOfPosts.slice(0,3);
+            if(listOfPosts[2].items === 1){
+                listOfPosts = listOfPosts.slice(0,2);
+            }
+            listOfTopCommented.sort(sortByNumber);
+            listOfTopCommented = listOfTopCommented.slice(0,3);
+            listOfMostLikedComments.sort(sortByNumber);
+            listOfMostLikedComments = listOfMostLikedComments.slice(0,3);
 
             realThis.set('list.topCommentsUsers', listOfComments);
             realThis.set('list.topPostsUsers', listOfPosts);

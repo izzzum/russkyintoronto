@@ -1,47 +1,46 @@
 <div class="container">
-    <h3>Статистика по последним {{list.postsNum}} постам</h3>
+    <h3>Для статистики проанализировано {{list.postsNum}} {{format-ending num=user.items word='post'}}</h3>
         <ul>
             <li>Написано комментариев: {{list.commentsNum}}</li>
             <li>Количество активных пользователей: {{list.userNum}}</li>
         </ul>
-    <h4>Топ-{{array-length list.topCommentsUsers}} по оставленным комментариям:</h4>
+    <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
     <div class="box">
         <ol>
         {{#each list.topCommentsUsers as |user|}}
         <li>
             <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
             <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
-            {{#if (eq user.user.sex '2')}}
-                оставил
-            {{else}}
+            {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
+            <p>{{#if (eq user.user.sex '1')}}
                 оставила
+            {{else}}
+                оставил
             {{/if}}
-            {{user.items}} комментариев <br><br>
-            <div style="width:100px; height: 10px; background: black;">
-                <div style="width:{{get-percent total=list.commentsNum fraction=user.items}}%; height: 10px; background: green; color:white; font-size: 10px;">{{get-percent total=list.commentsNum fraction=user.items}}%</div>
-            </div>
+            {{user.items}} {{format-ending num=user.items word='comment'}}</p>
+            
         </li>
         {{/each}}
         </ol>
     </div>
-    <h4>Топ-{{array-length list.topCommentedPosts}} по количеству написанных постов:</h4>
+    <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
     <div class="box">
         <ol>
         {{#each list.topPostsUsers as |user|}}
         <li>
             <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
             <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
-            {{#if (eq user.user.sex '2')}}
-                опубликовал
+            {{#if (eq user.user.sex '1')}}
+                написала
             {{else}}
-                опубликовала
+                написал
             {{/if}}
-            пост {{user.items}} раз
+            {{user.items}} {{format-ending num=user.items word='post'}}
         </li>
         {{/each}}
         </ol>
     </div>
-    <h4>Топ-{{array-length list.topCommentedPosts}} Поста:</h4>
+    <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
     <div class="box">
         <ol>
         {{#each list.topCommentedPosts as |post|}}
@@ -53,7 +52,7 @@
         {{/each}}
         </ol>
     </div>
-    <h4>Топ-{{array-length list.mostLikedComments}} Комментария:</h4>
+    <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
     <div class="box">
         <ol>
         {{#each list.mostLikedComments as |comment|}}
