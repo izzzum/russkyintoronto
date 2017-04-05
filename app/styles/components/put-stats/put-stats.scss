@@ -8,16 +8,10 @@
     overflow-y: scroll;
     border-bottom: 10px solid #337ab7;
     .container{
-        ol {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: stretch;
-    align-content: space-around;
-    justify-content: flex-start;
+        .box {
             li{
+                padding: 10px;
                align-self: auto;
-               width: 310px;
             }
             .comment{
                 background-color: #fff;

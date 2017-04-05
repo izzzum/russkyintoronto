@@ -1,40 +1,68 @@
 <div class="container">
-<h3>Статистика за последние {{list.postsNum}} постов</h3>
-<ul>
-    <li>Написано комментариев: {{list.commentsNum}}</li>
-    <li>Количество активных пользователей: {{list.userNum}}</li>
-</ul>
-<h4>Топ-{{array-length list.topCommentsUsers}} Комментатора:</h4>
-<ol>
-{{#each list.topCommentsUsers as |user|}}
-<li><a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
-<a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
-left {{user.items}} comments</li>
-{{/each}}
-</ol>
-<h4>Топ-{{array-length list.topCommentedPosts}} по кол-ву постов:</h4>
-<ol>
-{{#each list.topPostsUsers as |user|}}
-<li><a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
-<a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
-posted {{user.items}} times</li>
-{{/each}}
-</ol>
-<h4>Топ-{{array-length list.topCommentedPosts}} Поста:</h4>
-<ol>
-{{#each list.topCommentedPosts as |post|}}
-<li>
-{{single-post post=post.post simple=true}}
-</li>
-{{/each}}
-</ol>
-<h4>Топ-{{array-length list.mostLikedComments}} Комментария:</h4>
-<ol>
-{{#each list.mostLikedComments as |comment|}}
-<li>
-{{#link-to 'post' comment.comment.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
-{{single-comment comment=comment.comment simple=true}}
-</li>
-{{/each}}
-</ol>
+    <h3>Статистика по последним {{list.postsNum}} постам</h3>
+        <ul>
+            <li>Написано комментариев: {{list.commentsNum}}</li>
+            <li>Количество активных пользователей: {{list.userNum}}</li>
+        </ul>
+    <h4>Топ-{{array-length list.topCommentsUsers}} по оставленным комментариям:</h4>
+    <div class="box">
+        <ol>
+        {{#each list.topCommentsUsers as |user|}}
+        <li>
+            <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+            {{#if (eq user.user.sex '2')}}
+                оставил
+            {{else}}
+                оставила
+            {{/if}}
+            {{user.items}} комментариев <br><br>
+            <div style="width:100px; height: 10px; background: black;">
+                <div style="width:{{get-percent total=list.commentsNum fraction=user.items}}%; height: 10px; background: green; color:white; font-size: 10px;">{{get-percent total=list.commentsNum fraction=user.items}}%</div>
+            </div>
+        </li>
+        {{/each}}
+        </ol>
+    </div>
+    <h4>Топ-{{array-length list.topCommentedPosts}} по количеству написанных постов:</h4>
+    <div class="box">
+        <ol>
+        {{#each list.topPostsUsers as |user|}}
+        <li>
+            <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+            {{#if (eq user.user.sex '2')}}
+                опубликовал
+            {{else}}
+                опубликовала
+            {{/if}}
+            пост {{user.items}} раз
+        </li>
+        {{/each}}
+        </ol>
+    </div>
+    <h4>Топ-{{array-length list.topCommentedPosts}} Поста:</h4>
+    <div class="box">
+        <ol>
+        {{#each list.topCommentedPosts as |post|}}
+        <li>
+          Опубликован: <span class="time">{{get-date post.post.date}}</span><br>
+          {{#link-to 'post' post.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
+          {{single-post post=post.post simple=true}}
+        </li>
+        {{/each}}
+        </ol>
+    </div>
+    <h4>Топ-{{array-length list.mostLikedComments}} Комментария:</h4>
+    <div class="box">
+        <ol>
+        {{#each list.mostLikedComments as |comment|}}
+        <li>
+            Опубликован: <span class="time">{{get-date comment.comment.post.date}}</span><br>
+            {{#link-to 'post' comment.comment.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
+            {{single-comment comment=comment.comment simple=true}}
+        </li>
+        {{/each}}
+        </ol>
+    </div>
 </div>

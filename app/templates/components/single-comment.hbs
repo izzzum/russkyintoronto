@@ -1,5 +1,11 @@
-<p class="time">{{get-date comment.date}}</p>
-<a href="http://vk.com/id{{comment.user.id}}"><img class="img-circle" src="{{comment.user.photo100}}"></a>
+{{#unless simple}}<p class="time">{{get-date comment.date}}</p>{{/unless}}
+<a href="http://vk.com/id{{comment.user.id}}">
+{{#if simple}}
+    <img class="img-circle" src="{{comment.user.photo50}}">
+{{else}}
+    <img class="img-circle" src="{{comment.user.photo100}}">
+{{/if}}
+</a>
 <a class="name" href="http://vk.com/id{{comment.user.id}}">{{get-fullname comment.user.firstName comment.user.lastName}}</a>
 <p>
     {{#unless simple}}

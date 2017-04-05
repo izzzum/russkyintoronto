@@ -2,13 +2,13 @@
     <a class="getStats" {{action 'getStats'}}>
         <i class="fa fa-line-chart"></i> 
         {{#unless displayStats}}Показать статистику{{/unless}}
-        {{#if displayStats}}Hide Stats{{/if}}
+        {{#if displayStats}}Убрать статистику{{/if}}
     </a>
     <a class="scrollTop" {{action 'scrollTop'}}>
-        <i class="fa fa-arrow-up"></i> up
+        <i class="fa fa-arrow-up"></i> Вверх
     </a>
     <a class="scrollBot" {{action 'scrollBot'}}>
-        <i class="fa fa-arrow-down"></i> down
+        <i class="fa fa-arrow-down"></i> Вниз
     </a>
 </nav>
 {{#if showLoader}}

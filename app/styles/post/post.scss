@@ -1,0 +1,14 @@
+.post-page{
+    .post {
+        margin: 10px 0;
+    }
+    a.back-to-wall{
+        padding: 5px 10px;
+        background-color: #fff;
+        margin-bottom: 10px;
+        &:hover{
+            text-decoration: none;
+            background: #e9e9f6;
+        }
+    }
+}

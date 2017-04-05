@@ -1,7 +1,21 @@
 @import "ember-bootstrap/bootstrap";
 @import "components/components";
+@import "post/post";
 
-body{background-color: #edeef0 !important;}
+@mixin font-face($name) {
+  @font-face {
+    font-family: $name;
+    src:  url("fonts/#{$name}.eot?") format("eot"),
+	  url("fonts/#{$name}.woff2") format("woff2"),
+	  url("fonts/#{$name}.woff") format("woff");
+  }
+}
+
+//@include font-face('Anton');
+
+body{
+    background-color: #edeef0;
+}
 p {
     padding: 10px;
     padding-bottom: 0;
@@ -25,17 +39,17 @@ nav{
     top: 0;
     position: fixed;
     width: 100%;
-    background: #337ab7;
+    background: #2a5885;
     padding: 10px;
     z-index: 10000;
     .getStats, .scrollTop, .scrollBot {
         color: #fff;
-        margin-right: 10px;
+        margin-right: 2px;
         padding: 10px;
         cursor: pointer;
         &:hover{
             text-decoration: none;
-            color: #c1faff;
+            background: #337ab7;
         }
     }
 
