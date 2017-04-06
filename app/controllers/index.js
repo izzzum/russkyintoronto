@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
                     }
                 });
         let promise;
-        if(!Ember.isEmpty(posts) && posts.content.length < this.get('statsAmmount')) {
+        if(Ember.isPresent(posts) && posts.content.length < this.get('statsAmmount')) {
             this.store.adapterFor('post').set('namespace', "method/wall.get");
             posts = this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('statsAmmount')-posts.content.length, offset: posts.content.length, v: '5.7'});
             this.set('loadedPortion', this.get('statsAmmount'));

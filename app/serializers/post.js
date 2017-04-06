@@ -25,7 +25,7 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
            delete post.reposts.count;
            delete post.likes.count;
             post.comments = [];
-           if(!Ember.isEmpty(post.attachments)){
+           if(Ember.isPresent(post.attachments)){
             post.attachments.forEach(function(attachment){
                 attachment.id = Math.ceil(Math.random()*100000000);
                 if(Ember.isEmpty(ret[attachment.type])){

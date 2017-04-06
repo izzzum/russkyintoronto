@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     users: Ember.computed(function(){this.set('users', this.get('store').peekAll('user'));}),*/
    /* postsC: Ember.computed('list', function(){
         let posts = this.get('list.posts');
-        if(!Ember.isEmpty(posts)){
+        if(Ember.isPresent(posts)){
         let listOfTopCommented = [];
             posts.forEach(post =>{
                 listOfTopCommented.push({post: post.get('id'), items: post.get('commentsNum')});
@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     }),
     usersC: Ember.computed('list', function(){
         let users = this.get('list.users');
-        if(!Ember.isEmpty(users)){
+        if(Ember.isPresent(users)){
         let listOfComments = [];
         let listOfPosts = [];
             users.forEach(user =>{
@@ -40,7 +40,7 @@ export default Ember.Component.extend({
     }),
     commentsC: Ember.computed('list', function(){
         let comments = this.get('list.comments');
-        if(!Ember.isEmpty(comments)){
+        if(Ember.isPresent(comments)){
         let listOfMostLikedComments = [];
             comments.forEach(comment =>{
                     listOfMostLikedComments.push({comment: comment.get('id'), items: comment.get('likes')});

@@ -20,14 +20,14 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
            comment.comments_num = payload.response.count;
            comment.likes = comment.likes.count;
            comment.user = comment.from_id;
-          if(!Ember.isEmpty(comment.reply_to_user)){
+          if(Ember.isPresent(comment.reply_to_user)){
            comment.replied = comment.reply_to_user;
           }else {
               comment.replied = null;
           }
            delete comment.from_id;
            delete comment.likes.count;
-            if(!Ember.isEmpty(comment.attachments)){
+            if(Ember.isPresent(comment.attachments)){
             comment.attachments.forEach(function(attachment){
                 attachment.id = Math.ceil(Math.random()*100000000); //pizdec
                 if(Ember.isEmpty(ret[attachment.type])){
