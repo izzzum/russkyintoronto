@@ -11,14 +11,28 @@ export default Ember.Controller.extend({
     }),
     actions: {
     scrollTop(){
+        if(this.get('displayStats')){
+            Ember.$('.statistics').stop().animate({
+               scrollTop: (Ember.$('.container').offset().top-10)
+            }, 1000);
+        }
+        else{
             Ember.$('body').stop().animate({
                 scrollTop: (Ember.$('.page-header').offset().top-100)
             }, 1000);
+        }
     },
     scrollBot(){
+        if(this.get('displayStats')){
+            Ember.$('.statistics').stop().animate({
+               scrollTop: (Ember.$('.statistics .box:last ol:last li:last').offset().top-100)
+            }, 1000);
+        }
+        else{
             Ember.$('body').stop().animate({
                 scrollTop: (Ember.$('.page-footer').offset().top-100)
             }, 1000);
+        }
     },
     getStats() {
         let realThis = this;
