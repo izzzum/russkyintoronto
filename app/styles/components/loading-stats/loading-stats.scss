@@ -1,0 +1,20 @@
+.loading-stats{
+    z-index: 99999;
+    position: fixed;
+    top:50px;
+    padding: 20px;
+    width: 50%;
+    left: 50%;
+    transform: translate(-50%,0);
+    background: #2a5885;
+    color: #fff;
+    font-family: 'Anton', 'Verdana';
+    font-weight: normal;
+    font-size: 12px;
+    .loader-img{
+        img{
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
