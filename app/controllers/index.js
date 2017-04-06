@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
         return ((parseInt(a.items) > parseInt(b.items)) ? -1 : ((parseInt(a.items) === parseInt(b.items)) ? 0 : 1));
     },
    displayStats:false,
+   scrollPosition: null,
    store: Ember.inject.service(),
    loadedPortion: 8,
    statsAmmount: 50,
@@ -83,12 +84,13 @@ export default Ember.Controller.extend({
 
             this.set('statsInfoLoader', false);
             this.set('displayStats', true);
-            Ember.$('body').stop().animate({
-            scrollTop: (Ember.$('.page-header').offset().top-100)
-            }, 500);
             Ember.$('body').toggleClass("no-scroll");
+            this.set('scrollPosition', Ember.$('body').scrollTop());
             //animate
             Ember.run.later(function(){
+            Ember.$('body').stop().animate({
+            scrollTop: (Ember.$('.page-header').offset().top-100)
+            }, 50);
             Ember.$('.statistics').stop().animate({
                 height: "98%"
             }, 500, function(){
@@ -128,6 +130,11 @@ export default Ember.Controller.extend({
                 height: "0%"
             }, 500, function(){
                 realThis.set('displayStats', false);
+                if(Ember.isPresent(realThis.get('scrollPosition'))){
+                    Ember.$('body').stop().animate({
+                        scrollTop: realThis.get('scrollPosition')
+                    }, 1000);
+                }
                 Ember.$('body').toggleClass("no-scroll");
             });
         } else {
