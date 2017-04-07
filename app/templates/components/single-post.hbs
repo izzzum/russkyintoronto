@@ -1,12 +1,17 @@
 {{#unless simple}}{{#link-to 'post' post.id}}<span class="time">{{get-date post.date}}</span>{{/link-to}}{{/unless}}
+<div class="user">
 <a href="http://vk.com/id{{post.user.id}}">
 {{#if simple}}
     <img class="img-circle" src="{{post.user.photo50}}">
 {{else}}
     <img class="img-circle" src="{{post.user.photo100}}">
 {{/if}}
+{{#if (eq post.user.online '1')}}
+<span></span>
+{{/if}}
 </a>
 <a class="name" href="http://vk.com/id{{post.user.id}}">{{get-fullname post.user.firstName post.user.lastName}}</a>
+</div>
 <p>{{{text-to-link post.text}}}</p>
 {{#if post.attachments}}{{put-attachments attachments=post.attachments}}{{/if}}
 <div class="stats">

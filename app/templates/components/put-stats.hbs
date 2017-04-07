@@ -10,7 +10,11 @@
         <ol>
         {{#each list.topCommentsUsers as |user|}}
         <li>
-            <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+            {{#if (eq user.user.online '1')}}
+                <span class="online"></span>
+            {{/if}}
+            </a>
             {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
             <p>{{#if (eq user.user.sex '1')}}
                 оставила
@@ -18,7 +22,8 @@
                 оставил
             {{/if}}
             {{user.items}} {{format-ending num=user.items word='comment'}}</p>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">
+            {{get-fullname user.user.firstName user.user.lastName}}</a>
         </li>
         {{/each}}
         </ol>
@@ -30,7 +35,11 @@
         <ol>
         {{#each list.listOfOverallLikes as |user|}}
         <li>
-            <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+            {{#if (eq user.user.online '1')}}
+                <span class="online"></span>
+            {{/if}}
+            </a>
             {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items) delay=2000}}
             <p>{{#if (eq user.user.sex '1')}}
                 получила
@@ -50,7 +59,11 @@
         <ol>
         {{#each list.topPostsUsers as |user|}}
         <li>
-            <a href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}"></a>
+            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+            {{#if (eq user.user.online '1')}}
+                <span class="online"></span>
+            {{/if}}
+            </a>
             <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
             {{#if (eq user.user.sex '1')}}
                 написала

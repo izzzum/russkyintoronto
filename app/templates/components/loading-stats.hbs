@@ -1,2 +1,19 @@
-<p>Loading statistics...</p>
+{{#if notEqual}}
+    <p>Loading data... {{get-percent total=total fraction=state}}%</p>
+    <p>
+    {{#if state}}
+        {{state}}
+    {{else}}
+        0
+    {{/if}}
+        /
+    {{#if total}}
+        {{total}}
+    {{else}}
+        0
+    {{/if}}
+    </p>
+{{else}}
+    <p>Analyzing data...</p>
+{{/if}}
 {{loader-img show=true}}

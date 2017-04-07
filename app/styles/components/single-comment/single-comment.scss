@@ -6,6 +6,23 @@ margin: 5px;
 padding: 10px;
 padding-bottom: 0;
 background-color: #fff;
+  .user{
+    a {
+      &:first-of-type{
+        text-decoration: none;
+      }
+      span {
+          width: 14px;
+          height: 14px;
+          background: limegreen;
+          border-radius: 10px;
+          position: absolute;
+          top: 95px;
+          left: 85px;
+          border: 3px solid #fff;
+        }
+    }
+  }
   a i {
     cursor: pointer;
   }

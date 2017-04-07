@@ -5,6 +5,9 @@ export default Ember.Controller.extend({
    sortByNumber: function(a, b) {
         return ((parseInt(a.items) > parseInt(b.items)) ? -1 : ((parseInt(a.items) === parseInt(b.items)) ? 0 : 1));
     },
+   promise: Ember.A(),
+   totalNum: 0,          
+   loadingState: 0,
    displayStats:false,
    scrollPosition: null,
    store: Ember.inject.service(),
@@ -138,24 +141,27 @@ export default Ember.Controller.extend({
                 Ember.$('body').toggleClass("no-scroll");
             });
         } else {
-        this.set('statsInfoLoader', true);    
+        this.set('statsInfoLoader', true);   
         let store = this.get('store');
         let posts = store.peekAll('post');
+        let comments = store.peekAll('comment');
+            this.set('totalNum', comments.content.length);  
             posts.forEach(post => {
                     if(post.get('commentsNum') !== 0){
                         let currentLength = post.get('comments').content.currentState.length;
                         if(currentLength < post.get('commentsNum')){
-                            Ember.run.later(function(){
-                                store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(function(resolved){
-                                    resolved.forEach(comment =>{
+                            this.set('totalNum', this.get('totalNum')+post.get('commentsNum')-currentLength);
+                            //Ember.run.later(function(){
+                                realThis.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
+                                    function(resolved){resolved.forEach(comment =>{
+                                        realThis.set('loadingState', realThis.get('loadingState')+1);
                                         comment.set('post', post);
                                     });
-                                });
-                            }, Math.ceil(Math.random()*5000));
-                        }
+                                }));
+                            //}, Math.ceil(Math.random()*5000));
+                        }    
                     }
                 });
-        let promise;
         if(Ember.isPresent(posts) && posts.content.length < this.get('statsAmmount')) {
             this.store.adapterFor('post').set('namespace', "method/wall.get");
             posts = this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('statsAmmount')-posts.content.length, offset: posts.content.length, v: '5.7'});
@@ -166,33 +172,28 @@ export default Ember.Controller.extend({
                     if(post.get('commentsNum') !== 0){
                         let currentLength = post.get('comments').content.currentState.length;
                         if(currentLength < post.get('commentsNum')){
-                            Ember.run.later(function(){
-                                promise = store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'});
-                                promise.then(function(resolved){
-                                    resolved.forEach(comment =>{
+                            realThis.set('totalNum', realThis.get('totalNum')+post.get('commentsNum')-currentLength);
+                                //Ember.run.later(function(){
+                                realThis.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
+                                    function(resolved){resolved.forEach(comment =>{
+                                        realThis.set('loadingState', realThis.get('loadingState')+1);
                                         comment.set('post', post);
                                     });
-                                });
-                            }, Math.ceil(Math.random()*5000));
-                        }
+                                }));
+                               // }, Math.ceil(Math.random()*5000));
+                        }                      
                     }
                 }); 
            }).finally(function(){
-                                Ember.run.later(function(){
-                           
-promise.finally(function(){
-        realThis.send('computeAllThisShit');
-            });
-
-            }, 10000);             
+                 Ember.RSVP.all(realThis.get('promise')).then(function(){
+            realThis.send('computeAllThisShit');
+        });        
         });
     }
     else {
-     Ember.run.later(function(){
-         realThis.send('computeAllThisShit');
-        
-
-}, 10000);
+        Ember.RSVP.all(realThis.get('promise')).then(function(){
+            realThis.send('computeAllThisShit');
+        });
     }
 
         }

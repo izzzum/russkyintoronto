@@ -1,3 +1,4 @@
+<div class="user">
 {{#unless simple}}<p class="time">{{get-date comment.date}}</p>{{/unless}}
 <a href="http://vk.com/id{{comment.user.id}}">
 {{#if simple}}
@@ -5,8 +6,12 @@
 {{else}}
     <img class="img-circle" src="{{comment.user.photo100}}">
 {{/if}}
+{{#if (eq comment.user.online '1')}}
+<span></span>
+{{/if}}
 </a>
 <a class="name" href="http://vk.com/id{{comment.user.id}}">{{get-fullname comment.user.firstName comment.user.lastName}}</a>
+</div>
 <p>
     {{#unless simple}}
     {{#if comment.replyToComment}}

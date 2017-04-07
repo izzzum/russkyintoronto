@@ -10,6 +10,22 @@
     border-bottom: 10px solid #337ab7;
     .container{
         .box {
+            a.user{
+                position: relative;
+                &:hover{
+                    text-decoration: none;
+                }
+                span.online{
+                            width: 14px;
+                            height: 14px;
+                            background: limegreen;
+                            border-radius: 10px;
+                            position: absolute;
+                            top: 20px;
+                            left: 37px;
+                            border: 3px solid #fff;
+                }
+            }
             &:first-of-type, &:nth-of-type(2){       
                 a.name{
                     display: block;
@@ -26,8 +42,24 @@
                 background-color: #fff;
                 padding: 10px;
                 max-width: 300px;
+                .user{
+                    a span {
+                        top: 48px;
+                        left: 48px;
+                    }
+                }
             }
             .post {
+                & .comment .user a span {
+                        top: 95px;
+                        left: 85px;
+                }
+                .user{
+                    a span {
+                        top: 48px;
+                        left: 48px;
+                    }
+                }
                 max-width: 300px;
             }
         }
