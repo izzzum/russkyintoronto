@@ -7,9 +7,9 @@ export default Ember.Route.extend({
         this.controllerFor('index').set('count', this.get('count'));
         if(this.controllerFor('index').get('displayStats')){
             Ember.$('body').addClass("no-scroll");
-            Ember.$('body').stop().animate({
+            /*Ember.$('body').stop().animate({
                 scrollTop: (Ember.$('.page-header').offset().top-100)
-            }, 1000);
+            }, 1000);*/
             //animate
             Ember.run.later(function(){
             Ember.$('.statistics').stop().animate({

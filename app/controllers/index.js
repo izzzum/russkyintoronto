@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import delay from 'ember-delay/delay';
 
 export default Ember.Controller.extend({
    list: {},
@@ -91,9 +92,9 @@ export default Ember.Controller.extend({
             this.set('scrollPosition', Ember.$('body').scrollTop());
             //animate
             Ember.run.later(function(){
-            Ember.$('body').stop().animate({
+            /*Ember.$('body').stop().animate({
             scrollTop: (Ember.$('.page-header').offset().top-100)
-            }, 50);
+            }, 50);*/
             Ember.$('.statistics').stop().animate({
                 height: "98%"
             }, 500, function(){
@@ -133,7 +134,7 @@ export default Ember.Controller.extend({
                 height: "0%"
             }, 500, function(){
                 realThis.set('displayStats', false);
-                if(Ember.isPresent(realThis.get('scrollPosition'))){
+                if(Ember.isPresent(realThis.get('scrollPosition')) && Ember.$('body').scrollTop() !== realThis.get('scrollPosition')){
                     Ember.$('body').stop().animate({
                         scrollTop: realThis.get('scrollPosition')
                     }, 1000);
@@ -151,6 +152,9 @@ export default Ember.Controller.extend({
                         let currentLength = post.get('comments').content.currentState.length;
                         if(currentLength < post.get('commentsNum')){
                             this.set('totalNum', this.get('totalNum')+post.get('commentsNum')-currentLength);
+                            
+                            realThis.get('promise').addObject(
+                                delay(Math.random()*5000).then(function() {
                             //Ember.run.later(function(){
                                 realThis.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
                                     function(resolved){resolved.forEach(comment =>{
@@ -159,6 +163,7 @@ export default Ember.Controller.extend({
                                     });
                                 }));
                             //}, Math.ceil(Math.random()*5000));
+                            }));
                         }    
                     }
                 });
@@ -173,6 +178,8 @@ export default Ember.Controller.extend({
                         let currentLength = post.get('comments').content.currentState.length;
                         if(currentLength < post.get('commentsNum')){
                             realThis.set('totalNum', realThis.get('totalNum')+post.get('commentsNum')-currentLength);
+                                realThis.get('promise').addObject(
+                                delay(Math.random()*5000).then(function() {
                                 //Ember.run.later(function(){
                                 realThis.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
                                     function(resolved){resolved.forEach(comment =>{
@@ -181,6 +188,7 @@ export default Ember.Controller.extend({
                                     });
                                 }));
                                // }, Math.ceil(Math.random()*5000));
+                               }));
                         }                      
                     }
                 }); 
