@@ -12,12 +12,10 @@ export default Ember.Route.extend({
             }, 1000);*/
             //animate
             Ember.run.later(function(){
-            Ember.$('.statistics').stop().animate({
-                height: "98%"
-            }, 500, function(){
-                console.log('stats opened');
-            });
-            }, 600);
+                Ember.$('.statistics').animate({
+                    height: "98%"
+                }, 500);
+            }, 100);
         }
     },
     model: function() {
