@@ -1,23 +1,34 @@
-{{#each attachments as |attachment|}}
-    {{#if attachment.poll}}
-        {{put-poll poll=attachment.poll}}
-    {{/if}}
-    {{#if attachment.photo}}
-        {{put-photo photo=attachment.photo}}
-    {{/if}}
-    {{#if attachment.posted_photo}}
-        {{put-photo photo=attachment.posted_photo}}
-    {{/if}}
-    {{#if attachment.link}}
-        {{put-link link=attachment.link}}
-    {{/if}}
-    {{#if attachment.video}}
-        {{put-video video=attachment.video}}
-    {{/if}}
-    {{#if attachment.audio}}
-        {{put-audio audio=attachment.audio}}
-    {{/if}}
-    {{#if attachment.sticker}}
-        {{put-sticker sticker=attachment.sticker}}
-    {{/if}}
-{{/each}}
+{{#if photos}}
+<div class="album">
+    {{#each photos as |photo|}}
+        {{put-photo photo=photo length=(array-length photos)}}
+    {{/each}}
+</div>
+{{/if}}
+{{#if links}}
+<div class="links">
+    {{#each links as |link|}}
+        {{put-link link=link}}
+    {{/each}}
+</div>
+{{/if}}
+{{#if videos}}
+<div class="videos">
+    {{#each videos as |video|}}
+        {{put-video video=video}}
+    {{/each}}
+</div>
+{{/if}}
+{{#if audios}}
+<div class="audios">
+    {{#each audios as |audio|}}
+        {{put-audio audio=audio}}
+    {{/each}}
+</div>
+{{/if}}
+{{#if sticker}}
+    {{put-sticker sticker=sticker}}
+{{/if}}
+{{#if poll}}
+    {{put-poll poll=poll}}
+{{/if}}

@@ -1,4 +1,32 @@
-<a {{action 'toggleImageSize'}}>
-    <img class="{{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.photo604 photo.photo130}}">
-    <i class="fa fa-search-plus"></i>
+{{#if isLarge}}
+<div class="menu">
+    <a class="closeImg" {{action 'toggleImageSize'}}>
+        <i class="fa fa-remove"></i> 
+        Закрыть
+    </a>
+    {{#if ifPrev}}
+    <a class="prevImg" {{action 'previous'}}>
+        <i class="fa fa-arrow-left"></i> Предыдущее
+    </a>
+    {{/if}}
+    {{#if ifNext}}
+    <a class="nextImg" {{action 'next'}}>
+        <i class="fa fa-arrow-right"></i> Следующее
+    </a>
+    {{/if}}
+</div>
+{{/if}}
+<a class="img-resize" {{action 'toggleImageSize'}}>
+    {{#if (eq length 1)}}
+        <img class="photo-responsive {{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.large photo.photo604}}">
+    {{else}}
+        {{#if photo.tall}}
+            <span class="tall">
+                <img class="photo-responsive {{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.large photo.photo604}}">
+            </span>
+        {{else}}
+            <img class="photo-responsive {{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.large photo.photo604}}">
+        {{/if}}
+    {{/if}}
+    {{!-- <i class="fa fa-search-plus"></i> --}}
 </a>

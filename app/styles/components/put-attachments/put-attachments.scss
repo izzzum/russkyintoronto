@@ -9,24 +9,74 @@
             padding-top: 5px;
         }
     }
-    .photo-attachment{
-        padding: 10px;
-        border: 1px solid #edeef0;
-        display: inline-block;
-        a {
-            text-decoration: none;
-            img {
-                cursor: pointer;
-            }
+    .album{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        .photo-attachment{
+                .menu{
+                    text-align: left;
+                    top: 0;
+                    left: 0;
+                    position: fixed;
+                    width: 100%;
+                    background: #2a5885;
+                    padding: 10px;
+                    z-index: 10001;
+                    .closeImg, .nextImg, .prevImg {
+                        color: #fff;
+                        margin-right: 2px;
+                        padding: 10px;
+                        cursor: pointer;
+                        &:hover{
+                            text-decoration: none;
+                            background: #337ab7;
+                        }
+                    }
         }
-        .img-fullscreen{
-            position: fixed;
-            z-index: 999;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 100%;
-            height: auto;
+
+
+            &.single {
+                max-width: 100%;
+            }
+            margin: auto;
+            max-width: 50%;
+            a {
+                text-decoration: none;
+                span.tall img{
+                    max-height: 300px;
+                    width: auto;
+                    &.img-fullscreen{
+                        height: auto;
+                        width: auto;
+                        max-width: 100%;
+                        max-height: -webkit-calc(100% - 39px);
+                        max-height: -moz-calc(100% - 39px);
+                        max-height: -o-calc(100% - 39px);
+                    }
+                }
+                img{
+                    &.photo-responsive {
+                        max-width: 100%;
+                        height: auto;
+                    }
+                    cursor: pointer;
+                    &.img-fullscreen{
+                        position: fixed;
+                        z-index: 999;
+                        margin-top: 19.5px;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        max-width: 100%;
+                        height: auto;
+                        max-height: -webkit-calc(100% - 39px);
+                        max-height: -moz-calc(100% - 39px);
+                        max-height: -o-calc(100% - 39px);
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }
