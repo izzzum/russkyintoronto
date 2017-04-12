@@ -42,12 +42,13 @@ nav{
     background: #2a5885;
     padding: 10px;
     z-index: 10000;
-    .getStats, .scrollTop, .scrollBot {
+    a {
         color: #fff;
         margin-right: 2px;
         padding: 10px;
         cursor: pointer;
         &:hover{
+            color: #fff;
             text-decoration: none;
             background: #337ab7;
         }
