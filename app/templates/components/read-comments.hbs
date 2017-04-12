@@ -1,5 +1,5 @@
 {{#each comments as |comment|}}
-   {{single-comment comment=comment}}
+   {{single-comment comment=comment simple=simple}}
 {{/each}}
 {{#if loadingStatus}}
     {{loader-img show=loadingStatus}}

@@ -18,7 +18,7 @@
                 span.online{
                             width: 14px;
                             height: 14px;
-                            background: limegreen;
+                            background: #8ac176;
                             border-radius: 10px;
                             position: absolute;
                             top: 20px;
@@ -26,7 +26,10 @@
                             border: 3px solid #fff;
                 }
             }
-            &:first-of-type, &:nth-of-type(2){       
+            &:first-of-type, &:nth-of-type(2){   
+                a.user span.online {
+                    border: 3px solid #eee;
+                }    
                 a.name{
                     display: block;
                 }
@@ -50,10 +53,6 @@
                 }
             }
             .post {
-                & .comment .user a span {
-                        top: 95px;
-                        left: 85px;
-                }
                 .user{
                     a span {
                         top: 48px;

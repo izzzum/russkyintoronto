@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+    simple: false,
     classNames: ['comment'],
     attributeBindings: ['id'],
     id: Ember.computed(function(){
         if(this.get('simple') === false){
-        return `comment${this.get('comment').id}`;
+            return `comment${this.get('comment').id}`;
         }
     }),
     comment: null,
@@ -17,6 +18,6 @@ export default Ember.Component.extend({
             Ember.$('body').stop().animate({
             scrollTop: (Ember.$('#comment'+anchor).offset().top) //need to fix on mobile
             }, 1000);
-            }
+        }
     }
 });

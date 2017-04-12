@@ -14,9 +14,9 @@
 </div>
 <p>
     {{#unless simple}}
-    {{#if comment.replyToComment}}
-        <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
-    {{/if}}
+        {{#if comment.replyToComment}}
+            <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
+        {{/if}}
     {{/unless}}
     {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=(get-fullname comment.replied.firstName comment.replied.lastName)}}}
 </p>
