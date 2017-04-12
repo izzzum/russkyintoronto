@@ -17,6 +17,17 @@ export default Ember.Route.extend({
                 }, 500);
             }, 100);
         }
+        //this will not work well bc of the stats messing with position 
+        //and we will write a wrong one on deactivate
+
+        /*if(this.controllerFor('index').get('scrollPosition')){
+            Ember.$('body').addClass("no-scroll");
+            Ember.$('body').stop().animate({
+                scrollTop: this.controllerFor('index').get('scrollPosition')
+            }, 1000, function(){
+                Ember.$('body').removeClass("no-scroll");
+            });
+        }*/
     },
     model: function() {
         let posts = this.get('store').peekAll('post');
@@ -27,5 +38,11 @@ export default Ember.Route.extend({
       });
   }
   },
+       //this will not work well bc of the stats messing with position 
+        //and we will write a wrong one on deactivate
+
+  /*deactivate: function() {
+      this.controllerFor('index').set('scrollPosition', Ember.$('body').scrollTop());
+  }*/
 });
  
