@@ -12,8 +12,10 @@
     .album{
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
+        justify-content: center;
+        align-content: center;
         .photo-attachment{
+            padding: 2px;
                 .menu{
                     text-align: left;
                     top: 0;
@@ -33,13 +35,10 @@
                             background: #337ab7;
                         }
                     }
-        }
-
-
+                }
             &.single {
-                max-width: 100%;
+            max-width: 100%;
             }
-            margin: auto;
             max-width: 50%;
             a {
                 text-decoration: none;
@@ -58,6 +57,7 @@
                 img{
                     &.photo-responsive {
                         max-width: 100%;
+                        max-height: 300px;
                         height: auto;
                     }
                     cursor: pointer;
@@ -73,7 +73,6 @@
                         max-height: -webkit-calc(100% - 39px);
                         max-height: -moz-calc(100% - 39px);
                         max-height: -o-calc(100% - 39px);
-                        width: 100%;
                     }
                 }
             }
