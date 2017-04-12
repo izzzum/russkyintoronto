@@ -97,7 +97,11 @@ export default Ember.Controller.extend({
             }, 50);*/
             Ember.$('.statistics').animate({
                 height: "98%"
-            }, 500);
+            }, 500, function(){
+                Ember.$('body').stop().animate({
+                    scrollTop: (Ember.$('.page-header').offset().top-100)
+                }, 50);
+            });
             }, 100);
        /*Call is send from the getStats() */
    },
