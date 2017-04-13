@@ -1,7 +1,12 @@
-# my-app
+# russkyintoronto
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
+
+## About
+
+This is an EmberJS project that using VK API to fetch and display the data (posts, comments etc) from
+the pre-defined vk-group. It also provides a menu to get a statistics based on the fetched data.
 
 ## Prerequisites
 
