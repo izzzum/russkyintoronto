@@ -1,6 +1,5 @@
 .loading-stats{
     .percent-bar{
-        overflow: visible;
         .rate{
             background: -moz-linear-gradient(45deg, rgba(69,104,142,1) 0%, rgba(237,238,240,1) 100%); /* ff3.6+ */
             background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(69,104,142,1)), color-stop(100%, rgba(237,238,240,1))); /* safari4+,chrome */
