@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     actions: {
         jumpTo(anchor){
             Ember.$('body').stop().animate({
-            scrollTop: (Ember.$('#comment'+anchor).offset().top) //need to fix on mobile
+            scrollTop: (Ember.$('#comment'+anchor).offset().top -39) //-size of the top menu
             }, 1000);
         }
     }

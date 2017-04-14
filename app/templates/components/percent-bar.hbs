@@ -1,1 +1,7 @@
-<div class="rate"></div><div class="overlay-rate"></div><p>{{rate}}%</p>
+<div class="rate"></div>
+{{#if (eq delay 0)}}
+{{{get-loading-style rate}}}
+{{else}}
+<div class="overlay-rate"></div>
+{{/if}}
+<p>{{rate}}%</p>
