@@ -38,7 +38,9 @@ export default Ember.Controller.extend({
                 postsNum++;
                 listOfTopCommented.push({post: post, items: post.get('commentsNum')});
                 if(parseInt(post.get('likes')) !== 0){
-                    post.get('user').set('totalLikes', (parseInt(post.get('user').get('totalLikes'))+parseInt(post.get('likes'))));
+                    if(Ember.isPresent(post.get('user').content)){
+                        post.get('user').set('totalLikes', (parseInt(post.get('user').get('totalLikes'))+parseInt(post.get('likes'))));
+                    }
                 }
             });
 
@@ -47,7 +49,9 @@ export default Ember.Controller.extend({
                 commentsNum++;
                 listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
                 if(parseInt(comment.get('likes')) !== 0){
-                    comment.get('user').set('totalLikes', (parseInt(comment.get('user').get('totalLikes'))+parseInt(comment.get('likes'))));
+                    if(Ember.isPresent(comment.get('user')).content){
+                        comment.get('user').set('totalLikes', (parseInt(comment.get('user').get('totalLikes'))+parseInt(comment.get('likes'))));
+                    }
                 }
             });
 
