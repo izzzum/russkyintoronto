@@ -16,10 +16,14 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
        payload.response.comments = payload.response.items;
        delete payload.response.items;
        payload.response.comments.forEach(function(comment){
-           //let attachments = [];
            comment.comments_num = payload.response.count;
            comment.likes = comment.likes.count;
-           comment.user = comment.from_id;
+            if(comment.from_id > 0) {
+                comment.user = comment.from_id;
+           }
+           else {
+            comment.group = comment.from_id*(-1);
+           }
           if(Ember.isPresent(comment.reply_to_user)){
            comment.replied = comment.reply_to_user;
           }else {
@@ -48,19 +52,12 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
         });
         ret[pluralTypeKey] = payload.response.comments;
         ret['users'] = payload.response.profiles;
+        if(Ember.isPresent(payload.response.groups)){
+            ret['group'] = payload.response.groups;
+        }
         return this._normalizeResponse(store, primaryModelClass, ret, id, requestType, false);
 },
 keyForAttribute: function(key) {
     return Ember.String.underscore(key);
   }
 });
-
-
-/*import DS from 'ember-data';
-import { v4 } from 'uuid';
-
-export default DS.Adapter.extend({
-  generateIdForRecord: function(store, inputProperties) {
-    return v4();
-  }
-});*/

@@ -12,4 +12,5 @@ export default DS.Model.extend({
   reposts: DS.attr('string'),
   user: DS.belongsTo('user', {async: true}),
   comments: DS.hasMany('comment', {async: true}),
+  group: DS.belongsTo('group')
 });
