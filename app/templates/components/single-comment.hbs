@@ -21,7 +21,7 @@
 {{/if}}
 </a>
 {{#if comment.user}}
-    <a class="name" href="http://vk.com/id{{comment.user.id}}">{{get-fullname comment.user.firstName comment.user.lastName}}</a>
+    <a class="name" href="http://vk.com/id{{comment.user.id}}">{{comment.user.fullName}}</a>
 {{else}}
     <a class="name" href="http://vk.com/{{comment.group.screenName}}">{{comment.group.screenName}}</a>
 {{/if}}
@@ -32,7 +32,7 @@
             <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
         {{/if}}
     {{/unless}}
-    {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=(get-fullname comment.replied.firstName comment.replied.lastName)}}}
+    {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=comment.replied.fullName}}}
 </p>
 {{#if comment.attachments}}{{put-attachments attachments=comment.attachments}}{{/if}}
 {{#if isLikes}}

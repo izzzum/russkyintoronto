@@ -23,7 +23,7 @@
             {{/if}}
             {{user.items}} {{format-ending num=user.items word='comment'}}</p>
             <a class="name" href="http://vk.com/id{{user.user.id}}">
-            {{get-fullname user.user.firstName user.user.lastName}}</a>
+            {{user.user.fullName}}</a>
         </li>
         {{/each}}
         </ol>
@@ -47,7 +47,7 @@
                 получил
             {{/if}}
             {{user.items}} {{format-ending num=user.items word='like'}}</p>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">{{user.user.fullName}}</a>
         </li>
         {{/each}}
         </ol>
@@ -64,7 +64,7 @@
                 <span class="online"></span>
             {{/if}}
             </a>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-fullname user.user.firstName user.user.lastName}}</a>
+            <a class="name" href="http://vk.com/id{{user.user.id}}">{{user.user.fullName}}</a>
             {{#if (eq user.user.sex '1')}}
                 написала
             {{else}}

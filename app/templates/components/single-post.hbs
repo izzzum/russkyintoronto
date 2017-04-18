@@ -21,7 +21,7 @@
 {{/if}}
 </a>
 {{#if post.user}}
-    <a class="name" href="http://vk.com/id{{post.user.id}}">{{get-fullname post.user.firstName post.user.lastName}}</a>
+    <a class="name" href="http://vk.com/id{{post.user.id}}">{{post.user.fullName}}</a>
 {{else}}
     <a class="name" href="http://vk.com/{{post.group.screenName}}">{{post.group.screenName}}</a>
 {{/if}}

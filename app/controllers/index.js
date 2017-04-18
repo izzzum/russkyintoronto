@@ -28,43 +28,31 @@ export default Ember.Controller.extend({
         let listOfTopCommented = [];
         let listOfMostLikedComments = [];
         let listOfOverallLikes = [];
-        let userNum = 0;
-        let commentsNum = 0;
-        let postsNum = 0;
+        let userNum;
+        let commentsNum;
+        let postsNum;
         let likesNum = 0;
 
         let posts = store.peekAll('post');
             posts.forEach(post =>{
-                postsNum++;
                 listOfTopCommented.push({post: post, items: post.get('commentsNum')});
-                if(parseInt(post.get('likes')) !== 0){
-                    if(Ember.isPresent(post.get('user').content)){
-                        post.get('user').set('totalLikes', (parseInt(post.get('user').get('totalLikes'))+parseInt(post.get('likes'))));
-                    }
-                }
             });
+        postsNum = posts.content.length;
 
         let comments = store.peekAll('comment');
             comments.forEach(comment =>{
-                commentsNum++;
                 listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
-                if(parseInt(comment.get('likes')) !== 0){
-                    if(Ember.isPresent(comment.get('user')).content){
-                        comment.get('user').set('totalLikes', (parseInt(comment.get('user').get('totalLikes'))+parseInt(comment.get('likes'))));
-                    }
-                }
             });
-
-            let users = store.peekAll('user');
+        commentsNum = comments.content.length;
+            
+        let users = store.peekAll('user');
             users.forEach(user =>{
-                userNum++;
-                if(user.get('totalLikes')){
-                    likesNum += user.get('totalLikes');
-                }
-                listOfComments.push({user: user, items: user.get('comments').content.currentState.length});
-                listOfPosts.push({user: user, items: user.get('posts').content.currentState.length});
-                listOfOverallLikes.push({user: user, items: user.get('totalLikes')});
+                likesNum += parseInt(user.get('likes'));
+                listOfComments.push({user: user, items: user.get('leftComments')});
+                listOfPosts.push({user: user, items: user.get('leftPosts')});
+                listOfOverallLikes.push({user: user, items: user.get('likes')});
             });
+        userNum = users.content.length;
 
             listOfComments.sort(sortByNumber);
             listOfComments = listOfComments.slice(0,5);
@@ -135,15 +123,15 @@ export default Ember.Controller.extend({
     },
     getStats() {
         this.set('promise', Ember.A());
-        let realThis = this;
+        let _this = this;
         if(this.get('displayStats')) {
             Ember.$('.statistics').animate({
                 height: "0%"
             }, 500, function(){
-                realThis.set('displayStats', false);
-                if(Ember.isPresent(realThis.get('scrollPosition')) && Ember.$('body').scrollTop() !== realThis.get('scrollPosition')){
+                _this.set('displayStats', false);
+                if(Ember.isPresent(_this.get('scrollPosition')) && Ember.$('body').scrollTop() !== _this.get('scrollPosition')){
                     Ember.$('body').stop().animate({
-                        scrollTop: realThis.get('scrollPosition')
+                        scrollTop: _this.get('scrollPosition')
                     }, 1000);
                 }
                 Ember.$('body').toggleClass("no-scroll");
@@ -161,12 +149,12 @@ export default Ember.Controller.extend({
                         if(currentLength < post.get('commentsNum')){
                             this.set('totalNum', this.get('totalNum')+post.get('commentsNum')-currentLength);
                             
-                            realThis.get('promise').addObject(
+                            _this.get('promise').addObject(
                                 delay(150*numOfReqs).then(function() {
                             //Ember.run.later(function(){
-                                realThis.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
+                                _this.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
                                     function(resolved){resolved.forEach(comment =>{
-                                        realThis.set('loadingState', realThis.get('loadingState')+1);
+                                        _this.set('loadingState', _this.get('loadingState')+1);
                                         comment.set('post', post);
                                     });
                                 }));
@@ -186,13 +174,13 @@ export default Ember.Controller.extend({
                     if(post.get('commentsNum') !== 0){
                         let currentLength = post.get('comments').content.currentState.length;
                         if(currentLength < post.get('commentsNum')){
-                            realThis.set('totalNum', realThis.get('totalNum')+post.get('commentsNum')-currentLength);
-                                realThis.get('promise').addObject(
+                            _this.set('totalNum', _this.get('totalNum')+post.get('commentsNum')-currentLength);
+                                _this.get('promise').addObject(
                                 delay(150*numOfReqs).then(function() {
                                 //Ember.run.later(function(){
-                                realThis.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
+                                _this.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
                                     function(resolved){resolved.forEach(comment =>{
-                                        realThis.set('loadingState', realThis.get('loadingState')+1);
+                                        _this.set('loadingState', _this.get('loadingState')+1);
                                         comment.set('post', post);
                                     });
                                 }));
@@ -204,16 +192,16 @@ export default Ember.Controller.extend({
                 }); 
            }).finally(function(){
                delay(150*numOfReqs).then(function() {
-                 Ember.RSVP.all(realThis.get('promise')).then(function(){
-            realThis.send('computeAllThisShit');
+                 Ember.RSVP.all(_this.get('promise')).then(function(){
+            _this.send('computeAllThisShit');
         });        
         });
         });
     }
     else {
         delay(150*numOfReqs).then(function() {
-        Ember.RSVP.all(realThis.get('promise')).then(function(){
-            realThis.send('computeAllThisShit');
+        Ember.RSVP.all(_this.get('promise')).then(function(){
+            _this.send('computeAllThisShit');
         });
         });
     }
