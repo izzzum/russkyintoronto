@@ -33,12 +33,13 @@ export default Ember.Component.extend({
     },
     actions:{
         loadMore: function() {
+            let _this = this;
             return Ember.RSVP.hash({
-                posts: this.get('store').query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: this.get('loadedPortion'), v: '5.7'}).then(resolved => {
-                    let loadedPortion = this.get('loadedPortion') + this.get('count');
-                    this.set('loadedPortion', loadedPortion);
-                    this.set('posts', this.get('store').peekAll('post'));
-                    this.set('isLoadingNow', false);
+                posts: this.get('store').query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: this.get('loadedPortion'), v: '5.7'}).then(function() {
+                    let loadedPortion = _this.get('loadedPortion') + _this.get('count');
+                    _this.set('loadedPortion', loadedPortion);
+                    _this.set('posts', _this.get('store').peekAll('post'));
+                    _this.set('isLoadingNow', false);
                 }),
             });
         }

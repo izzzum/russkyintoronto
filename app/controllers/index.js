@@ -82,7 +82,6 @@ export default Ember.Controller.extend({
             
             if(this.get('updateState') === true){
                 this.set('lastState', this.get('loadingState') + this.get('lastState'));
-                console.log(this.get('lastState'));
             }
 
             this.set('statsInfoLoader', false);

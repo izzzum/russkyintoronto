@@ -16,12 +16,12 @@ export default DS.Model.extend({
     if(Ember.isPresent(this.get('posts'))){
        this.get('posts').forEach(post => {
         likes += parseInt(post.get('likes'));
-      })
+      });
     }
     if(Ember.isPresent(this.get('comments'))){
       this.get('comments').forEach(comment => {
         likes += parseInt(comment.get('likes'));
-      })
+      });
     }
     return likes;
   }),
