@@ -5,13 +5,13 @@ export default Ember.Component.extend({
     delay: 1200,
     didInsertElement: function(){
         if(this.get('delay') !== 0){
-            let realThis = this;
-            let el = "#"+realThis.elementId+" .overlay-rate";
+            let _this = this;
+            let el = `#${_this.elementId} .overlay-rate`;
             Ember.run.later(function(){
                 Ember.$(el).animate({
-                        left: realThis.get('rate')+"%"
+                        left: `${_this.get('rate')}%`
                     }, 1000);
-            }, realThis.get('delay'));
+            }, _this.get('delay'));
         }
     }
 });
