@@ -1,19 +1,19 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  type: DS.attr('string'),//attr
-  post: DS.belongsTo('post'),//dependency
-  comment: DS.belongsTo('comment'),//dependency
-  photo: DS.belongsTo('photo'),//done
-  postedPhoto: DS.belongsTo('posted-photo'),//done
-  video: DS.belongsTo('video'),//done
-  audio: DS.belongsTo('audio'),//done
-  doc: DS.belongsTo('doc'),//done
+  type: DS.attr('string'),
+  post: DS.belongsTo('post'),
+  comment: DS.belongsTo('comment'),
+  photo: DS.belongsTo('photo'),
+  postedPhoto: DS.belongsTo('posted-photo'),
+  video: DS.belongsTo('video'),
+  audio: DS.belongsTo('audio'),
+  doc: DS.belongsTo('doc'),
   graffiti: DS.belongsTo('graffiti'),//obsolete
-  link: DS.belongsTo('link'),//done
-  note: DS.belongsTo('note'),//done
-  app: DS.belongsTo('app'),//done
-  poll: DS.belongsTo('poll'),//done
-  page: DS.belongsTo('page'),//done
-  sticker: DS.belongsTo('sticker')//done
+  link: DS.belongsTo('link'),
+  note: DS.belongsTo('note'),
+  app: DS.belongsTo('app'),
+  poll: DS.belongsTo('poll'),
+  page: DS.belongsTo('page'),
+  sticker: DS.belongsTo('sticker')
 });
