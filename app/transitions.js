@@ -1,0 +1,20 @@
+export default function(){
+  this.transition(
+    this.fromRoute('index'),
+    this.toRoute('post'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+    this.transition(
+    this.fromRoute('index'),
+    this.toRoute('stats'),
+    this.use('toRight'),
+    this.reverse('toLeft')
+  );
+    this.transition(
+    this.fromRoute('stats'),
+    this.toRoute('post'),
+    this.use('scale'),
+    this.reverse('scale')
+  );
+}

@@ -1,0 +1,12 @@
+{{#if back}}
+<a class="back" {{action 'back'}}>
+    <i class="fa fa-arrow-left"></i> Назад
+</a>
+{{/if}}
+{{yield}}
+<a class="scrollTop" {{action 'scrollTop'}}>
+    <i class="fa fa-arrow-up"></i> Вверх
+</a>
+<a class="scrollBot" {{action 'scrollBot'}}>
+    <i class="fa fa-arrow-down"></i> Вниз
+</a>

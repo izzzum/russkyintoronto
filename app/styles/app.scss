@@ -55,3 +55,12 @@ nav{
     }
 
 }
+
+body .liquid-container{
+    -webkit-transform: none;
+    -moz-transform: none;
+    transform: none;
+}
+body .liquid-fix{
+    transform: none !important;
+}

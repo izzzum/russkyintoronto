@@ -21,5 +21,12 @@ export default Ember.Route.extend({
         if(Ember.$('body').hasClass('no-scroll')){
             Ember.$('body').toggleClass("no-scroll");
         }
+    },
+      renderTemplate(controller, model) {
+      this._super(controller, model);
+      this.render('generic-nav', {
+          into: 'application',
+          outlet: 'nav-menu'
+      });
     }
 });
