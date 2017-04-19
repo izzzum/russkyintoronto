@@ -71,7 +71,6 @@ export default Ember.Route.extend({
         },
     actions: {
     getStats() {
-        let _this = this;
         let store = this.get('store');
         let sortByNumber = this.get('sortByNumber');
         let listOfComments = [];
