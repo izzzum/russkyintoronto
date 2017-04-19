@@ -39,6 +39,22 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
                 if(Ember.isEmpty(attachment[attachment.type].id)){
                     attachment[attachment.type].id = Math.ceil(Math.random()*100000000);
                 }
+                if(attachment.type === 'poll'){
+                    if(attachment[attachment.type].owner_id > 0) {
+                        attachment[attachment.type].user = attachment[attachment.type].owner_id;
+                    }
+                    else {
+                        attachment[attachment.type].group = attachment[attachment.type].owner_id*(-1);
+                    }
+                    if(Ember.isEmpty(ret['answers'])){
+                        ret['answers'] = [];
+                    }
+                    attachment[attachment.type].answers.forEach(function(answer){
+                        answer['poll'] = attachment[attachment.type].id;
+                        ret.answers.push(answer);
+                    });
+                    delete attachment[attachment.type].answers;
+                }
                 attachment[attachment.type].user = attachment[attachment.type].user_id || attachment[attachment.type].owner_id;
                 attachment[attachment.type].attachment = attachment.id;
                 ret[attachment.type].push(attachment[attachment.type]);

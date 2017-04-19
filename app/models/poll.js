@@ -9,5 +9,6 @@ export default DS.Model.extend({
   answers: DS.hasMany('answer'),
   anonymous: DS.attr('number'),
   attachment: DS.belongsTo('attachment'),
-  user: DS.belongsTo('user')
+  user: DS.belongsTo('user'),
+  group: DS.belongsTo('group')
 });

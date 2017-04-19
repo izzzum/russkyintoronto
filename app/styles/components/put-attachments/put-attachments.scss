@@ -15,6 +15,32 @@
             display: inline-block;
         }
     }
+    .poll{
+        text-align: left;
+        border: 1px solid #edeef0;
+        border-radius: 2px;
+        margin: 15px 0 7px;
+        padding: 1px 15px 14px;
+        background-color: #fff;
+        .poll-title-group{
+            padding: 11px 0 2px;
+            line-height: 16px;
+            .poll-title{
+                color: #42648b;
+                font-weight: 700;
+            }
+            .poll-desc{
+                float: right;
+                color: #939393;
+            }
+        }
+        .answers ul li{
+            padding: 12px 0 0;
+        }
+        .total-votes{
+            padding-top: 12px;
+        }
+    }
     .album{
         display: flex;
         flex-wrap: wrap;
