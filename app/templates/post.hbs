@@ -1,12 +1,3 @@
-<nav class="menu">
-{{#link-to 'index'}}<i class="fa fa-arrow-left"></i> Вернуться на стену{{/link-to}}
-    <a class="scrollTop" {{action 'scrollTop'}}>
-        <i class="fa fa-arrow-up"></i> Вверх
-    </a>
-    <a class="scrollBot" {{action 'scrollBot'}}>
-        <i class="fa fa-arrow-down"></i> Вниз
-    </a>
-</nav>
 <div class="container post-page">
 {{#if model.posts}}
 {{#each model.posts as |post|}}

@@ -6,8 +6,7 @@ export default Ember.Component.extend({
     id: 'content',
     store: Ember.inject.service(),
     isLoadingNow: false,
-    count: null,
-    loadedPortion: null,
+    disablePostLoading: false,
     didInsertElement: function() {
         let view = this;
         Ember.$(window).bind("scroll", function(){
@@ -22,7 +21,7 @@ export default Ember.Component.extend({
         st += Ember.$(window).height();
         if(st >= Ember.$('body').outerHeight(true))   //user scrolled to bottom of the page?
         {
-            if(this.get('isLoadingNow') === false) {
+            if(this.get('isLoadingNow') === false && this.get('disablePostLoading') === false) {
                 this.set('isLoadingNow', true);
                 this.send('loadMore');
             }
@@ -30,18 +29,24 @@ export default Ember.Component.extend({
     },
     willDestroyElement: function() {
         Ember.$(window).unbind("scroll");
+        Ember.RSVP.resolve(this.get('promise'));
     },
     actions:{
         loadMore: function() {
             let _this = this;
-            return Ember.RSVP.hash({
-                posts: this.get('store').query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: this.get('loadedPortion'), v: '5.7'}).then(function() {
-                    let loadedPortion = _this.get('loadedPortion') + _this.get('count');
-                    _this.set('loadedPortion', loadedPortion);
+            let posts = this.get('store').peekAll('post');
+            let loadedPortion = posts.content.length === 1 ? 0 : posts.content.length;
+                _this.get('store').query('post', {
+                domain: 'russiansintoronto', 
+                filter:'all', 
+                extended:1, 
+                fields: 'profiles', 
+                count: _this.get('count'), 
+                offset: loadedPortion, 
+                v: '5.7'}).then(function() {
                     _this.set('posts', _this.get('store').peekAll('post'));
                     _this.set('isLoadingNow', false);
-                }),
-            });
+                });
         }
     }
 });
