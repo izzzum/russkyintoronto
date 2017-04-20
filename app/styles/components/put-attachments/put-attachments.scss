@@ -29,16 +29,44 @@
                 color: #42648b;
                 font-weight: 700;
             }
-            .poll-desc{
-                float: right;
-                color: #939393;
-            }
         }
         .answers ul li{
             padding: 12px 0 0;
         }
         .total-votes{
             padding-top: 12px;
+        }
+    }
+    .videos{
+        .video-attachment{
+            width: 100%;
+            max-width: 480px;
+            margin: auto;
+            margin-top: 10px;
+            height: 270px;
+            overflow: hidden;
+            &:hover{
+                cursor: pointer;
+                a:before{
+                    background-image: url(/assets/play_hover.png);
+                }
+            }
+            a{
+                top: -45px;
+                position: relative;
+                &:before{
+                    top: -112px;
+                    height: 270px;
+                    width: 100%;
+                    background-image: url(/assets/play.png);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 110px 80px;
+                    content: "";
+                    display: block;
+                    position: absolute;
+                }
+            }
         }
     }
     .album{
@@ -106,6 +134,24 @@
                         max-height: -moz-calc(100% - 39px);
                         max-height: -o-calc(100% - 39px);
                     }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: "400px"){
+    .attachments .videos{ 
+        .video-attachment{
+            max-width: auto;
+            a{
+                    position: initial;
+                    top: auto;
+                &:before{
+                    top: auto;
+                }
+                img{
+                    height: 100%;
                 }
             }
         }

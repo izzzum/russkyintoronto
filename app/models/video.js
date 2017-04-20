@@ -18,5 +18,6 @@ export default DS.Model.extend({
   processing: DS.attr('number'),
   live: DS.attr('number'),
   attachment: DS.belongsTo('attachment'),
-  user: DS.belongsTo('user')
+  user: DS.belongsTo('user'),
+  youtube: DS.belongsTo('youtube', {async: true})
 });

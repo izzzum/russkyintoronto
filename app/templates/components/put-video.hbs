@@ -1,2 +1,13 @@
-<p>Видео вложение не доступно :(</p>
-<p>Название: {{video.title}}</p>
+{{#if youtube}}
+    {{#if loading}}
+        {{loader-img show=loading}}
+    {{else}}
+        {{#if showIframe}}
+        {{youtube-iframe video=video.youtube.id}}
+        {{else}}
+            <a class="img-resize" {{action 'toggleIframe'}}><img class="photo-responsive" src="{{video.youtube.thumbnail}}"></a>
+        {{/if}}
+    {{/if}}
+{{else}}
+<p>Видео вложение "{{video.title}}" не доступно :(</p>
+{{/if}}
