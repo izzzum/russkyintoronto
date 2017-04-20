@@ -6,8 +6,7 @@ export default Ember.Component.extend({
     id: 'content',
     store: Ember.inject.service(),
     isLoadingNow: false,
-    count: null,
-    loadedPortion: null,
+    disablePostLoading: false,
     didInsertElement: function() {
         let view = this;
         Ember.$(window).bind("scroll", function(){
@@ -18,18 +17,11 @@ export default Ember.Component.extend({
        return this.get('isLoadingNow');
     }),
     didScroll: function() {
-       /* if(this.isScrolledToBottom()){
-            this.get('controller').send('more'); //need to edit
-        }*/
         var st = window.pageYOffset || document.documentElement.scrollTop;
-        //st += document.body.clientHeight;
         st += Ember.$(window).height();
-            /*console.log("st: " + st + "increment " + document.body.clientHeight);
-            console.log("body h: " + $('body').outerHeight(true));
-            console.log("window: "+$(window).height());*/
         if(st >= Ember.$('body').outerHeight(true))   //user scrolled to bottom of the page?
         {
-            if(this.get('isLoadingNow') === false) {
+            if(this.get('isLoadingNow') === false && this.get('disablePostLoading') === false) {
                 this.set('isLoadingNow', true);
                 this.send('loadMore');
             }
@@ -37,22 +29,24 @@ export default Ember.Component.extend({
     },
     willDestroyElement: function() {
         Ember.$(window).unbind("scroll");
+        Ember.RSVP.resolve(this.get('promise'));
     },
     actions:{
         loadMore: function() {
-            return Ember.RSVP.hash({
-                posts: this.get('store').query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('count'), offset: this.get('loadedPortion'), v: '5.7'}).then(resolved => {
-                    let loadedPortion = this.get('loadedPortion') + this.get('count');
-                    this.set('loadedPortion', loadedPortion);
-                    /*resolved.forEach(post => {
-                        //if(post.get('commentsNum') !== 0){
-                            //post.set('postType', `portion${this.get('loadedPortion')}`);
-                           // }
-                    });*/
-                    this.set('posts', this.get('store').peekAll('post'));
-                    this.set('isLoadingNow', false);
-                }),
-            });
+            let _this = this;
+            let posts = this.get('store').peekAll('post');
+            let loadedPortion = posts.content.length === 1 ? 0 : posts.content.length;
+                _this.get('store').query('post', {
+                domain: 'russiansintoronto', 
+                filter:'all', 
+                extended:1, 
+                fields: 'profiles', 
+                count: _this.get('count'), 
+                offset: loadedPortion, 
+                v: '5.7'}).then(function() {
+                    _this.set('posts', _this.get('store').peekAll('post'));
+                    _this.set('isLoadingNow', false);
+                });
         }
     }
 });

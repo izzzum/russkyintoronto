@@ -1,5 +1,6 @@
 {{#if notEqual}}
-    <p>Loading data... {{get-percent total=total fraction=state}}%</p>
+    <p>Loading data...</p>
+    <p>{{percent-bar rate=(get-percent total=total fraction=state) delay=0}}</p>
     <p>
     {{#if state}}
         {{state}}

@@ -1,12 +1,12 @@
 
-import { getFullname } from 'my-app/helpers/get-fullname';
+import { definePoster } from 'my-app/helpers/define-poster';
 import { module, test } from 'qunit';
 
-module('Unit | Helper | get fullname');
+module('Unit | Helper | define poster');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = getFullname([42]);
+  let result = definePoster([42]);
   assert.ok(result);
 });
 

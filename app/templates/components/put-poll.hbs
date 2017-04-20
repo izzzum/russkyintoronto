@@ -1,8 +1,13 @@
-<p class="poll-date">{{get-date poll.created}}</p>
-<h4>{{poll.question}}</h4>
-<ol>
-{{#each poll.answers as |answer|}}
-<li>{{answer.text}} - votes({{answer.votes}}), rate({{answer.rate}})</li>
-{{/each}}
-</ol>
-<p>Overall votes: {{poll.votes}}</p>
+<div class="poll-title-group">
+    <div class="poll-title">{{poll.question}}</div>
+</div>
+<div class="answers">
+    <ul>
+        {{#each poll.answers as |answer|}}
+            <li>{{percent-bar rate=answer.rate}} {{answer.text}} <b>{{answer.votes}}</b></li>
+        {{/each}}
+    </ul>
+</div>
+<div class="total-votes">
+    <div class="votes-counter">Отдано голосов: <b>{{poll.votes}}</b>.</div>
+</div>

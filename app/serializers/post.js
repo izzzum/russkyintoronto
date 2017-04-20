@@ -19,7 +19,12 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
            post.likes = post.likes.count;
            post.reposts = post.reposts.count;
            post['comments_num'] = post.comments.count;
-           post.user = post.from_id;
+           if(post.from_id > 0) {
+                post.user = post.from_id;
+           }
+           else {
+               post.group = post.from_id*(-1);
+           }
            delete post.from_id;
            delete post.comments;
            delete post.reposts.count;
@@ -34,6 +39,22 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
                 if(Ember.isEmpty(attachment[attachment.type].id)){
                     attachment[attachment.type].id = Math.ceil(Math.random()*100000000);
                 }
+                if(attachment.type === 'poll'){
+                    if(attachment[attachment.type].owner_id > 0) {
+                        attachment[attachment.type].user = attachment[attachment.type].owner_id;
+                    }
+                    else {
+                        attachment[attachment.type].group = attachment[attachment.type].owner_id*(-1);
+                    }
+                    if(Ember.isEmpty(ret['answers'])){
+                        ret['answers'] = [];
+                    }
+                    attachment[attachment.type].answers.forEach(function(answer){
+                        answer['poll'] = attachment[attachment.type].id;
+                        ret.answers.push(answer);
+                    });
+                    delete attachment[attachment.type].answers;
+                }
                 attachment[attachment.type].user = attachment[attachment.type].user_id || attachment[attachment.type].owner_id;
                 attachment[attachment.type].attachment = attachment.id;
                 ret[attachment.type].push(attachment[attachment.type]);
@@ -46,6 +67,9 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
         });
         ret[pluralTypeKey] = payload.response.posts;
         ret['user'] = payload.response.profiles;
+        if(Ember.isPresent(payload.response.groups)){
+            ret['group'] = payload.response.groups;
+        }
         return this._normalizeResponse(store, primaryModelClass, ret, id, requestType, false);
 },
 keyForAttribute: function(key) {

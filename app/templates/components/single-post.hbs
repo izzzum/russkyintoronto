@@ -1,16 +1,30 @@
 {{#unless simple}}{{#link-to 'post' post.id}}<span class="time">{{get-date post.date}}</span>{{/link-to}}{{/unless}}
 <div class="user">
-<a href="http://vk.com/id{{post.user.id}}">
+    <a href="http://vk.com/{{define-poster user=post.user.id group=post.group.screenName}}">
 {{#if simple}}
-    <img class="img-circle" src="{{post.user.photo50}}">
+    {{#if post.user}}
+        <img class="img-circle" src="{{post.user.photo50}}">
+    {{else}}
+        <img class="img-circle" src="{{post.group.photo50}}">
+    {{/if}} 
 {{else}}
-    <img class="img-circle" src="{{post.user.photo100}}">
+    {{#if post.user}}
+        <img class="img-circle" src="{{post.user.photo100}}">
+    {{else}}
+        <img class="img-circle" src="{{post.group.photo100}}">
+    {{/if}}
 {{/if}}
-{{#if (eq post.user.online '1')}}
-<span></span>
+{{#if post.user}}
+    {{#if (eq post.user.online '1')}}
+    <span></span>
+    {{/if}}
 {{/if}}
 </a>
-<a class="name" href="http://vk.com/id{{post.user.id}}">{{get-fullname post.user.firstName post.user.lastName}}</a>
+{{#if post.user}}
+    <a class="name" href="http://vk.com/id{{post.user.id}}">{{post.user.fullName}}</a>
+{{else}}
+    <a class="name" href="http://vk.com/{{post.group.screenName}}">{{post.group.screenName}}</a>
+{{/if}}
 </div>
 <p>{{{text-to-link post.text}}}</p>
 {{#if post.attachments}}{{put-attachments attachments=post.attachments}}{{/if}}

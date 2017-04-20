@@ -6,6 +6,7 @@ export default Ember.Component.extend({
     single: Ember.computed(function(){
         return this.get('length') === 1;
     }),
+    
     isLarge: false,
     ifNext: Ember.computed(function(){
         return Ember.$('#'+this.elementId).next().find('a.img-resize').length === 1;
@@ -18,11 +19,13 @@ export default Ember.Component.extend({
             this.toggleProperty('isLarge');
             Ember.$('.overlay').toggleClass("hide");
             Ember.$('body').toggleClass("no-scroll");
+            Ember.$('.liquid-child').toggleClass("liquid-fix");
         },
         next() {
             this.toggleProperty('isLarge');
             Ember.$('.overlay').toggleClass("hide");
             Ember.$('body').toggleClass("no-scroll");
+            Ember.$('.liquid-child').toggleClass("liquid-fix");
             Ember.$('#'+this.elementId).next().find('a.img-resize').click();
 
         },
@@ -30,6 +33,7 @@ export default Ember.Component.extend({
             this.toggleProperty('isLarge');
             Ember.$('.overlay').toggleClass("hide");
             Ember.$('body').toggleClass("no-scroll");
+            Ember.$('.liquid-child').toggleClass("liquid-fix");
             Ember.$('#'+this.elementId).prev().find('a.img-resize').click();
         },
     }

@@ -1,16 +1,30 @@
 <div class="user">
 {{#unless simple}}<p class="time">{{get-date comment.date}}</p>{{/unless}}
-<a href="http://vk.com/id{{comment.user.id}}">
+<a href="http://vk.com/{{define-poster user=comment.user.id group=comment.group.screenName}}">
 {{#if simple}}
-    <img class="img-circle" src="{{comment.user.photo50}}">
+    {{#if comment.user}}
+        <img class="img-circle" src="{{comment.user.photo50}}">
+    {{else}}
+        <img class="img-circle" src="{{comment.group.photo50}}">
+    {{/if}} 
 {{else}}
-    <img class="img-circle" src="{{comment.user.photo100}}">
+    {{#if comment.user}}
+        <img class="img-circle" src="{{comment.user.photo100}}">
+    {{else}}
+        <img class="img-circle" src="{{comment.group.photo100}}">
+    {{/if}}
 {{/if}}
-{{#if (eq comment.user.online '1')}}
-<span></span>
+{{#if simple}}
+    {{#if (eq comment.user.online '1')}}
+    <span></span>
+    {{/if}}
 {{/if}}
 </a>
-<a class="name" href="http://vk.com/id{{comment.user.id}}">{{get-fullname comment.user.firstName comment.user.lastName}}</a>
+{{#if comment.user}}
+    <a class="name" href="http://vk.com/id{{comment.user.id}}">{{comment.user.fullName}}</a>
+{{else}}
+    <a class="name" href="http://vk.com/{{comment.group.screenName}}">{{comment.group.screenName}}</a>
+{{/if}}
 </div>
 <p>
     {{#unless simple}}
@@ -18,7 +32,7 @@
             <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
         {{/if}}
     {{/unless}}
-    {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=(get-fullname comment.replied.firstName comment.replied.lastName)}}}
+    {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=comment.replied.fullName}}}
 </p>
 {{#if comment.attachments}}{{put-attachments attachments=comment.attachments}}{{/if}}
 {{#if isLikes}}
