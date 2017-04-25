@@ -1,102 +1,130 @@
 <div class="container">
-    <h3>Для статистики проанализировано {{list.postsNum}} {{format-ending num=user.items word='post'}}</h3>
-        <ul>
-            <li>Написано комментариев: {{list.commentsNum}}</li>
-            <li>Количество активных пользователей: {{list.userNum}}</li>
-            <li>Количество отданых лайков: {{list.likesNum}}</li>
-        </ul>
-    <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.topCommentsUsers as |user|}}
-        <li>
-            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
-            {{#if (eq user.user.online '1')}}
-                <span class="online"></span>
-            {{/if}}
-            </a>
-            {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
-            <p>{{#if (eq user.user.sex '1')}}
-                оставила
-            {{else}}
-                оставил
-            {{/if}}
-            {{user.items}} {{format-ending num=user.items word='comment'}}</p>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">
-            {{user.user.fullName}}</a>
-        </li>
-        {{/each}}
-        </ol>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Для статистики проанализировано <b>{{list.postsNum}}</b> {{format-ending num=user.items word='post'}}</h3>
+        </div>
     </div>
-
-
-    <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
-    <div class="box">
-        <ol>
-        {{#each list.listOfOverallLikes as |user|}}
-        <li>
-            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
-            {{#if (eq user.user.online '1')}}
-                <span class="online"></span>
-            {{/if}}
-            </a>
-            {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items) delay=2000}}
-            <p>{{#if (eq user.user.sex '1')}}
-                получила
-            {{else}}
-                получил
-            {{/if}}
-            {{user.items}} {{format-ending num=user.items word='like'}}</p>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{user.user.fullName}}</a>
-        </li>
-        {{/each}}
-        </ol>
+    <div class="row mainstat">
+        <div class="col-md-4">
+            <p>Написано комментариев: <b>{{list.commentsNum}}</b></p>
+        </div>
+        <div class="col-md-4">
+            <p>Количество активных пользователей: <b>{{list.userNum}}</b></p>
+        </div>
+        <div class="col-md-4">
+            <p>Количество отданых лайков: <b>{{list.likesNum}}</b></p>
+        </div>
     </div>
-
-
-    <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.topPostsUsers as |user|}}
-        <li>
-            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
-            {{#if (eq user.user.online '1')}}
-                <span class="online"></span>
-            {{/if}}
-            </a>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{user.user.fullName}}</a>
-            {{#if (eq user.user.sex '1')}}
-                написала
-            {{else}}
-                написал
-            {{/if}}
-            {{user.items}} {{format-ending num=user.items word='post'}}
-        </li>
+     <div class="row">
+         <div class="col-md-12">
+            <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
+         </div>
+     </div>
+     <div class="row topcomments">
+        {{#each list.topCommentsUsers as |user userID|}}
+        <div class="col-md-2">
+            <div class="inner-box">
+                <a class="name" href="http://vk.com/id{{user.user.id}}">
+                {{get-index userID}}. {{user.user.fullName}}</a>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+                        {{#if (eq user.user.online '1')}}
+                            <span class="online"></span>
+                        {{/if}}
+                        </a>
+                    </div>
+                </div>
+                {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
+                <p>{{#if (eq user.user.sex '1')}}
+                    оставила
+                {{else}}
+                    оставил
+                {{/if}}
+                <b>{{user.items}}</b> {{format-ending num=user.items word='comment'}}</p>
+            </div>
+        </div>
         {{/each}}
-        </ol>
+     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
+        </div>
     </div>
-    <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.topCommentedPosts as |post|}}
-        <li>
-          Опубликован: <span class="time">{{get-date post.post.date}}</span><br>
-          {{#link-to 'post' post.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
+    <div class="row toplikes">
+        {{#each list.listOfOverallLikes as |user userID|}}
+        <div class="col-md-2">
+            <div class="inner-box">
+                <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-index userID}}. {{user.user.fullName}}</a>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+                        {{#if (eq user.user.online '1')}}
+                            <span class="online"></span>
+                        {{/if}}
+                        </a>
+                    </div>
+                </div>
+                {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items) delay=2000}}
+                <p>{{#if (eq user.user.sex '1')}}
+                    получила
+                {{else}}
+                    получил
+                {{/if}}
+                <b>{{user.items}}</b> {{format-ending num=user.items word='like'}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+             <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
+        </div>
+    </div>
+    <div class="row topposts">
+         {{#each list.topPostsUsers as |user userID|}}
+        <div class="col-md-4">
+            <div class="inner-box">
+                <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+                {{#if (eq user.user.online '1')}}
+                    <span class="online"></span>
+                {{/if}}
+                </a>
+                <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-index userID}}. {{user.user.fullName}}</a>
+                {{#if (eq user.user.sex '1')}}
+                    написала
+                {{else}}
+                    написал
+                {{/if}}
+                <b>{{user.items}}</b> {{format-ending num=user.items word='post'}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
+        </div>
+    </div>
+    <div class="row">
+         {{#each list.topCommentedPosts as |post postID|}}
+        <div class="col-md-4">
+          {{get-index postID}}. Опубликован: {{#link-to 'post' post.post.id}}<span class="time">{{get-date post.post.date}}</span>{{/link-to}}
           {{single-post post=post.post simple=true}}
-        </li>
+        </div>
         {{/each}}
-        </ol>
     </div>
-    <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.mostLikedComments as |comment|}}
-        <li>
-            Опубликован: <span class="time">{{get-date comment.comment.post.date}}</span><br>
-            {{#link-to 'post' comment.comment.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
+        </div>
+    </div>
+    <div class="row">
+        {{#each list.mostLikedComments as |comment commentID|}}
+        <div class="col-md-4">
+            {{get-index commentID}}. Опубликован: {{#link-to 'post' comment.comment.post.id}}<span class="time">{{get-date comment.comment.post.date}}</span>{{/link-to}}
             {{single-comment comment=comment.comment simple=true}}
-        </li>
+        </div>
         {{/each}}
-        </ol>
     </div>
 </div>

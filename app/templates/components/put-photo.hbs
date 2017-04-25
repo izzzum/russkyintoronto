@@ -1,20 +1,20 @@
 {{#if isLarge}}
-<div class="menu">
-    <a class="closeImg" {{action 'toggleImageSize'}}>
-        <i class="fa fa-remove"></i> 
-        Закрыть
-    </a>
-    {{#if ifPrev}}
-    <a class="prevImg" {{action 'previous'}}>
-        <i class="fa fa-arrow-left"></i> Предыдущее
-    </a>
-    {{/if}}
-    {{#if ifNext}}
-    <a class="nextImg" {{action 'next'}}>
-        <i class="fa fa-arrow-right"></i> Следующее
-    </a>
-    {{/if}}
-</div>
+    <div class="menu">
+            <a class="closeImg" {{action 'toggleImageSize'}}>
+                <i class="fa fa-remove"></i> 
+                Закрыть
+            </a>
+        {{#if ifPrev}}
+            <a class="prevImg" {{action 'previous'}}>
+                <i class="fa fa-arrow-left"></i> Предыдущее
+            </a>
+        {{/if}}
+        {{#if ifNext}}
+            <a class="nextImg" {{action 'next'}}>
+                <i class="fa fa-arrow-right"></i> Следующее
+            </a>
+        {{/if}}
+    </div>
 {{/if}}
 <a class="img-resize" {{action 'toggleImageSize'}}>
     {{#if (eq length 1)}}
@@ -29,3 +29,17 @@
         {{/if}}
     {{/if}}
 </a>
+{{#if isLarge}}
+    <div class="sideControls" {{action 'toggleImageSize'}}>
+        {{#if ifPrev}}
+            <a class="sidePrevImg pull-left" {{action 'previous'}}>
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        {{/if}}
+        {{#if ifNext}}
+            <a class="sideNextImg pull-right" {{action 'next'}}>
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        {{/if}}
+    </div>
+{{/if}}
