@@ -1,5 +1,9 @@
 .post{
   .user{
+      img{
+          width: 100px;
+          height: 100px;
+      }
     a {
       &:first-of-type{
         text-decoration: none;

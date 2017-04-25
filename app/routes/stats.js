@@ -21,7 +21,6 @@ export default Ember.Route.extend({
     },
     store: Ember.inject.service(),
     model: function() {
-        this.controllerFor('stats').set('statsInfoLoader', true);
         let _this = this;
         let loadedPortion = 0;
         this.set('promise', Ember.A());
@@ -32,6 +31,7 @@ export default Ember.Route.extend({
             this.controllerFor('stats').set('totalNum',  comments.content.length);
             loadedPortion = posts.content.length;
         if(loadedPortion < this.get('statsAmmount')) {
+            this.controllerFor('stats').set('statsInfoLoader', true);
             this.store.adapterFor('post').set('namespace', "method/wall.get");
             posts = this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('statsAmmount')-loadedPortion, offset: loadedPortion, v: '5.7'});
             posts.then(function(resolved){
@@ -62,6 +62,7 @@ export default Ember.Route.extend({
                 });
             }
             else {
+                this.controllerFor('stats').set('statsInfoLoader', true);
                 delay(150*numOfReqs).then(function() {
                     Ember.RSVP.all(_this.get('promise')).then(function(){
                         _this.send('getStats');

@@ -1,15 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    classNames: ['percent-bar'],
+    classNames: ['progress'],
     delay: 1200,
     didInsertElement: function(){
         if(this.get('delay') !== 0){
             let _this = this;
-            let el = `#${_this.elementId} .overlay-rate`;
+            let el = `#${_this.elementId} .progress-bar`;
             Ember.run.later(function(){
-                Ember.$(el).animate({
-                        left: `${_this.get('rate')}%`
+                Ember.$(el).css({
+                        width: `${_this.get('rate')}%`
                     }, 1000);
             }, _this.get('delay'));
         }

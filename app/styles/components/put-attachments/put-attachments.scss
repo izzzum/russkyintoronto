@@ -76,6 +76,30 @@
         align-content: center;
         .photo-attachment{
             padding: 2px;
+                .sideControls{
+                    position: fixed;
+                    z-index: 9999;
+                    top: 53%;
+                    left: 0;
+                    width: 100%;
+                    transform: translate(0, -53%);
+                    padding-top: 80px;
+                    padding-bottom: 80px;
+                    .sidePrevImg, .sideNextImg{
+                        opacity: 0;
+                        padding: 20px;
+                        font-size: 20px;
+                        color: #ccc;
+                        cursor: pointer;
+                        transition: opacity, color .15s ease-in-out;
+                        &:hover{
+                            color: #eee;
+                        }
+                    }
+                    &:hover .sidePrevImg, &:hover .sideNextImg{
+                        opacity: 1;
+                    }
+                }
                 .menu{
                     text-align: left;
                     top: 0;
