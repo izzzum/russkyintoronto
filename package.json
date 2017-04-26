@@ -1,7 +1,7 @@
 {
   "name": "my-app",
-  "version": "0.0.0",
-  "description": "Small description for my-app goes here",
+  "version": "0.0.1",
+  "description": "Russky in Toronto Vk-mirror",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -49,8 +49,7 @@
     "loader.js": "^4.0.10",
     "object-assign": "4.1.1",
     "promise-polyfill": "6.0.2",
-    "request-promise": "4.1.1",
-    "vk-call": "1.0.0"
+    "request-promise": "4.1.1"
   },
   "engines": {
     "node": ">= 0.12.0"
