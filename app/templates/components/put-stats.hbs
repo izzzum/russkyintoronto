@@ -28,7 +28,10 @@
                 {{get-index userID}}. {{user.user.fullName}}</a>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+                        <a class="user" href="http://vk.com/id{{user.user.id}}">
+                        <object class="user-overlay s50">
+                            <img class="img-circle" src="{{user.user.photo50}}" onerror="this.style.display='none'">
+                        </object>
                         {{#if (eq user.user.online '1')}}
                             <span class="online"></span>
                         {{/if}}
@@ -58,7 +61,10 @@
                 <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-index userID}}. {{user.user.fullName}}</a>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+                        <a class="user" href="http://vk.com/id{{user.user.id}}">
+                        <object class="user-overlay s50">
+                            <img class="img-circle" src="{{user.user.photo50}}" onerror="this.style.display='none'">
+                        </object>
                         {{#if (eq user.user.online '1')}}
                             <span class="online"></span>
                         {{/if}}
@@ -85,7 +91,10 @@
          {{#each list.topPostsUsers as |user userID|}}
         <div class="col-md-4">
             <div class="inner-box">
-                <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
+                <a class="user" href="http://vk.com/id{{user.user.id}}">
+                <object class="user-overlay s50">
+                    <img class="img-circle" src="{{user.user.photo50}}" onerror="this.style.display='none'">
+                </object>
                 {{#if (eq user.user.online '1')}}
                     <span class="online"></span>
                 {{/if}}

@@ -1,0 +1,142 @@
+//loader
+.ember-load-indicator{
+    &:before{
+        content:"Загрузка...";
+        display: block;
+        position: absolute;
+        margin-top: 55px;
+        font-family: cursive, verdana;
+        font-weight: bold;
+    }
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+
+    svg {
+    -webkit-transform-origin: 50% 65%;
+            transform-origin: 50% 65%;
+    }
+
+    svg polygon {
+    stroke-dasharray: 17;
+    -webkit-animation: dash 2.5s cubic-bezier(0.35, 0.04, 0.63, 0.95) infinite;
+            animation: dash 2.5s cubic-bezier(0.35, 0.04, 0.63, 0.95) infinite;
+    }
+    @-webkit-keyframes dash {
+        to {
+            stroke-dashoffset: 136;
+        }
+    }
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 136;
+        }
+    }
+    @-webkit-keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);
+        }
+    }
+    @keyframes rotate {
+        100% {
+            -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);
+        }
+    }
+}
+//body
+body{
+    background-color: #edeef0;
+    &.loading{
+        height: 100vh;
+    }
+}
+//paragraphs
+p {
+    padding: 10px;
+    padding-bottom: 0;
+    }
+//remove after applying proper bootstrap styles
+.container {
+    padding: 0;
+}
+//navigation menu
+nav{
+    top: 0;
+    position: fixed;
+    width: 100%;
+    background: #2a5885;
+    padding: 10px;
+    z-index: 10000;
+    a {
+        color: #fff;
+        margin-right: 2px;
+        padding: 10px;
+        cursor: pointer;
+        &:hover{
+            color: #fff;
+            text-decoration: none;
+            background: #337ab7;
+        }
+    }
+
+}
+//liquid-fire fixes
+body .liquid-container{
+    -webkit-transform: none;
+    -moz-transform: none;
+    transform: none;
+}
+body .liquid-fix{
+    transform: none !important;
+}
+//post and comments
+.user-overlay{
+    &:before{
+        display: inline-block;
+        position: relative;
+        background: #45688E;
+        border-radius: 50%;
+        border: dashed #fff 2px;
+        content: "\f030";
+        font-family: FontAwesome;
+        text-align: center;
+        color: #fff;
+    }
+    &.s50:before{
+        width: 50px;
+        height: 50px;
+        font-size: 15px;
+        padding: 12.5px;
+    }
+    &.s100:before{
+        width: 100px;
+        height: 100px;
+        font-size: 30px;
+        padding: 25px;
+    }
+    img {
+        position: absolute;
+        left: 10px
+    }
+}
+//misc
+.overlay {
+    position: fixed;
+    top: 0;
+    background-color: #666;
+    width: 100%;
+    height: 105%;
+    z-index: 99;
+}
+.no-scroll {
+    overflow: hidden;
+}

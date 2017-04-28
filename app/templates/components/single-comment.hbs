@@ -2,21 +2,25 @@
 {{#unless simple}}<p class="time">{{get-date comment.date}}</p>{{/unless}}
 <a href="http://vk.com/{{define-poster user=comment.user.id group=comment.group.screenName}}">
 {{#if simple}}
+        <object class="user-overlay s50">
     {{#if comment.user}}
-        <img class="img-circle" src="{{comment.user.photo50}}">
+        <img class="img-circle" src="{{comment.user.photo50}}" onerror="this.style.display='none'">
     {{else}}
-        <img class="img-circle" src="{{comment.group.photo50}}">
+        <img class="img-circle" src="{{comment.group.photo50}}" onerror="this.style.display='none'">
     {{/if}} 
+        </object>
 {{else}}
+        <object class="user-overlay s100">
     {{#if comment.user}}
-        <img class="img-circle" src="{{comment.user.photo100}}">
+        <img class="img-circle" src="{{comment.user.photo100}}" onerror="this.style.display='none'">
     {{else}}
-        <img class="img-circle" src="{{comment.group.photo100}}">
+        <img class="img-circle" src="{{comment.group.photo100}}" onerror="this.style.display='none'">
     {{/if}}
+        </object>
 {{/if}}
 {{#if simple}}
     {{#if (eq comment.user.online '1')}}
-    <span></span>
+    <span class="online"></span>
     {{/if}}
 {{/if}}
 </a>
@@ -29,7 +33,9 @@
 <p>
     {{#unless simple}}
         {{#if comment.replyToComment}}
-            <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
+            {{#if comment.replied}}
+                <a {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
+            {{/if}}
         {{/if}}
     {{/unless}}
     {{{reply-to-link (text-to-link comment.text) replyTo=comment.replyToUser fullname=comment.replied.fullName}}}
