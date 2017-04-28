@@ -30,6 +30,9 @@
                 width: 100%;
             }
             a.user{
+                .user-overlay img {
+                    left: 0;
+                }
                 position: relative;
                 &:hover{
                     text-decoration: none;
@@ -49,6 +52,14 @@
                 background-color: #fff;
                 padding: 10px;
                 margin: 15px 0;
+                .user .user-overlay img {
+                    left: 25px;
+                }
+            }
+            .post {
+                .comment .user .user-overlay img {
+                left: 10px;
+                }
             }
             .post, .comment{
                 .user{
