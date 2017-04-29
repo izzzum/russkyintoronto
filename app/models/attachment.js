@@ -3,6 +3,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   type: DS.attr('string'),
   post: DS.belongsTo('post'),
+  repost: DS.belongsTo('repost'),
   comment: DS.belongsTo('comment'),
   photo: DS.belongsTo('photo'),
   postedPhoto: DS.belongsTo('posted-photo'),

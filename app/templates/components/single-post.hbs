@@ -32,6 +32,12 @@
 </div>
 <p>{{{text-to-link post.text}}}</p>
 {{#if post.attachments}}{{put-attachments attachments=post.attachments}}{{/if}}
+{{#if post.repost}}
+    <div class="repost">
+        <p>{{{text-to-link post.repost.text}}}</p>
+        {{#if post.repost.attachments}}{{put-attachments attachments=post.repost.attachments}}{{/if}}
+    </div>
+{{/if}}
 <div class="stats">
     <div class="likes">
         <i class="fa fa-heart-o"></i>
