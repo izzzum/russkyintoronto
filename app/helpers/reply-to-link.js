@@ -1,6 +1,6 @@
 import Ember from 'ember';
 //text, replyTo, fullname
-export function replyToLink(text, options) {
+export function replyToLink(text) {
   if (Ember.isEmpty(text)){
             return text;
         }
