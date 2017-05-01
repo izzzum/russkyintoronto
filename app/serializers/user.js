@@ -15,6 +15,14 @@ if ((m = regex.exec(key)) !== null) {
         else{
     return Ember.String.underscore(key);
         }
+  },
+  normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
+      let ret = {};
+      ret.user = {};
+      ret.user.id = payload.response[0].uid;
+      ret.user.first_name = payload.response[0].first_name;
+      ret.user.last_name = payload.response[0].last_name;
+      return this._normalizeResponse(store, primaryModelClass, ret, id, requestType, false);
   }
 });
 

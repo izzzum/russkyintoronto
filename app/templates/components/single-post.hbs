@@ -1,39 +1,13 @@
 {{#unless simple}}{{#link-to 'post' post.id}}<span class="time">{{get-date post.date}}</span>{{/link-to}}{{/unless}}
-<div class="user">
-    <a href="http://vk.com/{{define-poster user=post.user.id group=post.group.screenName}}">
-{{#if simple}}
-        <object class="user-overlay s50">
-    {{#if post.user}}
-        <img class="img-circle" src="{{post.user.photo50}}" onerror="this.style.display='none'">
-    {{else}}
-        <img class="img-circle" src="{{post.group.photo50}}" onerror="this.style.display='none'">
-    {{/if}}
-        </object>
-{{else}}
-        <object class="user-overlay s100">
-    {{#if post.user}}
-        <img class="img-circle" src="{{post.user.photo100}}" onerror="this.style.display='none'">
-    {{else}}
-        <img class="img-circle" src="{{post.group.photo100}}" onerror="this.style.display='none'">
-    {{/if}}
-        </object>
-{{/if}}
-{{#if post.user}}
-    {{#if (eq post.user.online '1')}}
-    <span class="online"></span>
-    {{/if}}
-{{/if}}
-</a>
-{{#if post.user}}
-    <a class="name" href="http://vk.com/id{{post.user.id}}">{{post.user.fullName}}</a>
-{{else}}
-    <a class="name" href="http://vk.com/{{post.group.screenName}}">{{post.group.screenName}}</a>
-{{/if}}
-</div>
+{{user-handler obj=post simple=simple}}
 <p>{{{text-to-link post.text}}}</p>
 {{#if post.attachments}}{{put-attachments attachments=post.attachments}}{{/if}}
 {{#if post.repost}}
     <div class="repost">
+        {{#user-handler obj=post.repost}}
+        <i class="fa fa-retweet fa-2x"></i>
+        {{#unless simple}}<span class="time">{{get-date post.repost.date}}</span>{{/unless}}
+        {{/user-handler}}
         <p>{{{text-to-link post.repost.text}}}</p>
         {{#if post.repost.attachments}}{{put-attachments attachments=post.repost.attachments}}{{/if}}
     </div>

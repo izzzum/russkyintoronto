@@ -10,6 +10,39 @@ let typeKey = primaryModelClass.modelName;
 },
 
 normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
+function attachmentHandler(attachments, type, linkId){
+    attachments.forEach(function(attachment){
+        attachment.id = Math.ceil(Math.random()*100000000);
+        if(Ember.isEmpty(ret[attachment.type])){
+            ret[attachment.type] = [];
+        }
+        if(Ember.isEmpty(attachment[attachment.type].id)){
+            attachment[attachment.type].id = Math.ceil(Math.random()*100000000);
+        }
+        if(attachment.type === 'poll'){
+            if(attachment[attachment.type].owner_id > 0) {
+                attachment[attachment.type].user = attachment[attachment.type].owner_id;
+            }
+            else {
+                attachment[attachment.type].group = attachment[attachment.type].owner_id*(-1);
+            }
+            if(Ember.isEmpty(ret['answers'])){
+                ret['answers'] = [];
+            }
+            attachment[attachment.type].answers.forEach(function(answer){
+                answer['poll'] = attachment[attachment.type].id;
+                ret.answers.push(answer);
+            });
+            delete attachment[attachment.type].answers;
+        }
+        attachment[attachment.type].user = attachment[attachment.type].user_id || attachment[attachment.type].owner_id;
+        attachment[attachment.type].attachment = attachment.id;
+        ret[attachment.type].push(attachment[attachment.type]);
+        delete attachment[attachment.type];
+        attachment[type] = linkId;
+        ret.attachments.push(attachment);
+    });
+}
  let pluralTypeKey = Ember.Inflector.inflector.pluralize(primaryModelClass.modelName);
        let ret = {};
        ret['attachments'] = [];
@@ -31,37 +64,7 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
            delete post.likes.count;
             post.comments = [];
            if(Ember.isPresent(post.attachments)){
-            post.attachments.forEach(function(attachment){
-                attachment.id = Math.ceil(Math.random()*100000000);
-                if(Ember.isEmpty(ret[attachment.type])){
-                    ret[attachment.type] = [];
-                }
-                if(Ember.isEmpty(attachment[attachment.type].id)){
-                    attachment[attachment.type].id = Math.ceil(Math.random()*100000000);
-                }
-                if(attachment.type === 'poll'){
-                    if(attachment[attachment.type].owner_id > 0) {
-                        attachment[attachment.type].user = attachment[attachment.type].owner_id;
-                    }
-                    else {
-                        attachment[attachment.type].group = attachment[attachment.type].owner_id*(-1);
-                    }
-                    if(Ember.isEmpty(ret['answers'])){
-                        ret['answers'] = [];
-                    }
-                    attachment[attachment.type].answers.forEach(function(answer){
-                        answer['poll'] = attachment[attachment.type].id;
-                        ret.answers.push(answer);
-                    });
-                    delete attachment[attachment.type].answers;
-                }
-                attachment[attachment.type].user = attachment[attachment.type].user_id || attachment[attachment.type].owner_id;
-                attachment[attachment.type].attachment = attachment.id;
-                ret[attachment.type].push(attachment[attachment.type]);
-                delete attachment[attachment.type];
-                attachment.post = post.id;
-                ret.attachments.push(attachment);
-            });
+            attachmentHandler(post.attachments, 'post', post.id);
             delete  post.attachments;
            }
            /*temp solution for reposts*/
@@ -70,7 +73,7 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
                 let repost = post.copy_history[0];
                 ret.repost.id = repost.id;
                 ret.repost.date = repost.date;
-                if(post.from_id > 0) {
+                if(repost.from_id > 0) {
                     ret.repost.user = repost.from_id;
                 }
                 else {
@@ -81,38 +84,8 @@ normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
                 ret.repost.post_type = repost.post_type;
                 /*repost attachments*/
                 if(Ember.isPresent(repost.attachments)){
-                repost.attachments.forEach(function(attachment){
-                    attachment.id = Math.ceil(Math.random()*100000000);
-                    if(Ember.isEmpty(ret[attachment.type])){
-                        ret[attachment.type] = [];
-                    }
-                    if(Ember.isEmpty(attachment[attachment.type].id)){
-                        attachment[attachment.type].id = Math.ceil(Math.random()*100000000);
-                    }
-                    if(attachment.type === 'poll'){
-                        if(attachment[attachment.type].owner_id > 0) {
-                            attachment[attachment.type].user = attachment[attachment.type].owner_id;
-                        }
-                        else {
-                            attachment[attachment.type].group = attachment[attachment.type].owner_id*(-1);
-                        }
-                        if(Ember.isEmpty(ret['answers'])){
-                            ret['answers'] = [];
-                        }
-                        attachment[attachment.type].answers.forEach(function(answer){
-                            answer['poll'] = attachment[attachment.type].id;
-                            ret.answers.push(answer);
-                        });
-                        delete attachment[attachment.type].answers;
-                    }
-                    attachment[attachment.type].user = attachment[attachment.type].user_id || attachment[attachment.type].owner_id;
-                    attachment[attachment.type].attachment = attachment.id;
-                    ret[attachment.type].push(attachment[attachment.type]);
-                    delete attachment[attachment.type];
-                    attachment.repost = repost.id;
-                    ret.attachments.push(attachment);
-                });
-            }
+                    attachmentHandler(repost.attachments, 'repost', repost.id);
+                }
                 /*end of repost attachments handler*/
             }
             /*end of repost handler*/

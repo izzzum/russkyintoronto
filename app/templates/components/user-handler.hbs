@@ -1,0 +1,30 @@
+    {{yield}}
+    <a href="http://vk.com/{{define-poster user=obj.user.id group=obj.group.screenName}}">
+{{#if simple}}
+        <object class="user-overlay s50">
+    {{#if obj.user}}
+        <img class="img-circle" src="{{obj.user.photo50}}" onerror="this.style.display='none'">
+    {{else}}
+        <img class="img-circle" src="{{obj.group.photo50}}" onerror="this.style.display='none'">
+    {{/if}}
+        </object>
+{{else}}
+        <object class="user-overlay s100">
+    {{#if obj.user}}
+        <img class="img-circle" src="{{obj.user.photo100}}" onerror="this.style.display='none'">
+    {{else}}
+        <img class="img-circle" src="{{obj.group.photo100}}" onerror="this.style.display='none'">
+    {{/if}}
+        </object>
+{{/if}}
+{{#if obj.user}}
+    {{#if (eq obj.user.online '1')}}
+    <span class="online"></span>
+    {{/if}}
+{{/if}}
+</a>
+{{#if obj.user}}
+    <a class="name" href="http://vk.com/id{{obj.user.id}}">{{obj.user.fullName}}</a>
+{{else}}
+    <a class="name" href="http://vk.com/{{obj.group.screenName}}">{{obj.group.screenName}}</a>
+{{/if}}

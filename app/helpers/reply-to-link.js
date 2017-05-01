@@ -1,13 +1,13 @@
 import Ember from 'ember';
 //text, replyTo, fullname
 export function replyToLink(text, options) {
-  if (Ember.isEmpty(text) || Ember.isEmpty(options.replyTo)){
+  if (Ember.isEmpty(text)){
             return text;
         }
   let inputText = text.toString();
   let replacedText, replacePattern, replacement;
+    replacement = '';
     replacePattern = /(\[.*\|.*\])/gim;
-    replacement = `<a href="http://vk.com/id${options.replyTo}">${options.fullname}</a>`;
     replacedText = inputText.replace(replacePattern, replacement);
   
   return replacedText;
