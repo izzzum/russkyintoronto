@@ -13,6 +13,6 @@ export default ApplicationAdapter.extend({
     },
     urlForFindRecord(id) {
         let baseUrl = this.buildURL();
-    return `${baseUrl}?user_ids=${id}&version=5.7`;
+    return `${baseUrl}?user_ids=${id}&version=5.7&fields=sex,online,photo_50,photo_100,screen_name`;
   }
 });

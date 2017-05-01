@@ -5,8 +5,9 @@
 {{#if post.repost}}
     <div class="repost">
         {{#user-handler obj=post.repost}}
-        <i class="fa fa-retweet fa-2x"></i>
         {{#unless simple}}<span class="time">{{get-date post.repost.date}}</span>{{/unless}}
+        <br/>
+        <i class="fa fa-retweet fa-2x"></i>
         {{/user-handler}}
         <p>{{{text-to-link post.repost.text}}}</p>
         {{#if post.repost.attachments}}{{put-attachments attachments=post.repost.attachments}}{{/if}}

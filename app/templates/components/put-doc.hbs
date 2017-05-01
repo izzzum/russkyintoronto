@@ -1,6 +1,5 @@
 {{#if images}}
-<img class="img-responsive" src="{{doc.url}}">
+    <img class="img-responsive" src="{{doc.url}}">
 {{else}}
-<p>Вложение(.{{doc.ext}}):</p>
-<a href="{{doc.url}}">{{doc.title}}</a>
+    <p><i class="fa fa-file-o">.{{doc.ext}}</i> <a href="{{doc.url}}">{{doc.title}}</a></p>
 {{/if}}
