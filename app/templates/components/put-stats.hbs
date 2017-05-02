@@ -5,54 +5,25 @@
             {{yield}}
         </h3>
     {{/stats-title-row}}
-    <div class="row mainstat">
-        <div class="col-md-4">
-            <p>Написано комментариев: <b>{{list.commentsNum}}</b></p>
-        </div>
-        <div class="col-md-4">
-            <p>Количество активных пользователей: <b>{{list.userNum}}</b></p>
-        </div>
-        <div class="col-md-4">
-            <p>Количество отданых лайков: <b>{{list.likesNum}}</b></p>
-        </div>
-    </div>
-    {{#stats-title-row}}
+    {{stats-header comments=list.commentsNum likes=list.likesNum users=list.userNum}}
+    {{#stats-title-row button=true location='stats.comments'}}
         <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
-        <div>
-            {{#link-to 'stats.comments'}}
-                <button type="button" class="btn btn-primary"><i class="fa fa-plus"> Все пользователи</i></button>
-            {{/link-to}}
-        </div>
      {{/stats-title-row}}
-     {{stats-row class="topcomments" lists=list.topCommentsUsers total=list.commentsNum size='col-md-2' bar=true act='оставил' word='comment'}}
-    {{#stats-title-row}}
+     {{stats-row class="topcomments" lists=list.topCommentsUsers total=list.commentsNum size='col-md-2' act='оставил' word='comment'}}
+    {{#stats-title-row button=true location='stats.likes'}}
         <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
     {{/stats-title-row}}
-    {{stats-row class="toplikes" lists=list.listOfOverallLikes total=list.likesNum size='col-md-2' bar=true act='получил' word='like'}}
-    {{#stats-title-row}}
+    {{stats-row class="toplikes" lists=list.listOfOverallLikes total=list.likesNum size='col-md-2' act='получил' word='like'}}
+    {{#stats-title-row button=true location='stats.posts'}}
         <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
     {{/stats-title-row}}
-    {{stats-row class="topposts" lists=list.topPostsUsers size='col-md-4' act='написал' word='post' reorder=true}}
-    {{#stats-title-row}}
+    {{stats-row class="topposts" lists=list.topPostsUsers size='col-md-4' act='написал' word='post' reorder=true total=list.postsNum}}
+    {{#stats-title-row button=true buttonText='Все посты' location='stats.top-posts'}}
         <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
     {{/stats-title-row}}
-    <div class="row">
-         {{#each list.topCommentedPosts as |post postID|}}
-        <div class="col-md-4">
-          {{get-index postID}}. Опубликован: {{#link-to 'post' post.post.id}}<span class="time">{{get-date post.post.date}}</span>{{/link-to}}
-          {{single-post post=post.post simple=true}}
-        </div>
-        {{/each}}
-    </div>
-    {{#stats-title-row}}
+    {{stats-post-row lists=list.topCommentedPosts post=true}}
+    {{#stats-title-row button=true buttonText='Все комментарии' location='stats.top-comments'}}
         <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
-   {{/stats-title-row}}
-    <div class="row">
-        {{#each list.mostLikedComments as |comment commentID|}}
-        <div class="col-md-4">
-            {{get-index commentID}}. Опубликован: {{#link-to 'post' comment.comment.post.id}}<span class="time">{{get-date comment.comment.post.date}}</span>{{/link-to}}
-            {{single-comment comment=comment.comment simple=true}}
-        </div>
-        {{/each}}
-    </div>
+    {{/stats-title-row}}
+    {{stats-post-row lists=list.mostLikedComments post=false}}
 </div>

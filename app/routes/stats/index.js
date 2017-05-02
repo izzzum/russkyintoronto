@@ -86,22 +86,32 @@ export default Ember.Route.extend({
 
         let posts = store.peekAll('post');
             posts.forEach(post =>{
-                listOfTopCommented.push({post: post, items: post.get('commentsNum')});
+                if(parseInt(post.get('commentsNum')) !== 0){
+                    listOfTopCommented.push({post: post, items: post.get('commentsNum')});
+                }
             });
         postsNum = posts.content.length;
 
         let comments = store.peekAll('comment');
             comments.forEach(comment =>{
-                listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
+                if(parseInt(comment.get('likes')) !== 0){
+                    listOfMostLikedComments.push({comment: comment, items: comment.get('likes')});
+                }
             });
         commentsNum = comments.content.length;
             
         let users = store.peekAll('user');
             users.forEach(user =>{
-                likesNum += parseInt(user.get('likes'));
-                listOfComments.push({user: user, items: user.get('leftComments')});
-                listOfPosts.push({user: user, items: user.get('leftPosts')});
-                listOfOverallLikes.push({user: user, items: user.get('likes')});
+                if(parseInt(user.get('leftComments')) !== 0){
+                    listOfComments.push({user: user, items: user.get('leftComments')});
+                }
+                if(parseInt(user.get('leftPosts')) !== 0){
+                    listOfPosts.push({user: user, items: user.get('leftPosts')});
+                }
+                if(parseInt(user.get('likes')) !== 0){
+                    listOfOverallLikes.push({user: user, items: user.get('likes')});
+                    likesNum += parseInt(user.get('likes'));
+                }
             });
         userNum = users.content.length;
             let fulllist = {};
@@ -140,8 +150,22 @@ export default Ember.Route.extend({
             totalvalues.likes = likesNum;
 
             this.controllerFor('stats.index').set('list', this.get('list'));
+
             this.controllerFor('stats.comments').set('comments', fulllist.listOfComments);
             this.controllerFor('stats.comments').set('list', totalvalues);
+
+            this.controllerFor('stats.likes').set('likes', fulllist.listOfOverallLikes);
+            this.controllerFor('stats.likes').set('list', totalvalues);
+
+            this.controllerFor('stats.posts').set('posts', fulllist.listOfPosts);
+            this.controllerFor('stats.posts').set('list', totalvalues);
+
+            this.controllerFor('stats.topPosts').set('topPosts', fulllist.listOfTopCommented);
+            this.controllerFor('stats.topPosts').set('list', totalvalues);
+
+            this.controllerFor('stats.topComments').set('topComments', fulllist.listOfMostLikedComments);
+            this.controllerFor('stats.topComments').set('list', totalvalues);
+
             this.controllerFor('stats.index').set('statsInfoLoader', false);
 
         },

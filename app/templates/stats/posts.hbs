@@ -7,9 +7,9 @@
         {{/stats-title-row}}
         {{stats-header comments=list.comments likes=list.likes users=list.users}}
         {{#stats-title-row}}
-            <h4>Топ-{{array-length portion}} {{format-ending num=(array-length portion) word='user'}} по оставленным комментариям:</h4>
+            <h4>Топ-{{array-length portion}} {{format-ending num=(array-length portion) word='user'}} по написанным постам:</h4>
         {{/stats-title-row}}
-        {{stats-row class="topcomments" lists=portion total=list.comments size='col-md-2' act='оставил' word='comment'}}
+        {{stats-row class="topposts" lists=portion total=list.posts size='col-md-4' act='написал' word='post' reorder=true}}
         {{#if renderButton}}
             <div class="text-center">
                 <button type="button" class="btn btn-primary" {{action "loadMore"}}><i class="fa fa-plus"> {{portionNumber}}</i></button>
