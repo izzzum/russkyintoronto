@@ -1,9 +1,10 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Для статистики проанализировано <b>{{list.postsNum}}</b> {{format-ending num=user.items word='post'}}</h3>
-        </div>
-    </div>
+    {{#stats-title-row}}
+        <h3>
+            Для статистики проанализировано <b>{{list.postsNum}}</b> {{format-ending num=user.items word='post'}} 
+            {{yield}}
+        </h3>
+    {{/stats-title-row}}
     <div class="row mainstat">
         <div class="col-md-4">
             <p>Написано комментариев: <b>{{list.commentsNum}}</b></p>
@@ -15,106 +16,26 @@
             <p>Количество отданых лайков: <b>{{list.likesNum}}</b></p>
         </div>
     </div>
-     <div class="row">
-         <div class="col-md-12">
-            <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
-         </div>
-     </div>
-     <div class="row topcomments">
-        {{#each list.topCommentsUsers as |user userID|}}
-        <div class="col-md-2">
-            <div class="inner-box">
-                <a class="name" href="http://vk.com/id{{user.user.id}}">
-                {{get-index userID}}. {{user.user.fullName}}</a>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <a class="user" href="http://vk.com/id{{user.user.id}}">
-                        <object class="user-overlay s50">
-                            <img class="img-circle" src="{{user.user.photo50}}" onerror="this.style.display='none'">
-                        </object>
-                        {{#if (eq user.user.online '1')}}
-                            <span class="online"></span>
-                        {{/if}}
-                        </a>
-                    </div>
-                </div>
-                {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
-                <p>{{#if (eq user.user.sex '1')}}
-                    оставила
-                {{else}}
-                    оставил
-                {{/if}}
-                <b>{{user.items}}</b> {{format-ending num=user.items word='comment'}}</p>
-            </div>
+    {{#stats-title-row}}
+        <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
+        <div>
+            {{#link-to 'stats.comments'}}
+                <button type="button" class="btn btn-primary"><i class="fa fa-plus"> Все пользователи</i></button>
+            {{/link-to}}
         </div>
-        {{/each}}
-     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
-        </div>
-    </div>
-    <div class="row toplikes">
-        {{#each list.listOfOverallLikes as |user userID|}}
-        <div class="col-md-2">
-            <div class="inner-box">
-                <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-index userID}}. {{user.user.fullName}}</a>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <a class="user" href="http://vk.com/id{{user.user.id}}">
-                        <object class="user-overlay s50">
-                            <img class="img-circle" src="{{user.user.photo50}}" onerror="this.style.display='none'">
-                        </object>
-                        {{#if (eq user.user.online '1')}}
-                            <span class="online"></span>
-                        {{/if}}
-                        </a>
-                    </div>
-                </div>
-                {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items) delay=2000}}
-                <p>{{#if (eq user.user.sex '1')}}
-                    получила
-                {{else}}
-                    получил
-                {{/if}}
-                <b>{{user.items}}</b> {{format-ending num=user.items word='like'}}</p>
-            </div>
-        </div>
-        {{/each}}
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-             <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
-        </div>
-    </div>
-    <div class="row topposts">
-         {{#each list.topPostsUsers as |user userID|}}
-        <div class="col-md-4">
-            <div class="inner-box">
-                <a class="user" href="http://vk.com/id{{user.user.id}}">
-                <object class="user-overlay s50">
-                    <img class="img-circle" src="{{user.user.photo50}}" onerror="this.style.display='none'">
-                </object>
-                {{#if (eq user.user.online '1')}}
-                    <span class="online"></span>
-                {{/if}}
-                </a>
-                <a class="name" href="http://vk.com/id{{user.user.id}}">{{get-index userID}}. {{user.user.fullName}}</a>
-                {{#if (eq user.user.sex '1')}}
-                    написала
-                {{else}}
-                    написал
-                {{/if}}
-                <b>{{user.items}}</b> {{format-ending num=user.items word='post'}}
-            </div>
-        </div>
-        {{/each}}
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
-        </div>
-    </div>
+     {{/stats-title-row}}
+     {{stats-row class="topcomments" lists=list.topCommentsUsers total=list.commentsNum size='col-md-2' bar=true act='оставил' word='comment'}}
+    {{#stats-title-row}}
+        <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
+    {{/stats-title-row}}
+    {{stats-row class="toplikes" lists=list.listOfOverallLikes total=list.likesNum size='col-md-2' bar=true act='получил' word='like'}}
+    {{#stats-title-row}}
+        <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
+    {{/stats-title-row}}
+    {{stats-row class="topposts" lists=list.topPostsUsers size='col-md-4' act='написал' word='post' reorder=true}}
+    {{#stats-title-row}}
+        <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
+    {{/stats-title-row}}
     <div class="row">
          {{#each list.topCommentedPosts as |post postID|}}
         <div class="col-md-4">
@@ -123,11 +44,9 @@
         </div>
         {{/each}}
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
-        </div>
-    </div>
+    {{#stats-title-row}}
+        <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
+   {{/stats-title-row}}
     <div class="row">
         {{#each list.mostLikedComments as |comment commentID|}}
         <div class="col-md-4">

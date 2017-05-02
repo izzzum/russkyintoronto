@@ -1,0 +1,8 @@
+{{#if list}}
+    {{#put-stats list=list action=changeAmount}}
+    <button type="button" class="btn btn-primary" {{action "changeAmount" 100}}><i class="fa fa-plus"> 100</i></button>
+    {{/put-stats}}
+{{else}}
+    {{loader-img show=true}}
+{{/if}}
+{{outlet}}

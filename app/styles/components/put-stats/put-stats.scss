@@ -1,5 +1,8 @@
 .statistics{
     .container{
+        h4+div{
+            margin-bottom: 10px;
+        }
         .topcomments, .toplikes, .topposts{
             .inner-box{
                 img{
@@ -9,12 +12,21 @@
                 background-color: #fff;
                 padding: 10px;
                 border: 1px solid #eee;
+                margin-bottom: 10px;
             }
         }
         .topcomments, .toplikes{
             a.name{
                 display: block;
                 margin-bottom: 10px;
+                height: 30px;
+            }
+        }
+        .topposts{
+            p{
+                display: inline-block;
+                padding: 0;
+                margin: 0;
             }
         }
         .row {

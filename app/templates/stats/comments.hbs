@@ -1,0 +1,26 @@
+<div class="statistics">
+    <div class="container">
+        {{#stats-title-row}}
+        <h3>
+            Для статистики проанализировано <b>{{list.posts}}</b> {{format-ending num=list.posts word='post'}}
+        </h3>
+        {{/stats-title-row}}
+        <div class="row mainstat">
+            <div class="col-md-4">
+                <p>Написано комментариев: <b>{{list.comments}}</b></p>
+            </div>
+            <div class="col-md-4">
+                <p>Количество активных пользователей: <b>{{list.users}}</b></p>
+            </div>
+            <div class="col-md-4">
+                <p>Количество отданых лайков: <b>{{list.likes}}</b></p>
+            </div>
+        </div>
+        {{stats-row class="topcomments" lists=portion total=list.comments size='col-md-2' bar=true act='оставил' word='comment'}}
+        {{#if renderButton}}
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" {{action "loadMore"}}><i class="fa fa-plus"> 20</i></button>
+            </div>
+        {{/if}}
+    </div>
+</div>
