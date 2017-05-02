@@ -1,3 +1,10 @@
 <div class="col-md-12">
     {{yield}}
+{{#if button}}
+    <div>
+        {{#link-to location}}
+            <button type="button" class="btn btn-primary"><i class="fa fa-plus"> {{buttonText}}</i></button>
+        {{/link-to}}
+    </div>
+{{/if}}
 </div>

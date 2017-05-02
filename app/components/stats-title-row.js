@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    classNames: ['row']
+    classNames: ['row'],
+    buttonText: 'Все пользователи'
 });

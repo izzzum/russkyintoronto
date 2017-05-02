@@ -1,0 +1,12 @@
+{{#each lists as |item itemID|}}
+    <div class="col-md-4">
+        {{get-index itemID}}. Опубликован: 
+        {{#if post}}
+        {{#link-to 'post' item.post.id}}<span class="time">{{get-date item.post.date}}</span>{{/link-to}}
+            {{single-post post=item.post simple=true}}
+        {{else}}
+        {{#link-to 'post' item.comment.post.id}}<span class="time">{{get-date item.comment.post.date}}</span>{{/link-to}}
+            {{single-comment comment=item.comment simple=true}}
+        {{/if}}
+    </div>
+{{/each}}

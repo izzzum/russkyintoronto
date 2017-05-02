@@ -7,7 +7,7 @@ export function replyToLink(text) {
   let inputText = text.toString();
   let replacedText, replacePattern, replacement;
     replacement = '';
-    replacePattern = /(\[.*\|.*\])/gim;
+    replacePattern = /(\[.*\|.*\][,])/gim;
     replacedText = inputText.replace(replacePattern, replacement);
   
   return replacedText;

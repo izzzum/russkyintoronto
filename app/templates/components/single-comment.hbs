@@ -5,10 +5,10 @@
     {{#unless simple}}
         {{#if comment.replyToComment}}
                 <a class="jumpTo" {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
-                <a href="http://vk.com/id{{comment.replyToUser}}">{{comment.replied.fullName}}</a>
         {{/if}}
     {{/unless}}
     {{#if comment.replyToComment}}
+        <a href="http://vk.com/id{{comment.replyToUser}}">{{comment.replied.fullName}}</a>,
         {{{reply-to-link (text-to-link comment.text)}}}
     {{else}}
         {{{text-to-link comment.text}}}
