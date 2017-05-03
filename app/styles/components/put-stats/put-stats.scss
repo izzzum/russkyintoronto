@@ -10,11 +10,12 @@
         }
         input{
             width: 50px;
+            margin-right: 10px;
         }
         button{
             .placeholder{
                 display: inline-block;
-                width: 70px;
+                width: 35px;
             }
         }
         @media (max-width: 767px){
