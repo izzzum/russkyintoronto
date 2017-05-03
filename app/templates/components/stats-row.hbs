@@ -1,29 +1,35 @@
 {{#each lists as |list listID|}}
 <div class="{{size}}">
-    <div class="inner-box">
+    <div class="inner-box container">
+        <div class="row">
         {{#if reorder}}
-            {{stats-userpic user=list.user}}
+            <div class="col-xs-5">
+                {{stats-userpic user=list.user}}
+            </div>
         {{/if}}
-        <a class="name" href="http://vk.com/id{{list.user.id}}">
-        {{get-index listID}}. {{list.user.fullName}}</a>
+        <div class="text-center {{if reorder 'col-xs-7' 'col-xs-12'}}">
+            <a class="name" href="http://vk.com/id{{list.user.id}}">
+            {{get-index listID}}. {{list.user.fullName}}</a>
+        </div>
         {{#unless reorder}}
-            <div class="container">
-                <div class="row">
-                    <div class="xs-col-12 text-center">
-                        {{stats-userpic user=list.user}}
-                    </div>
-                </div>
+            <div class="col-xs-12 text-center">
+                {{stats-userpic user=list.user}}
             </div>
         {{/unless}}
         {{#if bar}}
+        <div class="col-xs-12 text-center">
             {{percent-bar rate=(get-percent total=total fraction=list.items)}}
+        </div>
         {{/if}}
+        <div class="col-xs-12">
         <p>{{#if (eq list.user.sex '1')}}
             {{act}}а
         {{else}}
             {{act}}
         {{/if}}
         <b>{{list.items}}</b> {{format-ending num=list.items word=word}}</p>
+        </div>
+        </div>
     </div>
 </div>
 {{/each}}

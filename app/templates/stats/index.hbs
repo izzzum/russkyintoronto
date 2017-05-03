@@ -1,7 +1,18 @@
 {{#if list}}
     {{#put-stats list=list action=changeAmount}}
         <div class="pull-right">
-            <button type="button" class="btn btn-primary loadMore" {{action "changeAmount" 100}}><i class="fa fa-plus"> 100</i></button>
+            {{input type="number" 
+                name="amount" 
+                value=amount 
+                size=4 
+                maxlength=4 
+                min=1 
+                max=1000 
+                step=10 
+                key-up="validateInput"
+                focus-in="focus"
+            }}
+            <button type="button" class="btn btn-primary loadMore" {{action "changeAmount" amount}}><i class="fa fa-plus"><span class="placeholder">{{amount}}</span></i></button>
         </div>
     {{/put-stats}}
 {{else}}

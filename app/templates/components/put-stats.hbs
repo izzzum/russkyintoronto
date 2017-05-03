@@ -1,18 +1,18 @@
 <div class="container">
     {{#stats-title-row}}
         <h4 class="pull-left">
-            Загружено <b>{{list.postsNum}}</b> 
+            Загружено <b>{{list.totalvalues.posts}}</b> 
         </h4>
         {{stats-icon class='pull-left' icon='fa-edit'}}
         {{yield}}
     {{/stats-title-row}}
-    {{stats-header comments=list.commentsNum likes=list.likesNum users=list.userNum}}
+    {{stats-header comments=list.totalvalues.comments likes=list.totalvalues.likes users=list.totalvalues.users}}
     {{stats-title-row button=true location='stats.comments' icon1='fa-user-o' icon2='fa-comment-o' top=(array-length list.topCommentsUsers) default=true}}
-    {{stats-row class="topcomments main" lists=list.topCommentsUsers total=list.commentsNum size='col-xs-6 col-sm-4 col-md-2 col-lg-2' act='оставил' word='comment'}}
+    {{stats-row class="topcomments main" lists=list.topCommentsUsers total=list.totalvalues.comments size='col-xs-6 col-sm-4 col-md-2 col-lg-2' act='оставил' word='comment'}}
     {{stats-title-row button=true location='stats.likes' icon1='fa-user-o' icon2='fa-heart-o' top=(array-length list.listOfOverallLikes) default=true}}
-    {{stats-row class="toplikes main" lists=list.listOfOverallLikes total=list.likesNum size='col-xs-6 col-sm-4 col-md-2 col-lg-2' act='получил' word='like'}}
+    {{stats-row class="toplikes main" lists=list.listOfOverallLikes total=list.totalvalues.likes size='col-xs-6 col-sm-4 col-md-2 col-lg-2' act='получил' word='like'}}
     {{stats-title-row button=true location='stats.posts' icon1='fa-user-o' icon2='fa-edit' top=(array-length list.topPostsUsers) default=true}}
-    {{stats-row class="topposts main-2" lists=list.topPostsUsers size='col-xs-6 col-sm-4 col-md-4 col-lg-4' act='написал' word='post' reorder=true total=list.postsNum}}
+    {{stats-row class="topposts main-2" lists=list.topPostsUsers size='col-xs-6 col-sm-4 col-md-4 col-lg-4' act='написал' word='post' reorder=true total=list.totalvalues.posts}}
     {{stats-title-row button=true location='stats.top-posts' icon1='fa-edit' icon2='fa-comment-o' top=(array-length list.topCommentedPosts) default=true}}
     {{stats-post-row lists=list.topCommentedPosts post=true}}
     {{stats-title-row button=true location='stats.top-comments' icon1='fa-comment-o' icon2='fa-heart-o' top=(array-length list.mostLikedComments) default=true}}

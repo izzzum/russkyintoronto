@@ -5,6 +5,15 @@
                 color: #fff;
             }
         }
+        input{
+            width: 50px;
+        }
+        button{
+            .placeholder{
+                display: inline-block;
+                width: 70px;
+            }
+        }
         @media (max-width: 767px){
             .topcomments, .toplikes, .topposts{
                 &.main .col-xs-6:last-of-type,
@@ -83,6 +92,7 @@
             }
             a.user{
                 .user-overlay img {
+                    top: -18px;
                     left: 0;
                 }
                 position: relative;
