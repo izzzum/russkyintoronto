@@ -2,12 +2,8 @@
 {{#unless simple}}<p class="time">{{get-date comment.date}}</p>{{/unless}}
 {{/user-handler}}
 <p>
-    {{#unless simple}}
-        {{#if comment.replyToComment}}
-                <a class="jumpTo" {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
-        {{/if}}
-    {{/unless}}
     {{#if comment.replyToComment}}
+        <a class="jumpTo" {{action "jumpTo" comment.replyToComment}}><i class="fa fa-reply"></i></a>
         <a href="http://vk.com/id{{comment.replyToUser}}">{{comment.replied.fullName}}</a>,
         {{{reply-to-link (text-to-link comment.text)}}}
     {{else}}
@@ -16,5 +12,5 @@
 </p>
 {{#if comment.attachments}}{{put-attachments attachments=comment.attachments}}{{/if}}
 {{#if isLikes}}
-    <div class="stats"><div class="likes"><i class="fa fa-heart-o"></i> {{comment.likes}}</div></div>
+    <div class="stats {{if simple 'onTop'}}"><div class="likes"><i class="fa fa-heart-o"></i> {{comment.likes}}</div></div>
 {{/if}}

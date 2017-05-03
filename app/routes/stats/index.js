@@ -167,6 +167,7 @@ export default Ember.Route.extend({
             this.controllerFor('stats.topComments').set('list', totalvalues);
 
             this.controllerFor('stats.index').set('statsInfoLoader', false);
+            Ember.$('button.loadMore').attr('disabled', null);
 
         },
         sessionChanged(){

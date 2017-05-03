@@ -1,5 +1,5 @@
 {{#each lists as |item itemID|}}
-    <div class="col-md-4">
+    <div class="col-xs-12">
         {{get-index itemID}}. Опубликован: 
         {{#if post}}
         {{#link-to 'post' item.post.id}}<span class="time">{{get-date item.post.date}}</span>{{/link-to}}

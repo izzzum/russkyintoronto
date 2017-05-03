@@ -1,5 +1,5 @@
 {{#each lists as |list listID|}}
-<div class={{size}}>
+<div class="{{size}}">
     <div class="inner-box">
         {{#if reorder}}
             {{stats-userpic user=list.user}}
@@ -7,9 +7,13 @@
         <a class="name" href="http://vk.com/id{{list.user.id}}">
         {{get-index listID}}. {{list.user.fullName}}</a>
         {{#unless reorder}}
-            {{#stats-title-row}}
-                {{stats-userpic user=list.user class='text-center'}}
-            {{/stats-title-row}}
+            <div class="container">
+                <div class="row">
+                    <div class="xs-col-12 text-center">
+                        {{stats-userpic user=list.user}}
+                    </div>
+                </div>
+            </div>
         {{/unless}}
         {{#if bar}}
             {{percent-bar rate=(get-percent total=total fraction=list.items)}}

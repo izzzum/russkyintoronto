@@ -1,14 +1,13 @@
 <div class="statistics">
     <div class="container">
         {{#stats-title-row}}
-            <h3>
-                Для статистики проанализировано <b>{{list.posts}}</b> {{format-ending num=list.posts word='post'}}
-            </h3>
+            <h4 class="pull-left">
+                Загружено <b>{{list.posts}}</b> 
+            </h4>
+            {{stats-icon class='pull-left' icon='fa-edit'}}
         {{/stats-title-row}}
         {{stats-header comments=list.comments likes=list.likes users=list.users}}
-        {{#stats-title-row}}
-            <h4>Топ-{{array-length portion}} {{format-ending num=(array-length portion) word='post'}} по обсуждаемости:</h4>
-        {{/stats-title-row}}
+        {{stats-title-row icon1='fa-edit' icon2='fa-comment-o' top=(array-length portion) default=true}}
         {{stats-post-row lists=portion post=true}}
         {{#if renderButton}}
             <div class="text-center">
