@@ -1,5 +1,10 @@
 .statistics{
     .container{
+        h4+div,h4+div+div{ 
+            i:first-of-type{
+                color: #fff;
+            }
+        }
         @media (max-width: 767px){
             .topcomments, .toplikes, .topposts{
                 &.main .col-xs-6:last-of-type,
@@ -65,6 +70,9 @@
                     padding: 10px;
                     span span{
                         font-size: 16px;
+                        i:first-of-type{
+                            color: #eee;
+                        }
                     }
                 }
             }
