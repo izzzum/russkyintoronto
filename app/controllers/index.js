@@ -11,8 +11,6 @@ export default Ember.Controller.extend({
    promise: null,
    totalNum: 0,
    loadingState: 0,
-   lastState: 0,
-   updateState: null,
    scrollPosition: null,
    store: Ember.inject.service(),
    statsAmmount: 50,
@@ -33,26 +31,18 @@ export default Ember.Controller.extend({
         let loadedPortion = 0;
         this.set('promise', Ember.A());
         let _this = this;
-        this.set('updateState', false);
-        this.set('statsInfoLoader', true);   
+        this.set('statsInfoLoader', true);
+        this.set('totalNum', 0);
+        this.set('loadingState', 0);   
         let store = this.get('store');
         let posts = store.peekAll('post');
-        let comments = store.peekAll('comment');
         let numOfReqs = 0;
-        let resetSwitch = true;
-            this.set('totalNum', comments.content.length);
             loadedPortion = posts.content.length;
             posts.forEach(post => {
                     if(post.get('commentsNum') !== 0){
                         let currentLength = post.get('comments').content.currentState.length;
                         if(currentLength < post.get('commentsNum')){
                             this.set('totalNum', this.get('totalNum')+post.get('commentsNum')-currentLength);
-                            if(this.get('lastState') !== 0 && resetSwitch){
-                                resetSwitch = false;
-                                this.set('loadingState', 0);
-                                this.set('totalNum', this.get('totalNum') - this.get('lastState'));
-                            }
-                            this.set('updateState', true);
                             _this.get('promise').addObject(
                                 delay(150*numOfReqs).then(function() {
                                 _this.get('promise').addObject(store.query('comment',
@@ -109,9 +99,6 @@ export default Ember.Controller.extend({
         },
         transitionToStats(){
             let _this = this;
-            if(this.get('updateState') === true){
-                this.set('lastState', this.get('loadingState') + this.get('lastState'));
-            }
             this.set('statsInfoLoader', false);
             this.set('scrollPosition', Ember.$('body').scrollTop());
             Ember.run.later(function(){
