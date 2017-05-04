@@ -20,7 +20,9 @@ export function textToLink(text) {
     replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
     replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
 
-    
+    //insert newlines
+    replacedText = replacedText.replace(/\n/g, "<br />");
+
   return replacedText;
     }
 
