@@ -1,5 +1,19 @@
 .statistics{
     .container{
+        .name-col{
+            padding: 0 0 0 7px;
+            line-height: 1.1em;
+            max-width: 84px;
+            span {
+                display: inline-block;
+                height: 50px;
+                padding-left: 3px;
+                border-left: 1px solid #eee;
+            }
+        }
+        .pic-col{
+            max-width: 60px;
+        }
         h4.prime{
             margin-bottom: 20px;
         }
