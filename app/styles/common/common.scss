@@ -1,21 +1,14 @@
 @include font-face('Anton');
 //loader
 .ember-load-indicator{
-    
-    &:before{
-        left: 50%;
-        top: 50%;
-        content:"Загрузка...";
-        display: block;
-        position: absolute;
-        margin-top: 55px;
+    p{
         font-family: 'Anton', 'Verdana';
         font-weight: bold;
-        transform: translate(-50%, -50%);
     }
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
