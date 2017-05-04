@@ -1,4 +1,4 @@
-{{#if notEqual}}
+{{#liquid-if notEqual class="magical"}}
     <p>Loading data...</p>
     <p>{{percent-bar rate=(get-percent total=total fraction=state) delay=0}}</p>
     <p>
@@ -16,5 +16,5 @@
     </p>
 {{else}}
     <p>Analyzing data...</p>
-{{/if}}
+{{/liquid-if}}
 {{loader-img show=true}}

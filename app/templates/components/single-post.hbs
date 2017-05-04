@@ -1,7 +1,9 @@
 {{#unless simple}}{{#link-to 'post' post.id}}<span class="time">{{get-date post.date}}</span>{{/link-to}}{{/unless}}
 {{user-handler obj=post simple=simple}}
-<p>{{{text-to-link post.text}}}</p>
-{{#if post.attachments}}{{put-attachments attachments=post.attachments}}{{/if}}
+    <p>{{{text-to-link post.text}}}</p>
+{{#if post.attachments}}
+    {{put-attachments attachments=post.attachments}}
+{{/if}}
 {{#if post.repost}}
     <div class="repost">
         {{#user-handler obj=post.repost}}
@@ -39,4 +41,4 @@
 </div>
 {{#if isShowingComments}}
 {{read-comments postId=post.id commentsNum=post.commentsNum comments=post.comments simple=simple}}
-{{/if}} 
+{{/if}}

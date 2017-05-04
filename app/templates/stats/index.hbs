@@ -8,7 +8,8 @@
                 maxlength=4 
                 min=1 
                 max=1000 
-                step=10 
+                step=10
+                key-down="updateValue" 
                 key-up="validateInput"
                 focus-in="focus"
             }}
@@ -18,4 +19,4 @@
 {{else}}
     {{loader-img show=true}}
 {{/if}}
-{{outlet}}
+{{liquid-outlet}}

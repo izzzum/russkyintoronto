@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
     statsInfoLoader: false,
     statsAmount: 50,
     amount: 100,
+    previous: 100,
     actions: {
         changeAmount(amount) {
             amount = amount > 1000 ? 1000 : amount;
@@ -14,19 +15,24 @@ export default Ember.Controller.extend({
             this.set('statsAmount', this.get('statsAmount') + parseInt(amount));
             this.send("sessionChanged");
         },
-        validateInput(){
-            if(isNaN(Ember.$('input').val()) || Ember.$('input').val() === ''){
-                Ember.$('button.loadMore').attr('disabled', 'disabled');
-            }
-            else if(Ember.$('input').val()<1001){
-                Ember.$('input').val(parseInt(this.amount.toString().slice(0, 4)));
-                this.set('amount', Ember.$('input').val());
-                Ember.$('button.loadMore').attr('disabled', null);
-            }
-            else{
-                this.set('amount', 1000);
-                Ember.$('input').val(1000);
-                Ember.$('button.loadMore').attr('disabled', null);
+        updateValue(value){
+            this.set('previous',value)
+        },
+        validateInput(value){
+            if(value !== this.get('previous')){
+                if(isNaN(Ember.$('input').val()) || Ember.$('input').val() === ''){
+                    Ember.$('button.loadMore').attr('disabled', 'disabled');
+                }
+                else if(Ember.$('input').val()<1001){
+                    Ember.$('input').val(parseInt(this.amount.toString().slice(0, 4)));
+                    this.set('amount', Ember.$('input').val());
+                    Ember.$('button.loadMore').attr('disabled', null);
+                }
+                else{
+                    this.set('amount', 1000);
+                    Ember.$('input').val(1000);
+                    Ember.$('button.loadMore').attr('disabled', null);
+                }
             }
         },
         focus(){
