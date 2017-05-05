@@ -17,16 +17,10 @@
     </div>
 {{/if}}
 <a class="img-resize" {{action 'toggleImageSize'}}>
-    {{#if (eq length 1)}}
-        <img class="photo-responsive {{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.large photo.photo604}}">
+    {{#if isLarge}}
+        {{lazy-image url=url class=imgClass}}
     {{else}}
-        {{#if photo.tall}}
-            <span class="tall">
-                <img class="photo-responsive {{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.large photo.photo604}}">
-            </span>
-        {{else}}
-            <img class="photo-responsive {{if isLarge "img-fullscreen"}}" src="{{if isLarge photo.large photo.photo604}}">
-        {{/if}}
+        {{lazy-image url=url class=imgClass}}
     {{/if}}
 </a>
 {{#if isLarge}}

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     classNames: ['video-attachment'],
+    classNameBindings: ['youtube'],
     loading: false,
     youtube: false,
     showIframe: false,
