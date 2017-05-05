@@ -100,14 +100,16 @@ body .liquid-fix{
 .user-overlay{
     &:before{
         display: inline-block;
-        position: relative;
+        position: absolute;
         background: #45688E;
         border-radius: 50%;
-        border: dashed #fff 2px;
+        border: solid #fff 2px;
         content: "\f030";
         font-family: FontAwesome;
         text-align: center;
         color: #fff;
+        top: 0;
+        left: 0;
     }
     &.s50:before{
         width: 50px;

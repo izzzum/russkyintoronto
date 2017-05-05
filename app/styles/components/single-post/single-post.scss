@@ -13,6 +13,7 @@
             height: 50px;
             font-size: 14px;
             padding: 12.5px;
+            position: relative;
         }
         img{
             width: 50px;
@@ -23,6 +24,11 @@
     }
   }
   .user{
+    object{
+      &:before{
+        position: relative;
+      }
+    }
       img{
           width: 100px;
           height: 100px;

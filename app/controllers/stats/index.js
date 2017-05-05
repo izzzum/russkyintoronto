@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
             this.send("sessionChanged");
         },
         updateValue(value){
-            this.set('previous',value)
+            this.set('previous',value);
         },
         validateInput(value){
             if(value !== this.get('previous')){

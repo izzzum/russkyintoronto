@@ -7,6 +7,11 @@ padding: 10px;
 padding-bottom: 0;
 background-color: #fff;
   .user{
+      object{
+        &:before{
+          position: relative;
+        }
+      }
       img{
           width: 100px;
           height: 100px;
