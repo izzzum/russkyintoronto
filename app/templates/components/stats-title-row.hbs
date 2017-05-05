@@ -1,0 +1,15 @@
+<div class="col-md-12">
+    {{#if default}}
+        <h4 class="pull-left">Top-{{top}}</h4>
+        {{stats-icon class='pull-left' icon=icon1}}
+        {{stats-icon class='pull-left' icon=icon2}}
+    {{/if}}
+    {{yield}}
+{{#if button}}
+    <div class="pull-right">
+        {{#link-to location}}
+            <button type="button" class="btn btn-primary"><i class="fa fa-plus"> {{buttonText}}</i></button>
+        {{/link-to}}
+    </div>
+{{/if}}
+</div>

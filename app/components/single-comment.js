@@ -5,9 +5,7 @@ export default Ember.Component.extend({
     classNames: ['comment'],
     attributeBindings: ['id'],
     id: Ember.computed(function(){
-        if(this.get('simple') === false){
-            return `comment${this.get('comment').id}`;
-        }
+        return `comment${this.get('comment').id}`;
     }),
     comment: null,
     isLikes: Ember.computed('comment', function(){
@@ -15,9 +13,11 @@ export default Ember.Component.extend({
     }),
     actions: {
         jumpTo(anchor){
-            Ember.$('body').stop().animate({
-            scrollTop: (Ember.$('#comment'+anchor).offset().top -39) //-size of the top menu
-            }, 1000);
+            if(Ember.isPresent(Ember.$('#comment'+anchor))){
+                Ember.$('body').stop().animate({
+                    scrollTop: (Ember.$('#comment'+anchor).offset().top -39) //-size of the top menu
+                }, 1000);
+            }
         }
     }
 });

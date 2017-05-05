@@ -16,9 +16,15 @@
 
     {{content-for "head-footer"}}
   </head>
-  <body>
+  <body class="loading">
     {{content-for "body"}}
-
+    <div class="ember-load-indicator">
+      <!-- SVG Loader by Dominic Kolbe (codepen.io/dominickolbe/pen/YXYyvW) -->
+      <svg id="triangle" width="100px" height="100px" viewBox="-3 -4 39 39">
+        <polygon fill="#337ab7" stroke="#333333" stroke-width="1" points="16,0 32,32 0,32"></polygon>
+      </svg>
+      <p>Загрузка...</p>
+    </div>
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/my-app.js"></script>
 

@@ -25,7 +25,7 @@ export default DS.Model.extend({
     }
     return likes;
   }),
-  fullName: Ember.computed(function(){
+  fullName: Ember.computed('firstName', function(){
     return `${this.get('firstName')} ${this.get('lastName')}`;
   }),
   leftComments: Ember.computed('comments', function(){

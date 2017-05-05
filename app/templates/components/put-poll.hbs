@@ -4,7 +4,7 @@
 <div class="answers">
     <ul>
         {{#each poll.answers as |answer|}}
-            <li>{{percent-bar rate=answer.rate}} {{answer.text}} <b>{{answer.votes}}</b></li>
+            <li>{{answer.text}} <b>{{answer.votes}}</b>{{percent-bar rate=answer.rate}}</li>
         {{/each}}
     </ul>
 </div>

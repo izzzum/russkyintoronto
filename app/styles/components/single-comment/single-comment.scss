@@ -7,11 +7,20 @@ padding: 10px;
 padding-bottom: 0;
 background-color: #fff;
   .user{
+      object{
+        &:before{
+          position: relative;
+        }
+      }
+      img{
+          width: 100px;
+          height: 100px;
+      }
     a {
       &:first-of-type{
         text-decoration: none;
       }
-      span {
+      span.online {
           width: 14px;
           height: 14px;
           background: #8ac176;
@@ -22,6 +31,10 @@ background-color: #fff;
           border: 3px solid #fff;
         }
     }
+  }
+  .jumpTo{
+    cursor: pointer;
+    padding: 5px 0 5px 5px;
   }
   a i {
     cursor: pointer;

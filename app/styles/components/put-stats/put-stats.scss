@@ -1,8 +1,146 @@
 .statistics{
     .container{
-        .box {
+        .name-col{
+            padding: 0;
+            line-height: 1.1em;
+            max-width: 84px;
+            span {
+                display: inline-block;
+                height: 50px;
+                border-left: 1px solid #eee;
+                a {
+                    margin-left: 5px;
+                }
+            }
+        }
+        .pic-col{
+            padding: 0;
+            max-width: 60px;
+        }
+        h4.prime{
+            margin-bottom: 20px;
+        }
+        h4+div,h4+div+div{ 
+            i:first-of-type{
+                color: #fff;
+            }
+        }
+        input{
+            width: 50px;
+            margin-right: 10px;
+        }
+        button{
+            .placeholder{
+                display: inline-block;
+                width: 35px;
+            }
+        }
+        @media (max-width: 767px){
+            .topcomments, .toplikes, .topposts{
+                &.main .col-xs-6:last-of-type,
+                &.main-2 .col-xs-6:last-of-type {
+                    width: 100%;
+                }
+            }
+        }
+        @media (min-width: 768px){
+            .topcomments, .toplikes, .topposts{
+                &.main-2 .col-xs-6:last-of-type {
+                    width: 33.3333%;
+                }
+                &.main .col-xs-6{
+                    &:nth-of-type(4),
+                    &:last-of-type{
+                        width: 50%;
+                    }
+                }
+            }
+        }
+        @media (min-width: 992px){
+            .topcomments, .toplikes, .topposts{
+                &.main .col-xs-6{
+                    width: 20%;
+                    &:nth-of-type(4),
+                    &:last-of-type{
+                        width: 20%;
+                    }
+                }
+            }
+        }
+        .topcomments, .toplikes, .topposts{
+            p.stats-info{
+                font-size: 12px;
+                line-height: 1.2em;
+                padding: 0;
+                margin: 0;
+                margin-top: 5px;
+                height: 25px;
+            }
+            .inner-box{
+                img{
+                    width: 50px;
+                    height: 50px;
+                }
+                height: 135px;
+                background-color: #fff;
+                padding: 10px;
+                border: 1px solid #eee;
+                margin-bottom: 10px;
+            }
+        }
+        .topcomments, .toplikes{
+            a.name{
+                font-size: 12px;
+                display: block;
+                margin-bottom: 10px;
+                height: 30px;
+            }
+        }
+        .topposts{
+            a.name{
+                font-size: 12px;
+            }
+            p{
+                display: inline-block;
+                padding: 0;
+                margin: 0;
+            }
+        }
+        .row {
+            &.mainstat{
+                div{
+                    font-size: 12px;
+                    padding-right: 5px;
+                    padding-left: 5px;
+                    &:first-of-type{
+                        padding-left: 15px;
+                    }
+                    &:last-of-type{
+                        padding-right: 15px;
+                    }
+                }
+                p{
+                    background-color: #fff;
+                    padding: 10px;
+                    span span{
+                        font-size: 16px;
+                        i:first-of-type{
+                            color: #eee;
+                        }
+                    }
+                }
+            }
+            margin-left: 0;
+            margin-right: 0;
+            .container{
+                width: 100%;
+            }
             a.user{
-                position: relative;
+                .user-overlay img {
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                }
                 &:hover{
                     text-decoration: none;
                 }
@@ -12,45 +150,62 @@
                             background: #8ac176;
                             border-radius: 10px;
                             position: absolute;
-                            top: 20px;
-                            left: 37px;
+                            top: 35px;
+                            left: 40px;
                             border: 3px solid #fff;
-                }
-            }
-            &:first-of-type, &:nth-of-type(2){   
-                a.user span.online {
-                    border: 3px solid #eee;
-                }    
-                a.name{
-                    display: block;
-                }
-            }
-            li{
-                padding: 10px;
-                >p{
-                    padding: 0 10px;
-                    margin: -15px 0 0px 45px;
                 }
             }
             .comment{
                 background-color: #fff;
                 padding: 10px;
-                max-width: 300px;
+                margin: 15px 0;
                 .user{
-                    a span {
-                        top: 48px;
-                        left: 48px;
+                    .user-overlay{
+                        &:before{
+                            position: relative;
+                        }
+                        img {
+                            left: 25px;
+                        }
                     }
+                }
+                .stats.onTop{
+                    position: absolute;
+                    top: 50px;
+                    right: 30px;
+                    font-size: 16px;
                 }
             }
             .post {
+                .comment .user .user-overlay img {
+                left: 10px;
+                }
+                .comment{
+                        .stats.onTop{
+                            position: absolute;
+                            top: 5px;
+                            right: 5px;
+                            font-size: 14px;
+                            border-top: none;
+                            margin: 0;
+                            padding: 0;
+                            .likes{
+                                padding: 0;
+                            }
+                    }
+                }
+            }
+            .post, .comment{
                 .user{
+                    img{
+                        width: 50px;
+                        height: 50px;
+                    }
                     a span {
                         top: 48px;
                         left: 48px;
                     }
                 }
-                max-width: 300px;
             }
         }
     }

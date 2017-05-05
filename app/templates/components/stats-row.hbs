@@ -1,0 +1,30 @@
+{{#each lists as |list listID|}}
+<div class="{{size}}">
+    <div class="inner-box container">
+        <div class="row">
+            <div class="col-xs-5 text-center pic-col">
+                {{stats-userpic user=list.user}}
+            </div>
+        <div class="col-xs-7 name-col">
+            <span>
+                <a class="name" href="http://vk.com/id{{list.user.id}}">
+                {{get-index listID}}. {{list.user.fullName}}</a>
+            </span>
+        </div>
+        {{#if bar}}
+        <div class="col-xs-12 text-center">
+            {{percent-bar rate=(get-percent total=total fraction=list.items)}}
+        </div>
+        {{/if}}
+        <div class="col-xs-12">
+        <p class="stats-info">{{#if (eq list.user.sex '1')}}
+            {{act}}а
+        {{else}}
+            {{act}}
+        {{/if}}
+        <b>{{list.items}}</b> {{format-ending num=list.items word=word}}</p>
+        </div>
+        </div>
+    </div>
+</div>
+{{/each}}

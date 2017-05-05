@@ -1,10 +1,43 @@
 .post{
+  .repost {
+    border: solid 1px #eee;
+    border-bottom: none;
+    padding: 0 20px;
+    .time {
+      right: 30px;
+    }
+    .user{
+      object{
+        &:before{
+            width: 50px;
+            height: 50px;
+            font-size: 14px;
+            padding: 12.5px;
+            position: relative;
+        }
+        img{
+            width: 50px;
+            height: 50px;
+            left: 65px;
+        }
+      }
+    }
+  }
   .user{
+    object{
+      &:before{
+        position: relative;
+      }
+    }
+      img{
+          width: 100px;
+          height: 100px;
+      }
     a {
       &:first-of-type{
         text-decoration: none;
       }
-      span {
+      span.online {
           width: 14px;
           height: 14px;
           background: #8ac176;

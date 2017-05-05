@@ -1,7 +1,5 @@
-<div class="rate"></div>
 {{#if (eq delay 0)}}
 {{{get-loading-style rate}}}
 {{else}}
-<div class="overlay-rate"></div>
+<div class="progress-bar" role="progressbar" aria-valuenow="{{rate}}" aria-valuemin="0" aria-valuemax="100"><span>{{rate}}%</span></div>
 {{/if}}
-<p>{{rate}}%</p>

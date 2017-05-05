@@ -1,0 +1,6 @@
+<object class="user-overlay s50">
+    <img class="img-circle" src="{{user.photo50}}" onerror="this.style.display='none'">
+</object>
+{{#if (eq user.online '1')}}
+    <span class="online"></span>
+{{/if}}

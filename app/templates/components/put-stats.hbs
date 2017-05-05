@@ -1,102 +1,20 @@
 <div class="container">
-    <h3>Для статистики проанализировано {{list.postsNum}} {{format-ending num=user.items word='post'}}</h3>
-        <ul>
-            <li>Написано комментариев: {{list.commentsNum}}</li>
-            <li>Количество активных пользователей: {{list.userNum}}</li>
-            <li>Количество отданых лайков: {{list.likesNum}}</li>
-        </ul>
-    <h4>Топ-{{array-length list.topCommentsUsers}} {{format-ending num=(array-length list.topCommentsUsers) word='user'}} по оставленным комментариям:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.topCommentsUsers as |user|}}
-        <li>
-            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
-            {{#if (eq user.user.online '1')}}
-                <span class="online"></span>
-            {{/if}}
-            </a>
-            {{percent-bar rate=(get-percent total=list.commentsNum fraction=user.items)}}
-            <p>{{#if (eq user.user.sex '1')}}
-                оставила
-            {{else}}
-                оставил
-            {{/if}}
-            {{user.items}} {{format-ending num=user.items word='comment'}}</p>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">
-            {{user.user.fullName}}</a>
-        </li>
-        {{/each}}
-        </ol>
-    </div>
-
-
-    <h4>Топ-{{array-length list.listOfOverallLikes}} {{format-ending num=(array-length list.listOfOverallLikes) word='user'}} по общему количеству полученных лайков (посты и комментарии):</h4>
-    <div class="box">
-        <ol>
-        {{#each list.listOfOverallLikes as |user|}}
-        <li>
-            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
-            {{#if (eq user.user.online '1')}}
-                <span class="online"></span>
-            {{/if}}
-            </a>
-            {{percent-bar rate=(get-percent total=list.likesNum fraction=user.items) delay=2000}}
-            <p>{{#if (eq user.user.sex '1')}}
-                получила
-            {{else}}
-                получил
-            {{/if}}
-            {{user.items}} {{format-ending num=user.items word='like'}}</p>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{user.user.fullName}}</a>
-        </li>
-        {{/each}}
-        </ol>
-    </div>
-
-
-    <h4>Топ-{{array-length list.topPostsUsers}} {{format-ending num=(array-length list.topPostsUsers) word='user'}} по написанным постам:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.topPostsUsers as |user|}}
-        <li>
-            <a class="user" href="http://vk.com/id{{user.user.id}}"><img class="img-circle" src="{{user.user.photo50}}">
-            {{#if (eq user.user.online '1')}}
-                <span class="online"></span>
-            {{/if}}
-            </a>
-            <a class="name" href="http://vk.com/id{{user.user.id}}">{{user.user.fullName}}</a>
-            {{#if (eq user.user.sex '1')}}
-                написала
-            {{else}}
-                написал
-            {{/if}}
-            {{user.items}} {{format-ending num=user.items word='post'}}
-        </li>
-        {{/each}}
-        </ol>
-    </div>
-    <h4>Топ-{{array-length list.topCommentedPosts}} {{format-ending num=(array-length list.topCommentedPosts) word='post'}} по обсуждаемости:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.topCommentedPosts as |post|}}
-        <li>
-          Опубликован: <span class="time">{{get-date post.post.date}}</span><br>
-          {{#link-to 'post' post.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
-          {{single-post post=post.post simple=true}}
-        </li>
-        {{/each}}
-        </ol>
-    </div>
-    <h4>Топ-{{array-length list.mostLikedComments}} {{format-ending num=(array-length list.mostLikedComments) word='comment'}} по количеству лайков:</h4>
-    <div class="box">
-        <ol>
-        {{#each list.mostLikedComments as |comment|}}
-        <li>
-            Опубликован: <span class="time">{{get-date comment.comment.post.date}}</span><br>
-            {{#link-to 'post' comment.comment.post.id}}<i class="fa fa-link"> Ссылка на пост</i>{{/link-to}}
-            {{single-comment comment=comment.comment simple=true}}
-        </li>
-        {{/each}}
-        </ol>
-    </div>
+    {{#stats-title-row}}
+        <h4 class="prime pull-left">
+            Загружено <b>{{list.totalvalues.posts}}</b> 
+        </h4>
+        {{stats-icon class='pull-left' icon='fa-edit'}}
+        {{yield}}
+    {{/stats-title-row}}
+    {{stats-header comments=list.totalvalues.comments likes=list.totalvalues.likes users=list.totalvalues.users}}
+    {{stats-title-row button=true location='stats.comments' icon1='fa-user-o' icon2='fa-comment-o' top=(array-length list.topCommentsUsers) default=true}}
+    {{stats-row class="topcomments main" lists=list.topCommentsUsers total=list.totalvalues.comments size='col-xs-6 col-sm-4 col-md-3 col-lg-2' act='оставил' word='comment'}}
+    {{stats-title-row button=true location='stats.likes' icon1='fa-user-o' icon2='fa-heart-o' top=(array-length list.listOfOverallLikes) default=true}}
+    {{stats-row class="toplikes main" lists=list.listOfOverallLikes total=list.totalvalues.likes size='col-xs-6 col-sm-4 col-md-3 col-lg-2' act='получил' word='like'}}
+    {{stats-title-row button=true location='stats.posts' icon1='fa-user-o' icon2='fa-edit' top=(array-length list.topPostsUsers) default=true}}
+    {{stats-row class="topposts main-2" lists=list.topPostsUsers size='col-xs-6 col-sm-4 col-md-4 col-lg-4' act='написал' word='post' total=list.totalvalues.posts}}
+    {{stats-title-row button=true location='stats.top-posts' icon1='fa-edit' icon2='fa-comment-o' top=(array-length list.topCommentedPosts) default=true}}
+    {{stats-post-row lists=list.topCommentedPosts post=true}}
+    {{stats-title-row button=true location='stats.top-comments' icon1='fa-comment-o' icon2='fa-heart-o' top=(array-length list.mostLikedComments) default=true}}
+    {{stats-post-row lists=list.mostLikedComments post=false}}
 </div>

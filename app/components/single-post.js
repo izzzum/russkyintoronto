@@ -6,9 +6,7 @@ export default Ember.Component.extend({
     post: null,
     attributeBindings: ['id'],
     id: Ember.computed(function(){
-        if(this.get('simple') === false){
-            return `post${this.get('post').id}`;
-        }
+        return `post${this.get('post').id}`;
     }),
     isReposted: Ember.computed('post', function(){
         return this.get('post').get('reposts') !== '0';
