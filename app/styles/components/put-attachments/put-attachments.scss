@@ -38,7 +38,7 @@
         }
     }
     .videos{
-        .video-attachment{
+        .video-attachment.youtube{
             background-image: url(/assets/video_fail.jpg);
             background-repeat: no-repeat;
             background-size: contain;
@@ -131,23 +131,23 @@
             }
             max-width: 50%;
             a {
-                text-decoration: none;
-                span.tall img{
-                    max-height: 300px;
-                    width: auto;
+                .lazy-image-container{
+                    overflow: hidden;
                     &.img-fullscreen{
-                        height: auto;
-                        width: auto;
-                        max-width: 100%;
-                        max-height: -webkit-calc(100% - 39px);
-                        max-height: -moz-calc(100% - 39px);
-                        max-height: -o-calc(100% - 39px);
+                        .lazy-image-placeholder{
+                            background: #eee;
+                            padding: 50px;
+                            border-radius: 5px;
+                            position: fixed;
+                            transform: translate(50%, -50%);
+                            z-index: 999;
+                        }
                     }
                 }
+                text-decoration: none;
                 img{
                     &.photo-responsive {
-                        max-width: 100%;
-                        max-height: 300px;
+                        max-height: 200px;
                         height: auto;
                     }
                     cursor: pointer;
@@ -172,7 +172,7 @@
 
 @media screen and (max-width: "400px"){
     .attachments .videos{ 
-        .video-attachment{
+        .video-attachment.youtube{
             max-width: auto;
             a{
                     position: initial;

@@ -1,18 +1,20 @@
-<div class="statistics">
-    <div class="container">
-        {{#stats-title-row}}
-            <h4 class="pull-left">
-                Загружено <b>{{list.posts}}</b> 
-            </h4>
-            {{stats-icon class='pull-left' icon='fa-edit'}}
-        {{/stats-title-row}}
-        {{stats-header comments=list.comments likes=list.likes users=list.users}}
-        {{stats-title-row icon1='fa-comment-o' icon2='fa-heart-o' top=(array-length portion) default=true}}
-        {{stats-post-row lists=portion post=false}}
-        {{#if renderButton}}
-            <div class="text-center">
-                <button type="button" class="btn btn-primary" {{action "loadMore"}}><i class="fa fa-plus"> {{portionNumber}}</i></button>
-            </div>
-        {{/if}}
+{{#liquid-spacer growWidth=false}}
+    <div class="statistics">
+        <div class="container">
+            {{#stats-title-row}}
+                <h4 class="pull-left">
+                    Загружено <b>{{list.posts}}</b> 
+                </h4>
+                {{stats-icon class='pull-left' icon='fa-edit'}}
+            {{/stats-title-row}}
+            {{stats-header comments=list.comments likes=list.likes users=list.users}}
+            {{stats-title-row icon1='fa-comment-o' icon2='fa-heart-o' top=(array-length portion) default=true}}
+            {{stats-post-row lists=portion post=false}}
+            {{#if renderButton}}
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" {{action "loadMore"}}><i class="fa fa-plus"> {{portionNumber}}</i></button>
+                </div>
+            {{/if}}
+        </div>
     </div>
-</div>
+{{/liquid-spacer}}

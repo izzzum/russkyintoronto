@@ -9,5 +9,11 @@
         {{/if}}
     {{/if}}
 {{else}}
-<p>Видео "{{video.title}}" не доступно :/</p>
+<p>
+    <span class="fa-stack fa-lg">
+        <i class="fa fa-video-camera fa-stack-1x"></i>
+        <i class="fa fa-ban fa-stack-2x text-danger"></i>
+    </span>
+    Видео "{{video.title}}" не доступно :/
+</p>
 {{/if}}
