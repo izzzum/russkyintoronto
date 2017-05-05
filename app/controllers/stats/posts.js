@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
         }
         return true;
     }),
-    portion: Ember.computed('loaded', function(){
+    portion: Ember.computed('loaded', 'model', function(){
         if(this.get('renderButton')){
             return this.get('model').slice(0,this.get('loaded'));
         }
