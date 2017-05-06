@@ -1,8 +1,6 @@
 {{#each posts as |post|}}
-    {{#liquid-spacer growWidth=false}}
-        {{single-post post=post}}
-    {{/liquid-spacer}}
+    {{single-post post=post}}
 {{/each}}
 {{#if isThereMore}}
-{{loader-img show=isThereMore}}
+    {{loader-img show=isThereMore}}
 {{/if}}
