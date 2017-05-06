@@ -6,13 +6,22 @@ export default Ember.Component.extend({
     single: Ember.computed(function(){
         return this.get('length') === 1;
     }),
-    url: Ember.computed('isLarge', function(){
-        return this.get('isLarge') ? this.get('photo.large') : this.get('photo.photo604');
-    }),
     imgClass: Ember.computed('isLarge', function(){
         let baseStyle = 'photo-responsive';
         let fullScrStyle = 'img-fullscreen';
         return this.get('isLarge') ? `${baseStyle} ${fullScrStyle}` : baseStyle;
+    }),
+    toggleOverlay: Ember.computed('isLarge', function(){
+        if(this.get('isLarge')){
+            Ember.$('.overlay').addClass("hide");
+            Ember.$('body').removeClass("no-scroll");
+            Ember.$('.liquid-child').removeClass("liquid-fix");
+        }
+        else{
+            Ember.$('.overlay').removeClass("hide");
+            Ember.$('body').addClass("no-scroll");
+            Ember.$('.liquid-child').addClass("liquid-fix");
+        }
     }),
     isLarge: false,
     ifNext: Ember.computed(function(){
@@ -23,24 +32,16 @@ export default Ember.Component.extend({
     }),
     actions: {
         toggleImageSize() {
+            this.get('toggleOverlay');
             this.toggleProperty('isLarge');
-            Ember.$('.overlay').toggleClass("hide");
-            Ember.$('body').toggleClass("no-scroll");
-            Ember.$('.liquid-child').toggleClass("liquid-fix");
         },
         next() {
-            this.toggleProperty('isLarge');
-            Ember.$('.overlay').toggleClass("hide");
-            Ember.$('body').toggleClass("no-scroll");
-            Ember.$('.liquid-child').toggleClass("liquid-fix");
+            this.send('toggleImageSize');
             Ember.$('#'+this.elementId).next().find('a.img-resize').click();
 
         },
         previous() {
-            this.toggleProperty('isLarge');
-            Ember.$('.overlay').toggleClass("hide");
-            Ember.$('body').toggleClass("no-scroll");
-            Ember.$('.liquid-child').toggleClass("liquid-fix");
+            this.send('toggleImageSize');
             Ember.$('#'+this.elementId).prev().find('a.img-resize').click();
         },
     }

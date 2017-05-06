@@ -24,6 +24,7 @@
     }
   }
   .user{
+    white-space: nowrap;
     object{
       &:before{
         position: relative;
@@ -57,8 +58,7 @@ margin: 15px 0;
 word-wrap: break-word;
 background-color: #fff;
   .time, .linkToPost{
-    position: absolute;
-    right: 10px;
+    float: right;
     padding: 5px;
   }
   .linkToPost {

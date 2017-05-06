@@ -1,4 +1,3 @@
-{{#liquid-spacer growWidth=false}}
 {{#unless simple}}{{#link-to 'post' post.id}}<span class="time">{{get-date post.date}}</span>{{/link-to}}{{/unless}}
 {{user-handler obj=post simple=simple}}
     <p>{{{text-to-link post.text}}}</p>
@@ -43,4 +42,3 @@
 {{#if isShowingComments}}
 {{read-comments postId=post.id commentsNum=post.commentsNum comments=post.comments simple=simple}}
 {{/if}}
-{{/liquid-spacer}}

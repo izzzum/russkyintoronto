@@ -18,9 +18,9 @@
 {{/if}}
 <a class="img-resize" {{action 'toggleImageSize'}}>
     {{#if isLarge}}
-        {{lazy-image url=url class=imgClass}}
+        {{lazy-image url=photo.large class=imgClass}}
     {{else}}
-        {{lazy-image url=url class=imgClass}}
+        {{lazy-image url=photo.photo604 class=imgClass}}
     {{/if}}
 </a>
 {{#if isLarge}}
