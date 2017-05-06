@@ -1,12 +1,21 @@
 # russkyintoronto
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
-
 ## About
 
-This is an EmberJS project that using VK API to fetch and display the data (posts, comments etc) from
-the pre-defined vk-group. It also provides a menu to get a statistics based on the fetched data.
+EmberJS reader for any pre-defined vk-group. Data is loaded using VK API end-point. It also provides a menu to get a statistics based on the fetched data.
+
+## Settings
+
+Application can be set up by editing services\settings.js file
+
+* `name:` vk community name
+* `groupId:` vk community group_id
+* `defaultStatsAmount:` default number of posts to analyze for stats
+* `defaultStatsButtonVal:` default numbeer of posts for 'Load More' button in Stats page
+* `maxStatsValue:` maximum amount of posts to load per call on button press
+* `postLoadAmount:` amount of posts to load on index page (portion)
+* `header:` page header (html allowed, pre-wrapped in <h1>)
+* `footer:` page footer (html allowed)
 
 ## Prerequisites
 

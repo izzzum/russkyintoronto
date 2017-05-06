@@ -39,7 +39,7 @@ export default Ember.Component.extend({
         if (Ember.isEmpty(post.get('comments'))){
             this.set('isLoading', true);
             Ember.RSVP.hash({
-            comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, /*count: 4, offset: 1,*/ need_likes: 1, v: '5.7'}).then(resolved => {
+            comments: this.get('store').query('comment', {owner_id: this.get('settings').groupId, post_id: this.get('postId'), extended:1, oauth: 1, need_likes: 1, v: '5.7'}).then(resolved => {
                     let counter = 0;
                     resolved.forEach(comment => {
                         if (counter++ === resolved.content.length - 1){
@@ -58,7 +58,7 @@ export default Ember.Component.extend({
     loadMore() {
         this.set('isLoading', true);
             Ember.RSVP.hash({
-      comments: this.get('store').query('comment', {owner_id: '-164278', post_id: this.get('postId'), extended:1, oauth: 1, offset: this.get('loadedComments'), need_likes: 1, v: '5.7'}).then(resolved => {
+      comments: this.get('store').query('comment', {owner_id: this.get('settings').groupId, post_id: this.get('postId'), extended:1, oauth: 1, offset: this.get('loadedComments'), need_likes: 1, v: '5.7'}).then(resolved => {
             let post = this.get('store').peekRecord('post', this.get('postId'));
             let loadedComments = this.get('loadedComments') + resolved.content.length;
             this.set('loadedComments', loadedComments);

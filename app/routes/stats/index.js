@@ -41,7 +41,7 @@ export default Ember.Route.extend({
                  _this.get('promise').addObject(
                     delay(150*numOfReqs).then(function() {
                         _this.get('promise').addObject(
-                _this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: 100, offset: (i*100)+loadedPortion, v: '5.7'})
+                _this.store.query('post', {domain: _this.get('settings').name, filter:'all', extended:1, fields: 'profiles', count: 100, offset: (i*100)+loadedPortion, v: '5.7'})
                 );
             }));
                 numOfReqs += 1;
@@ -54,7 +54,7 @@ export default Ember.Route.extend({
                 if(checkAll){
                     loadedPortion = loadedPortion+(100*numOfReqs);
                 }
-                posts = _this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: _this.controllerFor('stats.index').get('statsAmount')-loadedPortion, offset: loadedPortion, v: '5.7'});
+                posts = _this.store.query('post', {domain: _this.get('settings').name, filter:'all', extended:1, fields: 'profiles', count: _this.controllerFor('stats.index').get('statsAmount')-loadedPortion, offset: loadedPortion, v: '5.7'});
                 posts.then(function(resolved){
                     let allPosts = checkAll ? _this.store.peekAll('post') : resolved;
                     allPosts.forEach(post => {
@@ -64,7 +64,7 @@ export default Ember.Route.extend({
                                 _this.controllerFor('stats.index').set('totalNum', _this.controllerFor('stats.index').get('totalNum')+post.get('commentsNum')-currentLength);
                                     _this.get('promise').addObject(
                                     delay(150*numOfReqs).then(function() {
-                                    _this.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
+                                    _this.get('promise').addObject(store.query('comment', {owner_id: _this.get('settings').groupId, post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
                                         function(resolved){resolved.forEach(comment =>{
                                             _this.controllerFor('stats.index').set('loadingState',  _this.controllerFor('stats.index').get('loadingState')+1);
                                             comment.set('post', post);

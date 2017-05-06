@@ -13,7 +13,9 @@ export default Ember.Controller.extend({
    loadingState: 0,
    scrollPosition: null,
    store: Ember.inject.service(),
-   statsAmmount: 50,
+   statsAmount: Ember.computed(function() {
+        return this.get('settings').defaultStatsAmount;
+   }),
    disablePostLoading: Ember.computed('statsInfoLoader', function(){
        if(this.get('statsInfoLoader') === true){
            return true;
@@ -46,7 +48,7 @@ export default Ember.Controller.extend({
                             _this.get('promise').addObject(
                                 delay(150*numOfReqs).then(function() {
                                 _this.get('promise').addObject(store.query('comment',
-                                {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'})
+                                {owner_id: _this.get('settings').groupId, post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'})
                                 .then(
                                     function(resolved){resolved.forEach(comment =>{
                                         _this.set('loadingState', _this.get('loadingState')+1);
@@ -58,9 +60,9 @@ export default Ember.Controller.extend({
                         }    
                     }
                 });
-        if(Ember.isPresent(posts) && loadedPortion < this.get('statsAmmount')) {
+        if(Ember.isPresent(posts) && loadedPortion < this.get('statsAmount')) {
             this.store.adapterFor('post').set('namespace', "method/wall.get");
-            posts = this.store.query('post', {domain: 'russiansintoronto', filter:'all', extended:1, fields: 'profiles', count: this.get('statsAmmount')-loadedPortion, offset: loadedPortion, v: '5.7'});
+            posts = this.store.query('post', {domain: this.get('settings').name, filter:'all', extended:1, fields: 'profiles', count: this.get('statsAmount')-loadedPortion, offset: loadedPortion, v: '5.7'});
             this.set('posts', posts);
             posts.then(function(resolved){
                 resolved.forEach(post => {
@@ -70,7 +72,7 @@ export default Ember.Controller.extend({
                             _this.set('totalNum', _this.get('totalNum')+post.get('commentsNum')-currentLength);
                                 _this.get('promise').addObject(
                                 delay(150*numOfReqs).then(function() {
-                                _this.get('promise').addObject(store.query('comment', {owner_id: '-164278', post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
+                                _this.get('promise').addObject(store.query('comment', {owner_id: _this.get('settings').groupId, post_id: post.get('id'), extended:1, oauth: 1, count: post.get('commentsNum'), offset: currentLength, need_likes: 1, v: '5.7'}).then(
                                     function(resolved){resolved.forEach(comment =>{
                                         _this.set('loadingState', _this.get('loadingState')+1);
                                         comment.set('post', post);
