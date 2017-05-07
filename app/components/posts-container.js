@@ -37,11 +37,11 @@ export default Ember.Component.extend({
             let posts = this.get('store').peekAll('post');
             let loadedPortion = posts.content.length === 1 ? 0 : posts.content.length;
                 _this.get('store').query('post', {
-                domain: 'russiansintoronto', 
+                domain: this.get('settings').name, 
                 filter:'all', 
                 extended:1, 
                 fields: 'profiles', 
-                count: _this.get('count'), 
+                count: _this.get('settings').postLoadAmount, 
                 offset: loadedPortion, 
                 v: '5.7'}).then(function() {
                     _this.set('posts', _this.get('store').peekAll('post'));

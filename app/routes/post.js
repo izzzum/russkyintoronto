@@ -8,7 +8,7 @@ export default Ember.Route.extend({
         if (Ember.isEmpty(post)){
             this.store.adapterFor('post').set('namespace', "method/wall.getById");
             return Ember.RSVP.hash({
-            posts: this.store.query('post', {posts: `-164278_${params.postId}`, extended:1, fields: 'profiles', v: '5.7'}),
+            posts: this.store.query('post', {posts: `${this.get('settings').groupId}_${params.postId}`, extended:1, fields: 'profiles', v: '5.7'}),
             });
         }
         else {

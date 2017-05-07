@@ -5,12 +5,21 @@ export default Ember.Controller.extend({
     totalNum: 0,
     loadingState: 0,
     statsInfoLoader: false,
-    statsAmount: 50,
-    amount: 100,
-    previous: 100,
+    maxStatsValue: Ember.computed(function() {
+        return this.get('settings').maxStatsValue;
+    }),
+    statsAmount: Ember.computed(function() {
+        return this.get('settings').defaultStatsAmount;
+   }),
+    amount: Ember.computed(function() {
+        return this.get('settings').defaultStatsButtonVal;
+    }),
+    previous: Ember.computed(function() {
+        return this.get('settings').defaultStatsButtonVal;
+    }),
     actions: {
         changeAmount(amount) {
-            amount = amount > 1000 ? 1000 : amount;
+            amount = amount > this.get('maxStatsValue') ? this.get('maxStatsValue') : amount;
             Ember.$('button.loadMore').attr('disabled', 'disabled');
             this.set('statsAmount', this.get('statsAmount') + parseInt(amount));
             this.send("sessionChanged");
@@ -29,8 +38,8 @@ export default Ember.Controller.extend({
                     Ember.$('button.loadMore').attr('disabled', null);
                 }
                 else{
-                    this.set('amount', 1000);
-                    Ember.$('input').val(1000);
+                    this.set('amount', this.get('maxStatsValue'));
+                    Ember.$('input').val(this.get('maxStatsValue'));
                     Ember.$('button.loadMore').attr('disabled', null);
                 }
             }
