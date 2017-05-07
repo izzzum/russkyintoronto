@@ -14,8 +14,6 @@ Application can be set up by editing services\settings.js file
 * `defaultStatsButtonVal:` default numbeer of posts for 'Load More' button in Stats page
 * `maxStatsValue:` maximum amount of posts to load per call on button press
 * `postLoadAmount:` amount of posts to load on index page (portion)
-* `header:` page header (html allowed, pre-wrapped in <h1>)
-* `footer:` page footer (html allowed)
 
 ## Prerequisites
 
