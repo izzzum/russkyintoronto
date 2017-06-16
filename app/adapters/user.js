@@ -1,7 +1,7 @@
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
-    host: 'https://api.vk.com',
+    host: 'http://api.russky.ca',
     namespace: 'method/users.get',
     pathForType: function() {
         return '';
